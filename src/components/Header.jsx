@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import Searchheader from './SearchHeader';
 
 class Header extends Component {
   render() {
@@ -24,6 +25,7 @@ class Header extends Component {
           />
 
         </button>
+        <Searchheader />
       </div>
     );
   }
