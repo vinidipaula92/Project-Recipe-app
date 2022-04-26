@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import profileIcon from '../images/profileIcon.svg';
+import searchIcon from '../images/searchIcon.svg';
 import Searchheader from './SearchHeader';
 
 function Header() {
@@ -7,7 +9,7 @@ function Header() {
     <div className="header">
       <Link to="/profile">
         <img
-          src="src/images/profileIcon.svg"
+          src={ profileIcon }
           alt="login"
           data-testid="profile-top-btn"
         />
@@ -18,7 +20,7 @@ function Header() {
         data-testid="search-btn"
       >
         <img
-          src="src/images/searchIcon.svg"
+          src={ searchIcon }
           alt="search"
           data-testid="search-icon"
         />
