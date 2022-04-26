@@ -2,7 +2,7 @@ import React from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
-export default function ExploreFood() {
+export default function Favorite() {
   return (
     <div>
       <Footer />
