@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import mealIcon from '../images/mealIcon.svg';
+import drinkIcon from '../images/drinkIcon.svg';
+import exploreIcon from '../images/exploreIcon.svg';
 
 function Footer() {
   return (
@@ -8,14 +11,14 @@ function Footer() {
         <Link to="/foods">
           <img
             data-testid="food-bottom-btn"
-            src="src/images/mealIcon.svg"
+            src={ mealIcon }
             alt="meal"
           />
         </Link>
         <Link to="/drinks">
           <img
             data-testid="drinks-bottom-btn"
-            src="src/images/drinkIcon.svg"
+            src={ drinkIcon }
             alt="drink"
           />
         </Link>
@@ -23,7 +26,7 @@ function Footer() {
 
           <img
             data-testid="explore-bottom-btn"
-            src="src/images/exploreIcon.svg"
+            src={ exploreIcon }
             alt="explore"
           />
         </Link>
