@@ -17,7 +17,7 @@ function Header() {
       <span data-testid="page-title">Titulo da pagina</span>
       <button
         type="button"
-        data-testid="search-btn"
+        data-testid="search-top-btn"
       >
         <img
           src={ searchIcon }
