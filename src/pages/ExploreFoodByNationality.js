@@ -1,7 +1,7 @@
 import React from 'react';
 import Footer from '../components/Footer';
 
-export default function ExploreMeals() {
+export default function ExploreFoodByNationality() {
   return (
     <div>
       <Footer />
