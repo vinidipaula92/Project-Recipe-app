@@ -5,8 +5,8 @@ import Header from '../components/Header';
 export default function Food() {
   return (
     <div>
-      <Footer />
       <Header />
+      <Footer />
     </div>
   );
 }

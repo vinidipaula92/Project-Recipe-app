@@ -5,8 +5,8 @@ import Header from '../components/Header';
 export default function ExploreFood() {
   return (
     <div>
-      <Footer />
       <Header />
+      <Footer />
     </div>
   );
 }
