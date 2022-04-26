@@ -1,12 +1,13 @@
 import React from 'react';
-import Footer from '../components/Footer';
 import Header from '../components/Header';
+import Searchheader from '../components/SearchHeader';
 
 export default function Favorite() {
   return (
     <div>
       <Header />
-      <Footer />
+      <span data-testid="page-title">Favorite Recipes</span>
+      <Searchheader />
     </div>
   );
 }

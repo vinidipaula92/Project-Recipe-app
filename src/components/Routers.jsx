@@ -30,7 +30,7 @@ function Routers() {
       <Route path="/favorite-recipes" component={ Favorite } />
       <Route path="/foods/:id" component={ DetailsFood } />
       <Route path="/drinks/:id" component={ DetailsDrink } />
-      <Route path="/done-recipe" component={ RecipeDone } />
+      <Route path="/done-recipes" component={ RecipeDone } />
       <Route path="/explore" component={ Explore } />
       <Route path="/profile" component={ Profile } />
       <Route path="/drinks" component={ Drinks } />
