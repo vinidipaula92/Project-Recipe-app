@@ -16,6 +16,10 @@ import Profile from '../pages/Profile';
 import ProgressDrink from '../pages/ProgressDrink';
 import ProgressFood from '../pages/ProgressFood';
 import RecipeDone from '../pages/RecipeDone';
+import HomeDrink from '../pages/HomeDrink';
+import HomeFood from '../pages/HomeFood';
+import Login from '../pages/Login';
+import Profile from '../pages/Profile';
 
 function Routers() {
   return (
