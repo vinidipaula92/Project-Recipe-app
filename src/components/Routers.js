@@ -17,7 +17,6 @@ import Profile from '../pages/Profile';
 function Routers() {
   return (
     <Switch>
-      <Route exact path="/" component={ Login } />
       <Route path="/homedrink" component={ HomeDrink } />
       <Route path="/homefood" component={ HomeFood } />
       <Route path="/explore" component={ Explore } />
@@ -30,6 +29,8 @@ function Routers() {
       <Route path="/explorefoodbynationality" component={ ExploreFoodByNationality } />
       <Route path="/favorite" component={ Favorite } />
       <Route path="/food" component={ Food } />
+      <Route exact path="/foods" component={ Food } />
+      <Route exact path="/" component={ Login } />
     </Switch>
   );
 }
