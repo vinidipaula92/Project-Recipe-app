@@ -1,33 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 export default function Login() {
   const history = useHistory();
-  const [user, setUser] = userState({
+  const [user, setUser] = useState({
     email: '',
     password: '',
   });
 
-  const [disabled, setDisabled] = userState(true);
-
-  const enterButtonValidation = () => {
-    const emailRegex = /\S +@\S+\.\S+/;
-    const numberSix = 6;
-    if (emailRegex.test(user.email) && (user.password.length > numberSix)) {
-      setDisabled(false);
-    } else { setDisabled(true); }
-  };
+  const EMAIL_REGEX = /\w+@\w+\.\S+/g;
+  const numberSix = 6;
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
     setUser({ ...user, [name]: value });
-    enterButtonValidation();
   };
 
   const handleClick = () => {
     localStorage.setItem(user, { email: value });
     history.push('/foods');
   };
+
+  const emailTest = EMAIL_REGEX.test(user.email);
+  const passwordTest = user.password.length >= numberSix;
+  console.log(!emailTest);
 
   return (
     <div>
@@ -50,7 +46,7 @@ export default function Login() {
         <button
           data-testid="login-submit-btn"
           type="button"
-          disabled={ disabled }
+          disabled={ !emailTest && !passwordTest }
           onClick={ handleClick }
         >
           Entrar
