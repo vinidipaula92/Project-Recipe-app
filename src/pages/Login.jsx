@@ -8,22 +8,23 @@ export default function Login() {
     password: '',
   });
 
-  // const [disabled, setDisabled] = useState(true);
+  const EMAIL_REGEX = /\w+@\w+\.\S+/g;
+  const numberSix = 6;
 
-  const handleDisable = () => {
-    const validEmail = /\w+@\w+\.\S+/g;
-    return !(user.password.length && validEmail.test(email));
+  const handleChange = ({ target }) => {
+    const { name, value } = target;
+    setUser({ ...user, [name]: value });
   };
-
-  // const handleChange = ({ target }) => {
-  //   const { name, value } = target;
-  //   setUser({ ...user, [name]: value });
-  // };
 
   const handleClick = () => {
-    localStorage.setItem(user, { email: value });
+    localStorage.setItem('user', JSON.stringify({ email: user.email }));
+    localStorage.setItem('mealsToken', '1');
+    localStorage.setItem('cocktailsToken', '1');
     history.push('/foods');
   };
+
+  const emailTest = !EMAIL_REGEX.test(user.email);
+  const passwordTest = user.password.length <= numberSix;
 
   return (
     <div>
@@ -35,7 +36,7 @@ export default function Login() {
           name="email"
           value={ user.email }
           data-testid="email-input"
-          onChange={ (e) => setUser(e.target.value) }
+          onChange={ handleChange }
         />
         <input
           className="passwordInput"
@@ -43,13 +44,13 @@ export default function Login() {
           name="password"
           value={ user.password }
           data-testid="password-input"
-          onChange={ (e) => setUser(e.target.value) }
+          onChange={ handleChange }
         />
         <button
           data-testid="login-submit-btn"
           type="button"
+          disabled={ emailTest || passwordTest }
           onClick={ handleClick }
-          disabled={ handleDisable }
         >
           Entrar
         </button>
