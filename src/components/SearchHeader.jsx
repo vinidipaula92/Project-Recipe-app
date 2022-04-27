@@ -13,8 +13,8 @@ function Searchheader() {
             data-testid="ingredient-search-radio"
             type="radio"
             id="Ingredient"
-            name="Ingredient"
-            value="Ingredient"
+            name="search-method"
+            value="ingredient"
           />
         </label>
         <label htmlFor="Name">
@@ -22,8 +22,8 @@ function Searchheader() {
             data-testid="name-search-radio"
             type="radio"
             id="Name"
-            name="Name"
-            value="Name"
+            name="search-method"
+            value="name"
           />
         </label>
         <label htmlFor="First letter">
@@ -31,8 +31,8 @@ function Searchheader() {
             data-testid="first-letter-search-radio"
             type="radio"
             id="First letter"
-            name="First letter"
-            value="First letter"
+            name="search-method"
+            value="first-letter"
           />
         </label>
       </form>
