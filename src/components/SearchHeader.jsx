@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import searchIcon from '../images/searchIcon.svg';
 
-function Searchheader() {
+export default function Searchheader() {
   const [search, setSearchMethod] = useState({
     searchMethod: '',
     searchValue: '',
@@ -45,9 +45,9 @@ function Searchheader() {
       inputDisable(false);
       setClick(0);
     }
-
+  };
   return (
-     <div>
+    <div>
       <button
         type="button"
         onClick={ handleInput }
@@ -59,18 +59,15 @@ function Searchheader() {
         />
       </button>
       <form>
-             {
+        {
           disable ? (
 
-        <input
-          data-testid="search-input"
-          type="text"
-          name="searchValue"
-          value={ searchMethod.searchValue }
-          onChange={ handleChange }
-                   <input
+            <input
               data-testid="search-input"
               type="text"
+              name="searchValue"
+              value={ searchMethod.searchValue }
+              onChange={ handleChange }
             />
           ) : null
         }
@@ -115,5 +112,3 @@ function Searchheader() {
     </div>
   );
 }
-
-export default Searchheader;
