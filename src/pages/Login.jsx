@@ -1,28 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 export default function Login() {
   const history = useHistory();
-  const [user, setUser] = userState({
+  const [user, setUser] = useState({
     email: '',
     password: '',
   });
 
-  const [disabled, setDisabled] = userState(true);
+  // const [disabled, setDisabled] = useState(true);
 
-  const enterButtonValidation = () => {
-    const emailRegex = /\S +@\S+\.\S+/;
-    const numberSix = 6;
-    if (emailRegex.test(user.email) && (user.password.length > numberSix)) {
-      setDisabled(false);
-    } else { setDisabled(true); }
+  const handleDisable = () => {
+    const validEmail = /\w+@\w+\.\S+/g;
+    return !(user.password.length && validEmail.test(email));
   };
 
-  const handleChange = ({ target }) => {
-    const { name, value } = target;
-    setUser({ ...user, [name]: value });
-    enterButtonValidation();
-  };
+  // const handleChange = ({ target }) => {
+  //   const { name, value } = target;
+  //   setUser({ ...user, [name]: value });
+  // };
 
   const handleClick = () => {
     localStorage.setItem(user, { email: value });
@@ -37,21 +33,23 @@ export default function Login() {
           className="emailInput"
           type="text"
           name="email"
+          value={ user.email }
           data-testid="email-input"
-          onChange={ handleChange }
+          onChange={ (e) => setUser(e.target.value) }
         />
         <input
           className="passwordInput"
           type="password"
           name="password"
+          value={ user.password }
           data-testid="password-input"
-          onChange={ handleChange }
+          onChange={ (e) => setUser(e.target.value) }
         />
         <button
           data-testid="login-submit-btn"
           type="button"
-          disabled={ disabled }
           onClick={ handleClick }
+          disabled={ handleDisable }
         >
           Entrar
         </button>
