@@ -15,7 +15,7 @@ export default function Searchheader() {
     const response = await fetch(link);
     const data = await response.json();
     console.log(data);
-    // return data;
+    return data;
   }
 
   const handleClick = () => {
@@ -24,13 +24,19 @@ export default function Searchheader() {
       const URL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchValue}`;
       getApi(URL);
     }
-    if (searchMethod === 'ingrediente') {
+    if (searchMethod === 'ingredient') {
       const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchValue}`;
       getApi(URL);
     }
     if (searchMethod === 'firstLetter') {
-      const URL = `https://www.themealdb.com/api/json/v1/1/search.php?f=${searchValue}`;
-      getApi(URL);
+      const um = 1;
+      const alert = 'Your search must have only 1 (one) character';
+      if (searchValue.length > um) {
+        global.alert(alert);
+      } else {
+        const URL = `https://www.themealdb.com/api/json/v1/1/search.php?f=${searchValue}`;
+        getApi(URL);
+      }
     }
   };
   const [disable, inputDisable] = useState(false);
@@ -58,57 +64,64 @@ export default function Searchheader() {
           data-testid="search-top-btn"
         />
       </button>
-      <form>
-        {
-          disable ? (
+      {
+        disable ? (
+          <>
+            <form>
+              <input
+                data-testid="search-input"
+                type="text"
+                name="searchValue"
+                value={ search.searchValue }
+                onChange={ handleChange }
+              />
+              <div>
+                <label htmlFor="ingredient">
+                  <input
+                    data-testid="ingredient-search-radio"
+                    type="radio"
+                    id="Ingredient"
+                    name="searchMethod"
+                    value="ingredient"
+                    onChange={ handleChange }
+                  />
+                  ingredient
+                </label>
+                <label htmlFor="Name">
+                  <input
+                    data-testid="name-search-radio"
+                    type="radio"
+                    id="Name"
+                    name="searchMethod"
+                    value="name"
+                    onClick={ handleChange }
+                  />
+                  name
+                </label>
+                <label htmlFor="First letter">
+                  <input
+                    data-testid="first-letter-search-radio"
+                    type="radio"
+                    id="First letter"
+                    name="searchMethod"
+                    value="firstLetter"
+                    onClick={ handleChange }
+                  />
+                  first letter
+                </label>
+              </div>
+            </form>
+            <button
+              data-testid="exec-search-btn"
+              type="submit"
+              onClick={ handleClick }
+            >
+              Search
+            </button>
 
-            <input
-              data-testid="search-input"
-              type="text"
-              name="searchValue"
-              value={ searchMethod.searchValue }
-              onChange={ handleChange }
-            />
-          ) : null
-        }
-        <label htmlFor="ingredient">
-          <input
-            data-testid="ingredient-search-radio"
-            type="radio"
-            id="Ingredient"
-            name="searchMethod"
-            value="ingredient"
-            onChange={ handleChange }
-          />
-        </label>
-        <label htmlFor="Name">
-          <input
-            data-testid="name-search-radio"
-            type="radio"
-            id="Name"
-            name="searchMethod"
-            value="name"
-            onClick={ handleChange }
-          />
-        </label>
-        <label htmlFor="First letter">
-          <input
-            data-testid="first-letter-search-radio"
-            type="radio"
-            id="First letter"
-            name="searchMethod"
-            value="firstLetter"
-            onClick={ handleChange }
-          />
-        </label>
-      </form>
-      <button
-        data-testid="exec-search-btn"
-        type="submit"
-        onClick={ handleClick }
-      >
-        Search
-      </button>
+          </>
+        ) : null
+      }
     </div>
   );
 }
