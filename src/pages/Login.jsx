@@ -17,7 +17,7 @@ export default function Login() {
   };
 
   const handleClick = () => {
-    localStorage.setItem('user', JSON.stringify({ email: user.email }));
+    localStorage.setItem('user', JSON.stringify(user.email));
     localStorage.setItem('mealsToken', '1');
     localStorage.setItem('cocktailsToken', '1');
     history.push('/foods');
@@ -34,16 +34,16 @@ export default function Login() {
           className="emailInput"
           type="text"
           name="email"
-          data-testid="email-input"
           value={ user.email }
+          data-testid="email-input"
           onChange={ handleChange }
         />
         <input
           className="passwordInput"
           type="password"
           name="password"
-          data-testid="password-input"
           value={ user.password }
+          data-testid="password-input"
           onChange={ handleChange }
         />
         <button

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import searchIcon from '../images/searchIcon.svg';
 
 function Searchheader() {
   const [search, setSearchMethod] = useState({
@@ -32,17 +33,47 @@ function Searchheader() {
       getApi(URL);
     }
   };
+  const [disable, inputDisable] = useState(false);
+  const [click, setClick] = useState(0);
+
+  const handleInput = () => {
+    if (click === 0) {
+      inputDisable(true);
+      setClick(1);
+    }
+    if (click === 1) {
+      inputDisable(false);
+      setClick(0);
+    }
 
   return (
-    <>
+     <div>
+      <button
+        type="button"
+        onClick={ handleInput }
+      >
+        <img
+          src={ searchIcon }
+          alt="search"
+          data-testid="search-top-btn"
+        />
+      </button>
       <form>
+             {
+          disable ? (
+
         <input
           data-testid="search-input"
           type="text"
           name="searchValue"
           value={ searchMethod.searchValue }
           onChange={ handleChange }
-        />
+                   <input
+              data-testid="search-input"
+              type="text"
+            />
+          ) : null
+        }
         <label htmlFor="ingredient">
           <input
             data-testid="ingredient-search-radio"
@@ -81,7 +112,7 @@ function Searchheader() {
       >
         Search
       </button>
-    </>
+    </div>
   );
 }
 
