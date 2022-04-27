@@ -4,8 +4,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 export default function Profile() {
-  const email = localStorage.getItem('user');
-  const emailName = email.replace('"', '').replace('"', '');
+  const userEmail = localStorage.getItem('user');
 
   const handleClick = () => {
     localStorage.clear();
@@ -15,7 +14,7 @@ export default function Profile() {
       <Header />
       <span data-testid="page-title">Profile</span>
       <div>
-        <h3 data-testid="profile-email">{emailName}</h3>
+        <h3 data-testid="profile-email">{userEmail}</h3>
         <Link to="/done-recipes">
           <button
             type="button"
