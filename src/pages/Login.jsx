@@ -17,13 +17,14 @@ export default function Login() {
   };
 
   const handleClick = () => {
-    localStorage.setItem(user, { email: value });
+    localStorage.setItem('user', JSON.stringify({ email: user.email }));
+    localStorage.setItem('mealsToken', '1');
+    localStorage.setItem('cocktailsToken', '1');
     history.push('/foods');
   };
 
-  const emailTest = EMAIL_REGEX.test(user.email);
-  const passwordTest = user.password.length >= numberSix;
-  console.log(!emailTest);
+  const emailTest = !EMAIL_REGEX.test(user.email);
+  const passwordTest = user.password.length <= numberSix;
 
   return (
     <div>
@@ -34,6 +35,7 @@ export default function Login() {
           type="text"
           name="email"
           data-testid="email-input"
+          value={ user.email }
           onChange={ handleChange }
         />
         <input
@@ -41,12 +43,13 @@ export default function Login() {
           type="password"
           name="password"
           data-testid="password-input"
+          value={ user.password }
           onChange={ handleChange }
         />
         <button
           data-testid="login-submit-btn"
           type="button"
-          disabled={ !emailTest && !passwordTest }
+          disabled={ emailTest || passwordTest }
           onClick={ handleClick }
         >
           Entrar
