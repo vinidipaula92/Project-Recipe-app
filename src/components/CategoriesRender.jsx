@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
@@ -10,6 +9,7 @@ import { requestDrinksCategories,
   requestDrinks } from '../services/apiRequest';
 import { NUMBER_FIVE } from '../services/consts';
 import { saveDataDrink, saveDataFood, addCategorieFilter } from '../redux/actions';
+/* eslint comma-dangle: ["error", "never"] */
 
 export default function CategoriesRender() {
   const { pathname } = useLocation();
