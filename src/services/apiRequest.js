@@ -84,3 +84,17 @@ export async function requestDrinksCategories() {
   const data = await response.json();
   return data;
 }
+
+export async function requestMealsByCategory(categorie) {
+  const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categorie}`;
+  const response = await fetch(URL);
+  const data = await response.json();
+  return data;
+}
+
+export async function requestDrinksByCategories(categorie) {
+  const URL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${categorie}`;
+  const response = await fetch(URL);
+  const data = await response.json();
+  return data;
+}
