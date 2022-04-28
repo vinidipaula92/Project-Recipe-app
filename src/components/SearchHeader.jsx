@@ -24,7 +24,7 @@ export default function Searchheader() {
       const URL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchValue}`;
       getApi(URL);
     }
-    if (searchMethod === 'ingrediente') {
+    if (searchMethod === 'ingredient') {
       const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchValue}`;
       getApi(URL);
     }
@@ -66,7 +66,7 @@ export default function Searchheader() {
               data-testid="search-input"
               type="text"
               name="searchValue"
-              value={ searchMethod.searchValue }
+              value={ search.searchValue }
               onChange={ handleChange }
             />
           ) : null
