@@ -59,3 +59,17 @@ export async function requestDrinks() {
   const data = await response.json();
   return data;
 }
+
+export async function requestMealsCategories() {
+  const mealsCategories = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
+  const response = await fetch(mealsCategories);
+  const data = await response.json();
+  return data;
+}
+
+export async function requestDrinksCategories() {
+  const drinkCategories = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
+  const response = await fetch(drinkCategories);
+  const data = await response.json();
+  return data;
+}
