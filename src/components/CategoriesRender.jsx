@@ -22,6 +22,7 @@ export default function CategoriesRender() {
 
   useEffect(() => {
     provideCategories();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
