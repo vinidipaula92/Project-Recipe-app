@@ -31,7 +31,7 @@ export default function Drinks() {
         drinks && drinks.map((drink, index) => (
           index <= NUMBER_ELEVEN && (
             <div data-testid={ `${index}-recipe-card` } key={ drink.idDrink }>
-              <Link to={ `/drinks/${drink.idMeal}` }>
+              <Link to={ `/drinks/${drink.idDrink}` }>
                 <img
                   data-testid={ `${index}-card-img` }
                   src={ drink.strDrinkThumb }
