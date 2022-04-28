@@ -20,53 +20,36 @@ export default function Searchheader() {
     setSearchMethod({ ...search, [name]: value });
   };
 
-  /*   async function getApi(link) {
-    const response = await fetch(link);
-    const data = await response.json();
-    console.log(data);
-    return data;
-  } */
+  const ifRouteFood = async (searchMethod, searchValue) => {
+    const newData = await resquestByMeal(searchMethod, searchValue);
+    dispatch(saveDataFood(newData));
+    if (!newData.meals) {
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
+      return;
+    }
+    if (newData.meals.length === NUMBER_ONE) {
+      history.push(`/foods/${newData.meals[0].idMeal}`);
+    }
+  };
 
-  /*   const handleClick = () => {
-    const { searchMethod, searchValue } = search;
-    if (searchMethod === 'name') {
-      const URL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchValue}`;
-      getApi(URL);
+  const ifRouteDrink = async (searchMethod, searchValue) => {
+    const newData = await resquestByDrink(searchMethod, searchValue);
+    dispatch(saveDataDrink(newData));
+    if (!newData.drinks) {
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
+      return;
     }
-    if (searchMethod === 'ingredient') {
-      const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchValue}`;
-      getApi(URL);
+    if (newData.drinks.length === NUMBER_ONE) {
+      history.push(`/drinks/${newData.drinks[0].idDrink}`);
     }
-    if (searchMethod === 'firstLetter') {
-      const um = 1;
-      const alert = 'Your search must have only 1 (one) character';
-      if (searchValue.length > um) {
-        global.alert(alert);
-      } else {
-        const URL = `https://www.themealdb.com/api/json/v1/1/search.php?f=${searchValue}`;
-        getApi(URL);
-      }
-    }
-  }; */
+  };
 
   const handleClick = async () => {
     const { searchMethod, searchValue } = search;
-    let newData = {};
     if (pathname === '/foods') {
-      newData = await resquestByMeal(searchMethod, searchValue);
-      if (newData.meals.length === NUMBER_ONE) {
-        history.push(`/foods/${newData.meals[0].idMeal}`);
-        return;
-      }
-      dispatch(saveDataFood(newData));
-    }
-    if (pathname === '/drinks') {
-      newData = await resquestByDrink(searchMethod, searchValue);
-      if (newData.drinks.length === NUMBER_ONE) {
-        history.push(`/drinks/${newData.drinks[0].idDrink}`);
-        return;
-      }
-      dispatch(saveDataDrink(newData));
+      ifRouteFood(searchMethod, searchValue);
+    } else {
+      ifRouteDrink(searchMethod, searchValue);
     }
   };
 
@@ -77,8 +60,7 @@ export default function Searchheader() {
     if (click === 0) {
       inputDisable(true);
       setClick(1);
-    }
-    if (click === 1) {
+    } else {
       inputDisable(false);
       setClick(0);
     }
