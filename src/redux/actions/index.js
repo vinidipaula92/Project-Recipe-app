@@ -1,6 +1,11 @@
-const USER_LOGIN = 'USER_LOGIN';
-const OUTRA_ACTION = 'OUTRA_ACTION';
+import { SAVE_DATA_DRINK, SAVE_DATA_FOOD } from '../../services/consts';
 
-export const minhaAction = (value) => ({ type: USER_LOGIN, value });
+export const saveDataFood = (data) => ({
+  type: SAVE_DATA_FOOD,
+  data,
+});
 
-export const outraAction = (coisa) => ({ type: OUTRA_ACTION, coisa });
+export const saveDataDrink = (data) => ({
+  type: SAVE_DATA_DRINK,
+  data,
+});
