@@ -48,9 +48,22 @@ export default function CategoriesRender() {
         dispatch(addCategorieFilter(''));
       } else {
         const mealsByCategorie = await requestMealsByCategory(value);
+        console.log(mealsByCategorie);
         dispatch(saveDataFood(mealsByCategorie));
         dispatch(addCategorieFilter(value));
       }
+    }
+  }
+
+  async function filterAllCategories() {
+    if (pathname === '/drinks') {
+      const drinksList = await requestDrinks();
+      dispatch(saveDataDrink(drinksList));
+      dispatch(addCategorieFilter(''));
+    } else if (pathname === '/foods') {
+      const mealsList = await requestMeal();
+      dispatch(saveDataFood(mealsList));
+      dispatch(addCategorieFilter(''));
     }
   }
 
@@ -61,6 +74,14 @@ export default function CategoriesRender() {
 
   return (
     <div>
+      <button
+        type="button"
+        data-testid="All-category-filter"
+        onClick={ filterAllCategories }
+      >
+        All
+
+      </button>
       {
         categoriesList.map((element, index) => (
           index < NUMBER_FIVE
