@@ -1,13 +1,22 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Searchheader from '../components/SearchHeader';
 import { NUMBER_ELEVEN } from '../services/consts';
+import { requestMeal } from '../services/apiRequest';
+import { saveDataFood } from '../redux/actions';
 
 export default function Food() {
   const { meals } = useSelector((state) => state.dataReducer.dataFood);
+  const dispatch = useDispatch();
+
+  useEffect(async () => {
+    const mealsList = await requestMeal();
+    dispatch(saveDataFood(mealsList));
+  }, []);
 
   return (
     <div>

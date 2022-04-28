@@ -45,3 +45,17 @@ export async function resquestByDrink(searchMethod, searchValue) {
   const data = await request(URL);
   return data;
 }
+
+export async function requestMeal() {
+  const mealsUrl = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+  const response = await fetch(mealsUrl);
+  const data = await response.json();
+  return data;
+}
+
+export async function requestDrinks() {
+  const mealsUrl = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+  const response = await fetch(mealsUrl);
+  const data = await response.json();
+  return data;
+}
