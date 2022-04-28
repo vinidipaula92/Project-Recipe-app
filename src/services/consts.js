@@ -6,3 +6,4 @@ export const NUMBER_FIVE = 5;
 
 export const SAVE_DATA_FOOD = 'SAVE_DATA_FOOD';
 export const SAVE_DATA_DRINK = 'SAVE_DATA_DRINK';
+export const ADD_CATEGORIE_FILTER = 'ADD_CATEGORIE_FILTER';
