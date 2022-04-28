@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Searchheader from '../components/SearchHeader';
-import { NUMBER_ELEVEN } from '../services/consts';
-import { requestMeal } from '../services/apiRequest';
 import { saveDataFood } from '../redux/actions';
+import { requestMeal } from '../services/apiRequest';
+import { NUMBER_ELEVEN } from '../services/consts';
 
 export default function Food() {
   const { meals } = useSelector((state) => state.dataReducer.dataFood);
@@ -20,6 +20,7 @@ export default function Food() {
 
   useEffect(() => {
     askApi();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
