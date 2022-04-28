@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory, useLocation } from 'react-router-dom';
 import searchIcon from '../images/searchIcon.svg';
+import { saveDataDrink, saveDataFood } from '../redux/actions';
+import { resquestByDrink, resquestByMeal } from '../services/apiRequest';
+import { NUMBER_ONE } from '../services/consts';
 
 export default function Searchheader() {
   const [search, setSearchMethod] = useState({
@@ -7,18 +12,22 @@ export default function Searchheader() {
     searchValue: '',
   });
 
+  const { pathname } = useLocation();
+  const history = useHistory();
+  const dispatch = useDispatch();
+
   const handleChange = ({ target: { name, value } }) => {
     setSearchMethod({ ...search, [name]: value });
   };
 
-  async function getApi(link) {
+  /*   async function getApi(link) {
     const response = await fetch(link);
     const data = await response.json();
     console.log(data);
     return data;
-  }
+  } */
 
-  const handleClick = () => {
+  /*   const handleClick = () => {
     const { searchMethod, searchValue } = search;
     if (searchMethod === 'name') {
       const URL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchValue}`;
@@ -38,7 +47,29 @@ export default function Searchheader() {
         getApi(URL);
       }
     }
+  }; */
+
+  const handleClick = async () => {
+    const { searchMethod, searchValue } = search;
+    let newData = {};
+    if (pathname === '/foods') {
+      newData = await resquestByMeal(searchMethod, searchValue);
+      if (newData.meals.length === NUMBER_ONE) {
+        history.push(`/foods/${newData.meals[0].idMeal}`);
+        return;
+      }
+      dispatch(saveDataFood(newData));
+    }
+    if (pathname === '/drinks') {
+      newData = await resquestByDrink(searchMethod, searchValue);
+      if (newData.drinks.length === NUMBER_ONE) {
+        history.push(`/drinks/${newData.drinks[0].idDrink}`);
+        return;
+      }
+      dispatch(saveDataDrink(newData));
+    }
   };
+
   const [disable, inputDisable] = useState(false);
   const [click, setClick] = useState(0);
 
@@ -80,29 +111,29 @@ export default function Searchheader() {
                   <input
                     data-testid="ingredient-search-radio"
                     type="radio"
-                    id="Ingredient"
+                    id="ingredient"
                     name="searchMethod"
                     value="ingredient"
                     onChange={ handleChange }
                   />
                   ingredient
                 </label>
-                <label htmlFor="Name">
+                <label htmlFor="name">
                   <input
                     data-testid="name-search-radio"
                     type="radio"
-                    id="Name"
+                    id="name"
                     name="searchMethod"
                     value="name"
                     onClick={ handleChange }
                   />
                   name
                 </label>
-                <label htmlFor="First letter">
+                <label htmlFor="firstLetter">
                   <input
                     data-testid="first-letter-search-radio"
                     type="radio"
-                    id="First letter"
+                    id="firstLetter"
                     name="searchMethod"
                     value="firstLetter"
                     onClick={ handleChange }
