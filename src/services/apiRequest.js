@@ -45,3 +45,15 @@ export async function resquestByDrink(searchMethod, searchValue) {
   const data = await request(URL);
   return data;
 }
+
+export async function requestRandomByFood() {
+  const response = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
+  const data = await response.json();
+  return data;
+}
+
+export async function requestRandomByDrink() {
+  const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php');
+  const data = await response.json();
+  return data;
+}
