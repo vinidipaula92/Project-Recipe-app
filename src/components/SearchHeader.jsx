@@ -5,6 +5,7 @@ import searchIcon from '../images/searchIcon.svg';
 import { saveDataDrink, saveDataFood } from '../redux/actions';
 import { resquestByDrink, resquestByMeal } from '../services/apiRequest';
 import { NUMBER_ONE } from '../services/consts';
+import CategoriesRender from './CategoriesRender';
 
 export default function Searchheader() {
   const [search, setSearchMethod] = useState({
@@ -133,7 +134,7 @@ export default function Searchheader() {
             </button>
 
           </>
-        ) : null
+        ) : <CategoriesRender />
       }
     </div>
   );
