@@ -1,13 +1,14 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { requestDrinksCategories,
-  requestMealsCategories,
-  requestMealsByCategory,
-  requestDrinksByCategories } from '../services/apiRequest';
-import { NUMBER_FIVE } from '../services/consts';
 import { saveDataDrink, saveDataFood } from '../redux/actions';
+/* eslint comma-dangle: ["error", "never"] */
+import {
+  requestDrinksByCategories,
+  requestDrinksCategories,
+  requestMealsByCategory, requestMealsCategories
+} from '../services/apiRequest';
+import { NUMBER_FIVE } from '../services/consts';
 
 export default function CategoriesRender() {
   const { pathname } = useLocation();
