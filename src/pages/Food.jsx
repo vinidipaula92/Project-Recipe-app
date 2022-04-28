@@ -13,9 +13,13 @@ export default function Food() {
   const { meals } = useSelector((state) => state.dataReducer.dataFood);
   const dispatch = useDispatch();
 
-  useEffect(async () => {
+  async function askApi() {
     const mealsList = await requestMeal();
     dispatch(saveDataFood(mealsList));
+  }
+
+  useEffect(() => {
+    askApi();
   }, []);
 
   return (

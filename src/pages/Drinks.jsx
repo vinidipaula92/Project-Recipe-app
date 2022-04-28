@@ -13,9 +13,13 @@ export default function Drinks() {
   const { drinks } = useSelector((state) => state.dataReducer.dataDrink);
   const dispatch = useDispatch();
 
-  useEffect(async () => {
+  async function askApi() {
     const drinksList = await requestDrinks();
     dispatch(saveDataDrink(drinksList));
+  }
+
+  useEffect(() => {
+    askApi();
   }, []);
 
   return (
