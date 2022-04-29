@@ -22,16 +22,6 @@
 // import RecipeDone from '../pages/RecipeDone';
 // import Favorite from '../pages/Favorite';
 
-// const renderWithRouter = (component) => {
-//   const customHistory = createMemoryHistory();
-
-//   const returnFromRender = render(
-//     <Router history={ customHistory }>{component}</Router>,
-//   );
-
-//   return { history: customHistory, ...returnFromRender };
-// };
-
 // describe('Testa a Tela de login: /;', () => {
 //   it('', () => {
 
