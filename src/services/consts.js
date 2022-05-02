@@ -13,3 +13,6 @@ export const emailId = 'email-input';
 export const passwordId = 'password-input';
 export const buttonId = 'login-submit-btn';
 export const emailForTests = 'email@email.com';
+
+export const RECIPE_DISPATCH = 'RECIPE_DISPATCH';
+export const DRINK_RECIPE_DISPATCH = 'DRINK_RECIPE_DISPATCH';

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ButtonShare from '../components/ButtonShare';
 
 export default function ProgressDrink() {
   const [add, setAdd] = useState(false);
@@ -20,13 +21,7 @@ export default function ProgressDrink() {
         src="https://www.seriouseats.com/recipes/images/2015/07/20150702-sous-vide-hamburger-anova-primary-1500x1125.jpg"
         alt="hamburger"
       />
-      <button
-        type="button"
-        data-testid="share-btn"
-      >
-        Share
-
-      </button>
+      <ButtonShare />
       <button
         type="button"
         data-testid="favorite-btn"

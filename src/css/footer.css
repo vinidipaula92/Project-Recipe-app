@@ -7,3 +7,7 @@ footer {
   bottom: 0;
   position: fixed;
 }
+
+.recipe-details {
+  margin-bottom: 40px;
+}
