@@ -6,10 +6,9 @@ import { useClipboard } from 'use-clipboard-copy';
 import { saveDataDrink } from '../redux/actions';
 import { requestDrinks, requestFoodRecipeById } from '../services/apiRequest';
 import { NUMBER_SIX } from '../services/consts';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import '../css/footer.css';
+import FavoriteButton from '../components/FavoriteButton';
 
 export default function DetailsFood() {
   const { id } = useParams();
@@ -18,7 +17,6 @@ export default function DetailsFood() {
   const [recipe, setRecipe] = useState({});
   const [loading, setLoading] = useState(true);
   const [share, setShare] = useState(true);
-  const [favorite, setFavorite] = useState(true);
 
   const getRecipeById = async () => {
     const { meals } = await requestFoodRecipeById(id);
@@ -54,44 +52,6 @@ export default function DetailsFood() {
   const handleCopy = () => {
     clipboard.copy(`http://localhost:3000/foods/${recipe.idMeal}`);
     setShare(false);
-  };
-
-  const handleChangeFavorite = () => {
-    const savedItems = localStorage.getItem('favoriteRecipes');
-    const savedItemsArray = JSON.parse(savedItems);
-
-    if (savedItems === null) {
-      const favRecipe = {
-        id: recipe.idMeal,
-        type: recipe.strTags,
-        nationality: recipe.strArea,
-        category: recipe.strCategory,
-        alcoholicOrNot: recipe.alcoholicOrNot,
-        name: recipe.strMeal,
-        image: recipe.strMealThumb,
-      };
-
-      const arrayToSave = [favRecipe];
-
-      const itemsToSave = JSON.stringify(arrayToSave);
-      localStorage.setItem('favoriteRecipes', itemsToSave);
-    } else {
-      const favRecipeItems = {
-        id: recipe.idMeal,
-        type: recipe.strTags,
-        nationality: recipe.strArea,
-        category: recipe.strCategory,
-        alcoholicOrNot: recipe.alcoholicOrNot,
-        name: recipe.strMeal,
-        image: recipe.strMealThumb,
-      };
-      savedItemsArray.push(favRecipeItems);
-      const itemsToSave = JSON.stringify(savedItemsArray);
-      localStorage.setItem('favoriteRecipes', itemsToSave);
-    }
-
-    if (favorite) return setFavorite(false);
-    return setFavorite(true);
   };
 
   return (
@@ -168,26 +128,7 @@ export default function DetailsFood() {
                   <p>Link copied!</p>
                 ) }
               </button>
-              <button
-                type="button"
-                onClick={ handleChangeFavorite }
-              >
-                {favorite
-                  ? (
-                    <img
-                      data-testid="favorite-btn"
-                      src={ whiteHeartIcon }
-                      alt="favoritar"
-                    />
-                  )
-                  : (
-                    <img
-                      data-testid="favorite-btn"
-                      src={ blackHeartIcon }
-                      alt="favoritar"
-                    />
-                  )}
-              </button>
+              <FavoriteButton recipe={ recipe } />
             </div>
             <p>
               a

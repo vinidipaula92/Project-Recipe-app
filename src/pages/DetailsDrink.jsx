@@ -6,10 +6,9 @@ import { useClipboard } from 'use-clipboard-copy';
 import { saveDataFood } from '../redux/actions';
 import { requestDrinkRecipeById, requestMeal } from '../services/apiRequest';
 import { NUMBER_SIX } from '../services/consts';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import '../css/footer.css';
+import FavoriteButton from '../components/FavoriteButton';
 
 export default function DetailsDrink() {
   const { id } = useParams();
@@ -18,7 +17,6 @@ export default function DetailsDrink() {
   const [drinkRecipe, setDrinkRecipe] = useState({});
   const [loading, setLoading] = useState(true);
   const [share, setShare] = useState(true);
-  const [favorite, setFavorite] = useState(true);
 
   const getRecipeById = async () => {
     const { drinks } = await requestDrinkRecipeById(id);
@@ -54,11 +52,6 @@ export default function DetailsDrink() {
   const handleCopy = () => {
     clipboard.copy(`http://localhost:3000/drinks/${drinkRecipe.idDrink}`);
     setShare(false);
-  };
-
-  const handleChangeFavorite = () => {
-    if (favorite) return setFavorite(false);
-    return setFavorite(true);
   };
 
   return (
@@ -135,26 +128,7 @@ export default function DetailsDrink() {
                   <p>Link copied!</p>
                 ) }
               </button>
-              <button
-                type="button"
-                onClick={ handleChangeFavorite }
-              >
-                {favorite
-                  ? (
-                    <img
-                      data-testid="favorite-btn"
-                      src={ whiteHeartIcon }
-                      alt="favoritar"
-                    />
-                  )
-                  : (
-                    <img
-                      data-testid="favorite-btn"
-                      src={ blackHeartIcon }
-                      alt="favoritar"
-                    />
-                  )}
-              </button>
+              <FavoriteButton recipe={ drinkRecipe } />
             </div>
             <p>
               a
