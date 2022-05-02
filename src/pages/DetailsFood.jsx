@@ -89,30 +89,32 @@ export default function DetailsFood() {
               />
               Your browser does not support the video tag.
             </video>
-            <Slider { ...settings }>
-              {
-                drinks && drinks.map((drink, index) => (
-                  index < NUMBER_SIX && (
-                    <div
-                      data-testid={ `${index}-recomendation-card` }
-                      key={ drink.idDrink }
-                    >
-                      <Link to={ `/drinks/${drink.idDrink}` }>
-                        <img
-                          data-testid={ `${index}-card-img` }
-                          src={ drink.strDrinkThumb }
-                          alt="recipes cards"
-                        />
-                        <p
-                          data-testid={ `${index}-recomendation-title` }
-                        >
-                          {drink.strDrink}
-                        </p>
-                      </Link>
-                    </div>
-                  )))
-              }
-            </Slider>
+            <div>
+              <Slider { ...settings }>
+                {
+                  drinks && drinks.map((drink, index) => (
+                    index < NUMBER_SIX && (
+                      <div
+                        data-testid={ `${index}-recomendation-card` }
+                        key={ drink.idDrink }
+                      >
+                        <Link to={ `/drinks/${drink.idDrink}` }>
+                          <img
+                            data-testid={ `${index}-card-img` }
+                            src={ drink.strDrinkThumb }
+                            alt="recipes cards"
+                          />
+                          <p
+                            data-testid={ `${index}-recomendation-title` }
+                          >
+                            {drink.strDrink}
+                          </p>
+                        </Link>
+                      </div>
+                    )))
+                }
+              </Slider>
+            </div>
             <div>
               <ButtonShare />
               <button

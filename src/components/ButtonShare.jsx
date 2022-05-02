@@ -12,11 +12,11 @@ export default function ButtonShare() {
   const { pathname } = useLocation();
 
   const handleCopy = () => {
-    if (pathname.includes('foods')) {
-      clipboard.copy(`http://localhost:3000/foods/${recipe.idMeal}`);
-    }
     if (pathname.includes('drinks')) {
       clipboard.copy(`http://localhost:3000/drinks/${drinkRecipe.idDrink}`);
+    }
+    if (pathname.includes('foods')) {
+      clipboard.copy(`http://localhost:3000/foods/${recipe.idMeal}`);
     }
     setShare(false);
   };
