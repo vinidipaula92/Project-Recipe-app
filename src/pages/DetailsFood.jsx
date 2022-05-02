@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import { useClipboard } from 'use-clipboard-copy';
 import { saveDataDrink } from '../redux/actions';
 import { requestDrinks, requestFoodRecipeById } from '../services/apiRequest';
