@@ -2,28 +2,26 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import Slider from 'react-slick';
-import { useClipboard } from 'use-clipboard-copy';
-import { saveDataFood } from '../redux/actions';
+import { drinkRecipeDispatch, saveDataFood } from '../redux/actions';
 import { requestDrinkRecipeById, requestMeal } from '../services/apiRequest';
 import { NUMBER_SIX } from '../services/consts';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import shareIcon from '../images/shareIcon.svg';
 import '../css/footer.css';
+import ButtonShare from '../components/ButtonShare';
 
 export default function DetailsDrink() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const clipboard = useClipboard();
   const [drinkRecipe, setDrinkRecipe] = useState({});
   const [loading, setLoading] = useState(true);
-  const [share, setShare] = useState(true);
   const [favorite, setFavorite] = useState(true);
 
   const getRecipeById = async () => {
     const { drinks } = await requestDrinkRecipeById(id);
     setDrinkRecipe(drinks[0]);
     setLoading(false);
+    dispatch(drinkRecipeDispatch(drinks[0]));
   };
 
   async function askApi() {
@@ -49,11 +47,6 @@ export default function DetailsDrink() {
     speed: 500,
     slidesToShow: 2,
     slidesToScroll: 2,
-  };
-
-  const handleCopy = () => {
-    clipboard.copy(`http://localhost:3000/drinks/${drinkRecipe.idDrink}`);
-    setShare(false);
   };
 
   const handleChangeFavorite = () => {
@@ -121,20 +114,7 @@ export default function DetailsDrink() {
               }
             </Slider>
             <div>
-              <button
-                type="button"
-                data-testid="share-btn"
-                onClick={ handleCopy }
-              >
-                { share ? (
-                  <img
-                    src={ shareIcon }
-                    alt="compartilhar"
-                  />
-                ) : (
-                  <p>Link copied!</p>
-                ) }
-              </button>
+              <ButtonShare />
               <button
                 type="button"
                 onClick={ handleChangeFavorite }

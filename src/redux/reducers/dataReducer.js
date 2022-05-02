@@ -1,5 +1,10 @@
-import { SAVE_DATA_DRINK,
-  SAVE_DATA_FOOD, ADD_CATEGORIE_FILTER } from '../../services/consts';
+import {
+  SAVE_DATA_DRINK,
+  SAVE_DATA_FOOD,
+  ADD_CATEGORIE_FILTER,
+  RECIPE_DISPATCH,
+  DRINK_RECIPE_DISPATCH,
+} from '../../services/consts';
 
 const INITIAL_STATE = {
   dataFood: {},
@@ -21,6 +26,16 @@ const dataReducer = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       categorieFilter: action.data,
+    };
+  case RECIPE_DISPATCH:
+    return {
+      ...state,
+      recipe: action.recipe,
+    };
+  case DRINK_RECIPE_DISPATCH:
+    return {
+      ...state,
+      drinkRecipe: action.drinkRecipe,
     };
   default:
     return state;
