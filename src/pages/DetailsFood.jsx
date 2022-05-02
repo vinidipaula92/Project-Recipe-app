@@ -57,6 +57,39 @@ export default function DetailsFood() {
   };
 
   const handleChangeFavorite = () => {
+    const savedItems = localStorage.getItem('favoriteRecipes');
+    const savedItemsArray = JSON.parse(savedItems);
+
+    if (savedItems === null) {
+      const favRecipe = {
+        id: recipe.idMeal,
+        type: recipe.strTags,
+        nationality: recipe.strArea,
+        category: recipe.strCategory,
+        alcoholicOrNot: recipe.alcoholicOrNot,
+        name: recipe.strMeal,
+        image: recipe.strMealThumb,
+      };
+
+      const arrayToSave = [favRecipe];
+
+      const itemsToSave = JSON.stringify(arrayToSave);
+      localStorage.setItem('favoriteRecipes', itemsToSave);
+    } else {
+      const favRecipeItems = {
+        id: recipe.idMeal,
+        type: recipe.strTags,
+        nationality: recipe.strArea,
+        category: recipe.strCategory,
+        alcoholicOrNot: recipe.alcoholicOrNot,
+        name: recipe.strMeal,
+        image: recipe.strMealThumb,
+      };
+      savedItemsArray.push(favRecipeItems);
+      const itemsToSave = JSON.stringify(savedItemsArray);
+      localStorage.setItem('favoriteRecipes', itemsToSave);
+    }
+
     if (favorite) return setFavorite(false);
     return setFavorite(true);
   };
