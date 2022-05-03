@@ -19,7 +19,9 @@ export default function Food() {
   }
 
   useEffect(() => {
-    askApi();
+    if (meals === undefined) {
+      askApi();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
