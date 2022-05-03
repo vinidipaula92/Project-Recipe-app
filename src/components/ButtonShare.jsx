@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useClipboard } from 'use-clipboard-copy';
 // import { useSelector } from 'react-redux';
