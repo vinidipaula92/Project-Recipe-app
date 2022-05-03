@@ -87,12 +87,22 @@ export const checkFavoriteMeals = (recipe) => {
   const savedItems = localStorage.getItem('favoriteRecipes');
   const savedItemsArray = JSON.parse(savedItems);
 
-  return savedItemsArray.some((element) => element.id === recipe.idMeal);
+  if (savedItemsArray === null) {
+    return false;
+  }
+  if (savedItemsArray.length > 0) {
+    return savedItemsArray.some((element) => element.id === recipe.idMeal);
+  }
 };
 
 export const checkFavoriteDrinks = (recipe) => {
   const savedItems = localStorage.getItem('favoriteRecipes');
   const savedItemsArray = JSON.parse(savedItems);
 
-  return savedItemsArray.some((element) => element.id === recipe.idDrink);
+  if (savedItemsArray === null) {
+    return false;
+  }
+  if (savedItems.length > 0) {
+    return savedItemsArray.some((element) => element.id === recipe.idDrink);
+  }
 };
