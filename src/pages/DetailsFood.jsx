@@ -9,19 +9,29 @@ import { NUMBER_SIX } from '../services/consts';
 import shareIcon from '../images/shareIcon.svg';
 import '../css/footer.css';
 import FavoriteButton from '../components/FavoriteButton';
+import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
+import ButtonShare from '../components/ButtonShare';
+import '../css/footer.css';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import { recipeDispatch, saveDataDrink } from '../redux/actions';
+import { requestDrinks, requestFoodRecipeById } from '../services/apiRequest';
+import { NUMBER_SIX } from '../services/consts';
 
 export default function DetailsFood() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const clipboard = useClipboard();
   const [recipe, setRecipe] = useState({});
   const [loading, setLoading] = useState(true);
   const [share, setShare] = useState(true);
+  const [favorite, setFavorite] = useState(true);
 
   const getRecipeById = async () => {
     const { meals } = await requestFoodRecipeById(id);
     setRecipe(meals[0]);
     setLoading(false);
+    dispatch(recipeDispatch(meals[0]));
   };
 
   async function askApi() {
@@ -49,16 +59,22 @@ export default function DetailsFood() {
     slidesToScroll: 2,
   };
 
+
   const handleCopy = () => {
     clipboard.copy(`http://localhost:3000/foods/${recipe.idMeal}`);
     setShare(false);
+  };
+
+  const handleChangeFavorite = () => {
+    if (favorite) return setFavorite(false);
+    return setFavorite(true);
   };
 
   return (
     <div>
       {
         loading ? <p>Loading...</p> : (
-          <div>
+          <div className="recipe-details">
             <img
               data-testid="recipe-photo"
               src={ recipe.strMealThumb }
@@ -89,52 +105,36 @@ export default function DetailsFood() {
               />
               Your browser does not support the video tag.
             </video>
-            <Slider { ...settings }>
-              {
-                drinks && drinks.map((drink, index) => (
-                  index < NUMBER_SIX && (
-                    <div
-                      data-testid={ `${index}-recomendation-card` }
-                      key={ drink.idDrink }
-                    >
-                      <Link to={ `/drinks/${drink.idDrink}` }>
-                        <img
-                          data-testid={ `${index}-card-img` }
-                          src={ drink.strDrinkThumb }
-                          alt="recipes cards"
-                        />
-                        <p
-                          data-testid={ `${index}-recomendation-title` }
-                        >
-                          {drink.strDrink}
-                        </p>
-                      </Link>
-                    </div>
-                  )))
-              }
-            </Slider>
             <div>
-              <button
-                type="button"
-                data-testid="share-btn"
-                onClick={ handleCopy }
-              >
-                { share ? (
-                  <img
-                    src={ shareIcon }
-                    alt="compartilhar"
-                  />
-                ) : (
-                  <p>Link copied!</p>
-                ) }
-              </button>
+              <Slider { ...settings }>
+                {
+                  drinks && drinks.map((drink, index) => (
+                    index < NUMBER_SIX && (
+                      <div
+                        data-testid={ `${index}-recomendation-card` }
+                        key={ drink.idDrink }
+                      >
+                        <Link to={ `/drinks/${drink.idDrink}` }>
+                          <img
+                            data-testid={ `${index}-card-img` }
+                            src={ drink.strDrinkThumb }
+                            alt="recipes cards"
+                          />
+                          <p
+                            data-testid={ `${index}-recomendation-title` }
+                          >
+                            {drink.strDrink}
+                          </p>
+                        </Link>
+                      </div>
+                    )))
+                }
+              </Slider>
+            </div>
+            <div>
+              <ButtonShare />
               <FavoriteButton recipe={ recipe } />
             </div>
-            <p>
-              a
-              a
-              a
-            </p>
             <Link to={ `/foods/${recipe.idMeal}/in-progress` }>
               <button
                 className="footer-fixed"

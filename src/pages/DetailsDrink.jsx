@@ -9,19 +9,29 @@ import { NUMBER_SIX } from '../services/consts';
 import shareIcon from '../images/shareIcon.svg';
 import '../css/footer.css';
 import FavoriteButton from '../components/FavoriteButton';
+import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
+import ButtonShare from '../components/ButtonShare';
+import '../css/footer.css';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import { drinkRecipeDispatch, saveDataFood } from '../redux/actions';
+import { requestDrinkRecipeById, requestMeal } from '../services/apiRequest';
+import { NUMBER_SIX } from '../services/consts';
 
 export default function DetailsDrink() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const clipboard = useClipboard();
   const [drinkRecipe, setDrinkRecipe] = useState({});
   const [loading, setLoading] = useState(true);
   const [share, setShare] = useState(true);
+  const [favorite, setFavorite] = useState(true);
 
   const getRecipeById = async () => {
     const { drinks } = await requestDrinkRecipeById(id);
     setDrinkRecipe(drinks[0]);
     setLoading(false);
+    dispatch(drinkRecipeDispatch(drinks[0]));
   };
 
   async function askApi() {
@@ -52,6 +62,11 @@ export default function DetailsDrink() {
   const handleCopy = () => {
     clipboard.copy(`http://localhost:3000/drinks/${drinkRecipe.idDrink}`);
     setShare(false);
+  };
+    
+  const handleChangeFavorite = () => {
+    if (favorite) return setFavorite(false);
+    return setFavorite(true);
   };
 
   return (
@@ -114,20 +129,7 @@ export default function DetailsDrink() {
               }
             </Slider>
             <div>
-              <button
-                type="button"
-                data-testid="share-btn"
-                onClick={ handleCopy }
-              >
-                { share ? (
-                  <img
-                    src={ shareIcon }
-                    alt="compartilhar"
-                  />
-                ) : (
-                  <p>Link copied!</p>
-                ) }
-              </button>
+              <ButtonShare />
               <FavoriteButton recipe={ drinkRecipe } />
             </div>
             <p>
