@@ -4,11 +4,8 @@ import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.m
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { addCategorieFilter, saveDataFood } from '../redux/actions';
-import {
-  requestExploreIngredientFood, resquestByMeal
-} from '../services/apiRequest';
+import { requestExploreIngredientFood, resquestByMeal } from '../services/apiRequest';
 import { NUMBER_ELEVEN } from '../services/consts';
-/* eslint comma-dangle: ["error", "never"] */
 
 export default function ExploreFoodByIngredient() {
   const [loading, setLoading] = useState(true);
