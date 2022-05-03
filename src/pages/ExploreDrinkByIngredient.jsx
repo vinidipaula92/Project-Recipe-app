@@ -25,10 +25,6 @@ export default function ExploreDrinkByIngredient() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // const drinkIngredient = Object.keys(ingredient).filter((key) => key
-  //   .includes('strIngredient'));
-  console.log(drinks);
-
   return (
     <div>
       <Header />

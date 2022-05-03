@@ -1,8 +1,8 @@
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { useClipboard } from 'use-clipboard-copy';
 // import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
-import PropTypes from 'prop-types';
+import { useClipboard } from 'use-clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
 
 export default function ButtonShare(props) {
@@ -20,6 +20,7 @@ export default function ButtonShare(props) {
     setIndexEx(index);
     setDrinkRecipe(recipes);
     setRecipe(recipes);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleCopy = () => {
