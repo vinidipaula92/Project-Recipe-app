@@ -4,11 +4,8 @@ import { useHistory, useLocation } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { addCategorieFilter, saveDataDrink } from '../redux/actions';
-import {
-  requestExploreIngredientDrink, resquestByDrink
-} from '../services/apiRequest';
+import { requestExploreIngredientDrink, resquestByDrink } from '../services/apiRequest';
 import { NUMBER_ELEVEN } from '../services/consts';
-/* eslint comma-dangle: ["error", "never"] */
 
 export default function ExploreDrinkByIngredient() {
   const [loading, setLoading] = useState(true);
