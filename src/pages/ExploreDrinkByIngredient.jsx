@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory, useLocation } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import { saveDataDrink } from '../redux/actions';
-import { requestExploreIngredientDrink } from '../services/apiRequest';
+import { addCategorieFilter, saveDataDrink } from '../redux/actions';
+import {
+  requestExploreIngredientDrink, resquestByDrink
+} from '../services/apiRequest';
 import { NUMBER_ELEVEN } from '../services/consts';
+/* eslint comma-dangle: ["error", "never"] */
 
 export default function ExploreDrinkByIngredient() {
   const [loading, setLoading] = useState(true);
   const { drinks } = useSelector((state) => state.dataReducer.dataDrink);
   const dispatch = useDispatch();
-  // const [ingredient, setIngredient] = useState([]);
+  const history = useHistory();
+  const { pathname } = useLocation();
 
   async function askApi() {
     const drinksList = await requestExploreIngredientDrink();
@@ -25,6 +29,16 @@ export default function ExploreDrinkByIngredient() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleCick = async ({ target }) => {
+    const { value } = target;
+    if (pathname === '/explore/drinks/ingredients') {
+      const drinksByCategorie = await resquestByDrink('ingredient', value);
+      dispatch(saveDataDrink(drinksByCategorie));
+      dispatch(addCategorieFilter(value));
+    }
+    history.push('/drinks');
+  };
+
   return (
     <div>
       <Header />
@@ -37,7 +51,6 @@ export default function ExploreDrinkByIngredient() {
                 drinks.map((drink, index) => (
                   index <= NUMBER_ELEVEN && (
                     <div
-                      data-testid={ `${index}-ingredient-card` }
                       key={ index }
                     >
                       <img
@@ -45,15 +58,19 @@ export default function ExploreDrinkByIngredient() {
                         src={ `https://www.thecocktaildb.com/images/ingredients/${drink.strIngredient1}-Small.png` }
                         alt="recipes cards"
                       />
-                      <Link
-                        data-testid={ `${index}-recipe-card` }
-                        to={ `/drinks/${drink.strIngredient1}` }
-                      >
-                        <p data-testid={ `${index}-card-name` }>
-                          {drink.strIngredient1}
 
-                        </p>
-                      </Link>
+                      <p data-testid={ `${index}-card-name` }>
+                        {drink.strIngredient1}
+
+                      </p>
+                      <button
+                        type="button"
+                        onClick={ handleCick }
+                        value={ drink.strIngredient1 }
+                        data-testid={ `${index}-ingredient-card` }
+                      >
+                        {drink.strIngredient1}
+                      </button>
                     </div>
                   )))
               }
