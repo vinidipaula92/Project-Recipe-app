@@ -4,8 +4,6 @@ import { Link, useParams } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { useClipboard } from 'use-clipboard-copy';
-import { saveDataFood } from '../redux/actions';
 import { drinkRecipeDispatch, saveDataFood } from '../redux/actions';
 import { requestDrinkRecipeById, requestMeal } from '../services/apiRequest';
 import { NUMBER_SIX } from '../services/consts';
