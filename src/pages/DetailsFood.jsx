@@ -2,22 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import Slider from 'react-slick';
+import { saveDataDrink, recipeDispatch } from '../redux/actions';
+import { requestDrinks, requestFoodRecipeById } from '../services/apiRequest';
+import { NUMBER_SIX } from '../services/consts';
+import FavoriteButton from '../components/FavoriteButton';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import ButtonShare from '../components/ButtonShare';
-import '../css/footer.css';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import { recipeDispatch, saveDataDrink } from '../redux/actions';
-import { requestDrinks, requestFoodRecipeById } from '../services/apiRequest';
-import { NUMBER_SIX } from '../services/consts';
 
 export default function DetailsFood() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [recipe, setRecipe] = useState({});
   const [loading, setLoading] = useState(true);
-  const [favorite, setFavorite] = useState(true);
 
   const getRecipeById = async () => {
     const { meals } = await requestFoodRecipeById(id);
@@ -49,11 +46,6 @@ export default function DetailsFood() {
     speed: 500,
     slidesToShow: 2,
     slidesToScroll: 2,
-  };
-
-  const handleChangeFavorite = () => {
-    if (favorite) return setFavorite(false);
-    return setFavorite(true);
   };
 
   return (
@@ -119,26 +111,7 @@ export default function DetailsFood() {
             </div>
             <div>
               <ButtonShare recipes={ recipe } />
-              <button
-                type="button"
-                onClick={ handleChangeFavorite }
-              >
-                {favorite
-                  ? (
-                    <img
-                      data-testid="favorite-btn"
-                      src={ whiteHeartIcon }
-                      alt="favoritar"
-                    />
-                  )
-                  : (
-                    <img
-                      data-testid="favorite-btn"
-                      src={ blackHeartIcon }
-                      alt="favoritar"
-                    />
-                  )}
-              </button>
+              <FavoriteButton recipe={ recipe } />
             </div>
             <Link to={ `/foods/${recipe.idMeal}/in-progress` }>
               <button
