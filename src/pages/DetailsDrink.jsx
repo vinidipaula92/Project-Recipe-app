@@ -109,7 +109,7 @@ export default function DetailsDrink() {
               }
             </Slider>
             <div>
-              <ButtonShare />
+              <ButtonShare recipes={ drinkRecipe } />
               <FavoriteButton recipe={ drinkRecipe } />
             </div>
             <p>

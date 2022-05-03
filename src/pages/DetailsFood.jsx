@@ -110,7 +110,7 @@ export default function DetailsFood() {
               </Slider>
             </div>
             <div>
-              <ButtonShare />
+              <ButtonShare recipes={ recipe } />
               <FavoriteButton recipe={ recipe } />
             </div>
             <Link to={ `/foods/${recipe.idMeal}/in-progress` }>
