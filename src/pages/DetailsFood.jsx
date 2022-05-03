@@ -4,8 +4,6 @@ import { Link, useParams } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { useClipboard } from 'use-clipboard-copy';
-import { saveDataDrink } from '../redux/actions';
 import { recipeDispatch, saveDataDrink } from '../redux/actions';
 import { requestDrinks, requestFoodRecipeById } from '../services/apiRequest';
 import { NUMBER_SIX } from '../services/consts';
@@ -120,7 +118,7 @@ export default function DetailsFood() {
               </Slider>
             </div>
             <div>
-              <ButtonShare />
+              <ButtonShare recipes={ recipe } />
               <button
                 type="button"
                 onClick={ handleChangeFavorite }
