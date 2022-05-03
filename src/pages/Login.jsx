@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import '../css/Login.css';
 
 export default function Login() {
   const history = useHistory();
@@ -27,11 +28,12 @@ export default function Login() {
   const passwordTest = user.password.length <= numberSix;
 
   return (
-    <div>
-      <p>Login</p>
+    <div className="login-page-body">
+      <p className="login-page-title">Login</p>
+      {/* <div className="login-page-form"> */}
       <form>
         <input
-          className="emailInput"
+          className="email-input"
           type="text"
           name="email"
           value={ user.email }
@@ -39,7 +41,7 @@ export default function Login() {
           onChange={ handleChange }
         />
         <input
-          className="passwordInput"
+          className="password-input"
           type="password"
           name="password"
           value={ user.password }
@@ -55,6 +57,7 @@ export default function Login() {
           Entrar
         </button>
       </form>
+      {/* </div> */}
     </div>
   );
 }

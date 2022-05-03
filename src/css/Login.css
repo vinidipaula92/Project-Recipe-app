@@ -1,0 +1,21 @@
+.login-page-title {
+  text-align: center;
+}
+
+.login-page-body {
+  border: 3px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.password-input, .email-input {
+  margin: 4px 0;
+}

@@ -24,7 +24,7 @@ export default function Searchheader() {
   const ifRouteFood = async (searchMethod, searchValue) => {
     const newData = await resquestByMeal(searchMethod, searchValue);
     dispatch(saveDataFood(newData));
-    if (!newData.meals) {
+    if (!newData?.meals) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
       return;
     }
@@ -36,7 +36,7 @@ export default function Searchheader() {
   const ifRouteDrink = async (searchMethod, searchValue) => {
     const newData = await resquestByDrink(searchMethod, searchValue);
     dispatch(saveDataDrink(newData));
-    if (!newData.drinks) {
+    if (!newData?.drinks) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
       return;
     }

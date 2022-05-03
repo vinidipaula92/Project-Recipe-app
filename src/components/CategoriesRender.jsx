@@ -48,7 +48,6 @@ export default function CategoriesRender() {
         dispatch(addCategorieFilter(''));
       } else {
         const mealsByCategorie = await requestMealsByCategory(value);
-        console.log(mealsByCategorie);
         dispatch(saveDataFood(mealsByCategorie));
         dispatch(addCategorieFilter(value));
       }
