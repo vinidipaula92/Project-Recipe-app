@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
+import ButtonShare from '../components/ButtonShare';
+import '../css/footer.css';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import { drinkRecipeDispatch, saveDataFood } from '../redux/actions';
 import { requestDrinkRecipeById, requestMeal } from '../services/apiRequest';
 import { NUMBER_SIX } from '../services/consts';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import '../css/footer.css';
-import ButtonShare from '../components/ButtonShare';
 
 export default function DetailsDrink() {
   const { id } = useParams();
