@@ -2,30 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import Slider from 'react-slick';
-import { useClipboard } from 'use-clipboard-copy';
-import { saveDataDrink } from '../redux/actions';
+import { saveDataDrink, recipeDispatch } from '../redux/actions';
 import { requestDrinks, requestFoodRecipeById } from '../services/apiRequest';
 import { NUMBER_SIX } from '../services/consts';
-import shareIcon from '../images/shareIcon.svg';
-import '../css/footer.css';
 import FavoriteButton from '../components/FavoriteButton';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import ButtonShare from '../components/ButtonShare';
-import '../css/footer.css';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import { recipeDispatch, saveDataDrink } from '../redux/actions';
-import { requestDrinks, requestFoodRecipeById } from '../services/apiRequest';
-import { NUMBER_SIX } from '../services/consts';
 
 export default function DetailsFood() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [recipe, setRecipe] = useState({});
   const [loading, setLoading] = useState(true);
-  const [share, setShare] = useState(true);
-  const [favorite, setFavorite] = useState(true);
 
   const getRecipeById = async () => {
     const { meals } = await requestFoodRecipeById(id);
@@ -57,17 +46,6 @@ export default function DetailsFood() {
     speed: 500,
     slidesToShow: 2,
     slidesToScroll: 2,
-  };
-
-
-  const handleCopy = () => {
-    clipboard.copy(`http://localhost:3000/foods/${recipe.idMeal}`);
-    setShare(false);
-  };
-
-  const handleChangeFavorite = () => {
-    if (favorite) return setFavorite(false);
-    return setFavorite(true);
   };
 
   return (
