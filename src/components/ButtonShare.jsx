@@ -1,22 +1,41 @@
-import React, { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from 'react';
 import { useClipboard } from 'use-clipboard-copy';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 
-export default function ButtonShare() {
-  const recipe = useSelector((state) => state.dataReducer.recipe);
-  const drinkRecipe = useSelector((state) => state.dataReducer.drinkRecipe);
+export default function ButtonShare(props) {
+  // const recipe = useSelector((state) => state.dataReducer.recipe);
+  // const drinkRecipe = useSelector((state) => state.dataReducer.drinkRecipe);
+  const [recipe, setRecipe] = useState();
+  const [indexEx, setIndexEx] = useState();
+  const [drinkRecipe, setDrinkRecipe] = useState();
   const [share, setShare] = useState(true);
   const clipboard = useClipboard();
   const { pathname } = useLocation();
 
+  useEffect(() => {
+    const { recipes, index } = props;
+    setIndexEx(index);
+    setDrinkRecipe(recipes);
+    setRecipe(recipes);
+  }, []);
+
   const handleCopy = () => {
+    console.log('aqui');
     if (pathname.includes('drinks')) {
       clipboard.copy(`http://localhost:3000/drinks/${drinkRecipe.idDrink}`);
     }
     if (pathname.includes('foods')) {
       clipboard.copy(`http://localhost:3000/foods/${recipe.idMeal}`);
+    }
+    if (drinkRecipe.type === 'drink') {
+      clipboard.copy(`http://localhost:3000/drinks/${drinkRecipe.id}`);
+    }
+    if (drinkRecipe.type === 'food') {
+      clipboard.copy(`http://localhost:3000/foods/${recipe.id}`);
     }
     setShare(false);
   };
@@ -24,11 +43,12 @@ export default function ButtonShare() {
   return (
     <button
       type="button"
-      data-testid="share-btn"
       onClick={ handleCopy }
     >
       { share ? (
         <img
+          data-testid={ indexEx !== undefined
+            ? (`${indexEx}-horizontal-share-btn`) : ('share-btn') }
           src={ shareIcon }
           alt="compartilhar"
         />
@@ -38,3 +58,7 @@ export default function ButtonShare() {
     </button>
   );
 }
+
+ButtonShare.propTypes = {
+  recipe: PropTypes.array,
+}.isRequired;

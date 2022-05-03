@@ -111,3 +111,15 @@ export async function requestDrinksByCategories(categorie) {
   const data = await response.json();
   return data;
 }
+
+export async function requestExploreIngredientFood() {
+  const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?i=list');
+  const data = await response.json();
+  return data;
+}
+
+export async function requestExploreIngredientDrink() {
+  const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list');
+  const data = await response.json();
+  return data;
+}
