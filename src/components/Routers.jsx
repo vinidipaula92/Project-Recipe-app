@@ -12,6 +12,7 @@ import ExploreFoodByNationality from '../pages/ExploreFoodByNationality';
 import Favorite from '../pages/Favorite';
 import Food from '../pages/Food';
 import Login from '../pages/Login';
+import NotFound from '../pages/NotFound';
 import Profile from '../pages/Profile';
 import ProgressDrink from '../pages/ProgressDrink';
 import ProgressFood from '../pages/ProgressFood';
@@ -21,6 +22,7 @@ function Routers() {
   return (
     <Switch>
       <Route path="/explore/drinks/ingredients" component={ ExploreDrinkByIngredient } />
+      <Route path="/explore/drinks/nationalities" component={ NotFound } />
       <Route path="/explore/foods/ingredients" component={ ExploreFoodByIngredient } />
       <Route path="/explore/foods/nationalities" component={ ExploreFoodByNationality } />
       <Route path="/foods/:id/in-progress" component={ ProgressFood } />
