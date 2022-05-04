@@ -10,6 +10,7 @@ import FavoriteButton from '../components/FavoriteButton';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import ButtonShare from '../components/ButtonShare';
+import '../css/Details.css';
 
 export default function DetailsDrink() {
   const { id } = useParams();
@@ -108,7 +109,7 @@ export default function DetailsDrink() {
                   )))
               }
             </Slider>
-            <div>
+            <div className="buttons">
               <ButtonShare recipes={ drinkRecipe } />
               <FavoriteButton recipe={ drinkRecipe } />
             </div>
