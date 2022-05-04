@@ -23,6 +23,7 @@ export default function Searchheader() {
 
   const ifRouteFood = async (searchMethod, searchValue) => {
     const newData = await resquestByMeal(searchMethod, searchValue);
+    console.log(newData);
     dispatch(saveDataFood(newData));
     if (!newData.meals) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
