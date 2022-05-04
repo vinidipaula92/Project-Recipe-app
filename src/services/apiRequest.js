@@ -123,3 +123,21 @@ export async function requestExploreIngredientDrink() {
   const data = await response.json();
   return data;
 }
+
+export async function requestNationality() {
+  const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
+  const data = await response.json();
+  return data;
+}
+
+export async function requestFoodNationality(nacionality) {
+  if (nacionality === 'All') {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+    const data = await response.json();
+    return data;
+  }
+  const response = await
+  fetch(`www.themealdb.com/api/json/v1/1/filter.php?a=${nacionality}`);
+  const data = await response.json();
+  return data;
+}
