@@ -2,6 +2,13 @@
   text-align: center;
 }
 
+.login-page {
+  display: flex;
+  height: 640px;
+  justify-content: center;
+  width: 320px;
+}
+
 .login-page-body {
   border: 2px solid black;
   display: flex;

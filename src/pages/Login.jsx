@@ -28,36 +28,38 @@ export default function Login() {
   const passwordTest = user.password.length <= numberSix;
 
   return (
-    <div className="login-page-body">
-      <p className="login-page-title">Login</p>
-      {/* <div className="login-page-form"> */}
-      <form>
-        <input
-          className="email-input"
-          type="text"
-          name="email"
-          value={ user.email }
-          data-testid="email-input"
-          onChange={ handleChange }
-        />
-        <input
-          className="password-input"
-          type="password"
-          name="password"
-          value={ user.password }
-          data-testid="password-input"
-          onChange={ handleChange }
-        />
-        <button
-          data-testid="login-submit-btn"
-          type="button"
-          disabled={ emailTest || passwordTest }
-          onClick={ handleClick }
-        >
-          Entrar
-        </button>
-      </form>
-      {/* </div> */}
+    <div className="login-page">
+      <div className="login-page-body">
+        <p className="login-page-title">Login</p>
+        {/* <div className="login-page-form"> */}
+        <form>
+          <input
+            className="email-input"
+            type="text"
+            name="email"
+            value={ user.email }
+            data-testid="email-input"
+            onChange={ handleChange }
+          />
+          <input
+            className="password-input"
+            type="password"
+            name="password"
+            value={ user.password }
+            data-testid="password-input"
+            onChange={ handleChange }
+          />
+          <button
+            data-testid="login-submit-btn"
+            type="button"
+            disabled={ emailTest || passwordTest }
+            onClick={ handleClick }
+          >
+            Entrar
+          </button>
+        </form>
+        {/* </div> */}
+      </div>
     </div>
   );
 }
