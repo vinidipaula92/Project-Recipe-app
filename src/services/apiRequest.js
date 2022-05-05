@@ -6,44 +6,65 @@ export async function request(URL) {
   return data;
 }
 
-export async function resquestByMeal(searchMethod, searchValue) {
-  let URL = '';
-  if (searchMethod === 'name') {
-    URL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchValue}`;
-  }
-  if (searchMethod === 'ingredient') {
-    URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchValue}`;
-  }
-  if (searchMethod === 'firstLetter') {
-    const alert = 'Your search must have only 1 (one) character';
-    if (searchValue.length > NUMBER_ONE) {
-      global.alert(alert);
-    } else {
-      URL = `https://www.themealdb.com/api/json/v1/1/search.php?f=${searchValue}`;
-    }
-  }
-  const data = await request(URL);
+export async function requestMeal() {
+  const mealsUrl = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+  const response = await fetch(mealsUrl);
+  const data = await response.json();
+  return data;
+}
+export async function requestDrinks() {
+  const mealsUrl = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+  const response = await fetch(mealsUrl);
+  const data = await response.json();
   return data;
 }
 
-export async function resquestByDrink(searchMethod, searchValue) {
-  let URL = '';
+export async function resquestByMeal(searchMethod, searchValue) {
   if (searchMethod === 'name') {
-    URL = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchValue}`;
+    const URL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchValue}`;
+    const data = await request(URL);
+    return data;
   }
   if (searchMethod === 'ingredient') {
-    URL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${searchValue}`;
+    const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchValue}`;
+    const data = await request(URL);
+    return data;
   }
   if (searchMethod === 'firstLetter') {
     const alert = 'Your search must have only 1 (one) character';
     if (searchValue.length > NUMBER_ONE) {
       global.alert(alert);
-    } else {
-      URL = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${searchValue}`;
+      const data = await requestMeal();
+      return data;
     }
+    const URL = `https://www.themealdb.com/api/json/v1/1/search.php?f=${searchValue}`;
+    const data = await request(URL);
+    return data;
   }
-  const data = await request(URL);
-  return data;
+}
+
+export async function resquestByDrink(searchMethod, searchValue) {
+  if (searchMethod === 'name') {
+    const URL = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchValue}`;
+    const data = await request(URL);
+    return data;
+  }
+  if (searchMethod === 'ingredient') {
+    const URL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${searchValue}`;
+    const data = await request(URL);
+    return data;
+  }
+  if (searchMethod === 'firstLetter') {
+    const alert = 'Your search must have only 1 (one) character';
+    if (searchValue.length > NUMBER_ONE) {
+      global.alert(alert);
+      const data = await requestDrinks();
+      return data;
+    }
+    const URL = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${searchValue}`;
+    const data = await request(URL);
+    return data;
+  }
 }
 
 export async function requestRandomByFood() {
@@ -54,19 +75,6 @@ export async function requestRandomByFood() {
 
 export async function requestRandomByDrink() {
   const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php');
-  const data = await response.json();
-  return data;
-}
-
-export async function requestMeal() {
-  const mealsUrl = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-  const response = await fetch(mealsUrl);
-  const data = await response.json();
-  return data;
-}
-export async function requestDrinks() {
-  const mealsUrl = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
-  const response = await fetch(mealsUrl);
   const data = await response.json();
   return data;
 }

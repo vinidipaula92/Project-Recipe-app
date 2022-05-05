@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import Footer from '../components/Footer';
-// import Searchheader from '../components/SearchHeader';
 import Header from '../components/Header';
+import Searchheader from '../components/SearchHeader';
 import { nationality, requestFoodNationality, requestMeal } from '../services/apiRequest';
 import { NUMBER_ELEVEN } from '../services/consts';
 
@@ -40,6 +40,7 @@ export default function ExploreFoodByNationality() {
   return (
     <div>
       <Header />
+      <Searchheader />
       <span data-testid="page-title">Explore Nationalities</span>
       {loading ? (
         <p>Loading...</p>
