@@ -26,10 +26,8 @@ export default function ExploreFoodByNationality() {
       const mealsListFood = await requestMeal();
       setNative(mealsListFood.meals);
     }
-    const mealsListFood = await requestFoodNationality(value);
-    setNative(mealsListFood.meals);
-    console.log(native);
-    console.log(value);
+    const data = await requestFoodNationality(value);
+    setNative(data.meals);
   };
 
   useEffect(() => {
