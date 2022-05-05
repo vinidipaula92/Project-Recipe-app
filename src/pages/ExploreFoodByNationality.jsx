@@ -2,19 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import {
-  requestFoodNationality, requestMeal,
-  requestNationality,
-} from '../services/apiRequest';
+import { nationality, requestFoodNationality, requestMeal } from '../services/apiRequest';
 import { NUMBER_ELEVEN } from '../services/consts';
 
 export default function ExploreFoodByNationality() {
   const [loading, setLoading] = useState(true);
   const [native, setNative] = useState([]);
   const [recipe, setRecipe] = useState([]);
+  // const [allMeal, setAllMeal] = useState([]);
 
   async function askApi() {
-    const response = await requestNationality();
+    const response = await nationality();
     setRecipe(response.meals);
     const mealsListFood = await requestMeal();
     setNative(mealsListFood.meals);
@@ -29,8 +27,8 @@ export default function ExploreFoodByNationality() {
     }
     const mealsListFood = await requestFoodNationality(value);
     setNative(mealsListFood.meals);
-    console.log(value);
     console.log(native);
+    console.log(value);
   };
 
   useEffect(() => {
@@ -49,7 +47,7 @@ export default function ExploreFoodByNationality() {
           data-testid="explore-by-nationality-dropdown"
           onChange={ handleChange }
         >
-          <option>All</option>
+          <option data-testid="All-option">All</option>
           {recipe
             && recipe.map((nacionalidade, index) => (
               <option
