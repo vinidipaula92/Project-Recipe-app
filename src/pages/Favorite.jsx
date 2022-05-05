@@ -29,7 +29,7 @@ export default function Favorite() {
               <p
                 data-testid={ `${index}-horizontal-top-text` }
               >
-                { element.nationality }
+                { element.type === 'food' ? element.nationality : element.alcoholicOrNot }
                 {' '}
                 -
                 {' '}
