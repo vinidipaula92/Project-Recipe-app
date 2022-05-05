@@ -1,32 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import Searchheader from '../components/SearchHeader';
-import { addCategorieFilter, saveDataFood } from '../redux/actions';
-import { requestFoodNationality, requestNationality } from '../services/apiRequest';
+import {
+  requestFoodNationality, requestMeal,
+  requestNationality
+} from '../services/apiRequest';
+import { NUMBER_ELEVEN } from '../services/consts';
 
 export default function ExploreFoodByNationality() {
   const [loading, setLoading] = useState(true);
-  const [native, setNative] = useState('');
-  const [teste, setTeste] = useState([]);
-  const dispatch = useDispatch();
-  const { meals } = useSelector((state) => state.dataReducer.categorieFilter);
+  const [native, setNative] = useState([]);
+  const [recipe, setRecipe] = useState([]);
 
   async function askApi() {
-    const mealsList = await requestNationality();
-    const mealsListFood = await requestFoodNationality('All');
-    dispatch(addCategorieFilter(mealsListFood));
-    dispatch(saveDataFood(mealsList));
+    const response = await requestNationality();
+    setRecipe(response.meals);
+    const mealsListFood = await requestMeal();
+    setNative(mealsListFood.meals);
     setLoading(false);
-    setTeste(mealsListFood);
-    console.log(teste);
-    console.log(mealsListFood);
   }
 
   const handleChange = async ({ target }) => {
     const { value } = target;
-    setNative(value);
+    if (value === 'All') {
+      const mealsListFood = await requestMeal();
+      setNative(mealsListFood.meals);
+    }
+    const mealsListFood = await requestFoodNationality(value);
+    setNative(mealsListFood.meals);
+    console.log(value);
     console.log(native);
   };
 
@@ -39,30 +42,41 @@ export default function ExploreFoodByNationality() {
     <div>
       <Header />
       <span data-testid="page-title">Explore Nationalities</span>
-      <Searchheader />
-      {
-        loading ? <p>Loading...</p> : (
-          <select
-            data-testid="explore-by-nationality-dropdown"
-            onChange={ handleChange }
-
-          >
-            <option>All</option>
-            {
-              meals && meals.map((nacionalidade, index) => (
-                <option
-                  data-testid={ `${nacionalidade.strArea}-option` }
-                  key={ index }
-                  value={ nacionalidade.strArea }
-                >
-                  { nacionalidade.strArea }
-
-                </option>
-              ))
-            }
-          </select>
-        )
-      }
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <select
+          data-testid="explore-by-nationality-dropdown"
+          onChange={ handleChange }
+        >
+          <option>All</option>
+          {recipe
+            && recipe.map((nacionalidade, index) => (
+              <option
+                data-testid={ `${nacionalidade.strArea}-option` }
+                key={ index }
+                value={ nacionalidade.strArea }
+              >
+                {nacionalidade.strArea}
+              </option>
+            ))}
+        </select>
+      )}
+      {native
+        && native.map(
+          (meal, index) => index <= NUMBER_ELEVEN && (
+            <div key={ index } data-testid={ `${index}-recipe-card` }>
+              <Link to={ `/foods/${meal.idMeal}` }>
+                <img
+                  data-testid={ `${index}-card-img` }
+                  src={ meal.strMealThumb }
+                  alt="recipes cards"
+                />
+                <p data-testid={ `${index}-card-name` }>{meal.strMeal}</p>
+              </Link>
+            </div>
+          ),
+        )}
       <Footer />
     </div>
   );
