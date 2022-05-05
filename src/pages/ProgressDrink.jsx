@@ -52,11 +52,13 @@ export default function ProgressDrink() {
               && drinkRecipe[measure[index]] !== null
                 && (
                   <p>
-                    <label htmlFor={ `${index}-ingredient-step` }>
+                    <label
+                      key={ `${index}` }
+                      htmlFor={ `${index}-ingredient-step` }
+                      data-testid={ `${index}-ingredient-step` }
+                    >
                       <input
                         type="checkbox"
-                        key={ ingredient }
-                        data-testid={ `${index}-ingredient-step` }
                         id={ `${index}-ingredient-step` }
                       />
                       {`${drinkRecipe[ingredient]} - ${drinkRecipe[measure[index]]}`}
