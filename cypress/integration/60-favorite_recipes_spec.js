@@ -103,7 +103,7 @@ describe('Favorite recipes screen', () => {
     });
   });
 
-  describe.only('64 - Desenvolva a solução de maneira que o botão de "desfavoritar" deve remover a receita da lista de receitas favoritas do `localStorage` e da tela', () => {
+  describe('64 - Desenvolva a solução de maneira que o botão de "desfavoritar" deve remover a receita da lista de receitas favoritas do `localStorage` e da tela', () => {
     it('Ao clicar no botão de "desfavoritar" a respectiva receita é removida da tela', () => {
       cy.get('[data-testid="0-horizontal-name"]').contains(favoriteRecipes[0].name);
       cy.get('[data-testid="1-horizontal-name"]').contains(favoriteRecipes[1].name);
