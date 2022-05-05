@@ -1,10 +1,8 @@
 import {
-  SAVE_DATA_DRINK,
-  SAVE_DATA_FOOD,
   ADD_CATEGORIE_FILTER,
-  RECIPE_DISPATCH,
   DRINK_RECIPE_DISPATCH,
-} from '../../services/consts';
+  RECIPE_DISPATCH, SAVE_DATA_DRINK,
+  SAVE_DATA_FOOD } from '../../services/consts';
 
 const INITIAL_STATE = {
   dataFood: {},

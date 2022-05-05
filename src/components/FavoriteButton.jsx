@@ -10,7 +10,7 @@ import { handleCHangeFavoriteDrink,
   checkFavoriteMeals } from '../services/Helpers';
 
 export default function FavoriteButton(props) {
-  const { recipe } = props;
+  const { recipe, index } = props;
   const location = useLocation();
   const { pathname } = location;
   const [favorite, setFavorite] = useState(true);
@@ -36,8 +36,11 @@ export default function FavoriteButton(props) {
     }
   };
 
+  const favList = () => (index >= 0 && setFavorite(false));
+
   useEffect(() => {
     checkFavorite();
+    favList();
   }, []);
 
   return (
@@ -48,14 +51,22 @@ export default function FavoriteButton(props) {
       {favorite
         ? (
           <img
-            data-testid="favorite-btn"
+            data-testid={ index !== undefined ? (
+              `${index}-horizontal-favorite-btn`
+            ) : (
+              'favorite-btn'
+            ) }
             src={ whiteHeartIcon }
             alt="favoritar"
           />
         )
         : (
           <img
-            data-testid="favorite-btn"
+            data-testid={ index !== undefined ? (
+              `${index}-horizontal-favorite-btn`
+            ) : (
+              'favorite-btn'
+            ) }
             src={ blackHeartIcon }
             alt="favoritar"
           />
