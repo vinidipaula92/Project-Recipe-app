@@ -30,15 +30,18 @@ export default function DetailsDrink() {
     dispatch(saveDataFood(mealsList));
   }
 
-  /*  const verifyRecipeStatus = () => {
-    const inProgressRecipes = localStorage.getItem('inProgressRecipes');
-    if (inProgressRecipes) {
+  const verifyRecipeStatus = () => {
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (inProgressRecipes && inProgressRecipes.cocktails) {
+      console.log(Object.keys(inProgressRecipes.cocktails).includes(id));
+      setContinueRecipe(Object.keys(inProgressRecipes.cocktails).includes(id));
     }
-   } */
+  };
 
   useEffect(() => {
     getRecipeById();
     askApi();
+    verifyRecipeStatus();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
