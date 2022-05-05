@@ -138,9 +138,9 @@ export async function nationality() {
   return data;
 }
 
-export async function requestFoodNationality(nacionality) {
+export async function requestFoodNationality(national) {
   const response = await
-  fetch(`www.themealdb.com/api/json/v1/1/filter.php?a=${nacionality}`);
+  fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${national}`);
   const data = await response.json();
   return data;
 }
