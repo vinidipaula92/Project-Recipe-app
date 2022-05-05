@@ -61,12 +61,15 @@ export default function RecipeDone() {
         recipes && recipes.map((recipe, index) => (
           <div key={ recipe.id }>
             <Link to={ `/${recipe.type}s/${recipe.id}` }>
-              <img
-                data-testid={ `${index}-horizontal-image` }
-                src={ recipe.image }
-                alt={ recipe.name }
-              />
-              <h1 data-testid={ `${index}-horizontal-name` }>{recipe.name}</h1>
+              <div>
+                <h1 data-testid={ `${index}-horizontal-name` }>{recipe.name}</h1>
+                <img
+                  width="300px"
+                  data-testid={ `${index}-horizontal-image` }
+                  src={ recipe.image }
+                  alt={ recipe.name }
+                />
+              </div>
             </Link>
             { recipe.type === 'food' ? (
               <p data-testid={ `${index}-horizontal-top-text` }>
