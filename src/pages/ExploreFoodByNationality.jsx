@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import Footer from '../components/Footer';
+import Searchheader from '../components/SearchHeader';
 import Header from '../components/Header';
 import { nationality, requestFoodNationality, requestMeal } from '../services/apiRequest';
 import { NUMBER_ELEVEN } from '../services/consts';
