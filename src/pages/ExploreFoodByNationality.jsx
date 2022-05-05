@@ -10,24 +10,26 @@ export default function ExploreFoodByNationality() {
   const [loading, setLoading] = useState(true);
   const [native, setNative] = useState([]);
   const [recipe, setRecipe] = useState([]);
-  // const [allMeal, setAllMeal] = useState([]);
+  const [allMeal, setAllMeal] = useState([]);
 
   async function askApi() {
     const response = await nationality();
     setRecipe(response.meals);
     const mealsListFood = await requestMeal();
     setNative(mealsListFood.meals);
+    setAllMeal(mealsListFood.meals);
     setLoading(false);
   }
 
   const handleChange = async ({ target }) => {
     const { value } = target;
-    if (value === 'All') {
-      const mealsListFood = await requestMeal();
-      setNative(mealsListFood.meals);
+    if (value !== 'All') {
+      const data = await requestFoodNationality(value);
+      setNative(data.meals);
+      console.log(data);
+    } else {
+      setNative(allMeal);
     }
-    const data = await requestFoodNationality(value);
-    setNative(data.meals);
   };
 
   useEffect(() => {
@@ -47,7 +49,13 @@ export default function ExploreFoodByNationality() {
           data-testid="explore-by-nationality-dropdown"
           onChange={ handleChange }
         >
-          <option data-testid="All-option">All</option>
+          <option
+            data-testid="All-option"
+            value="All"
+          >
+            All
+
+          </option>
           {recipe
             && recipe.map((nacionalidade, index) => (
               <option
