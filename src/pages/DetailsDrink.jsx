@@ -10,6 +10,7 @@ import '../css/footer.css';
 import { drinkRecipeDispatch, saveDataFood } from '../redux/actions';
 import { requestDrinkRecipeById, requestMeal } from '../services/apiRequest';
 import { NUMBER_SIX } from '../services/consts';
+import '../css/Details.css';
 
 export default function DetailsDrink() {
   const { id } = useParams();
@@ -118,7 +119,7 @@ export default function DetailsDrink() {
                   )))
               }
             </Slider>
-            <div>
+            <div className="buttons">
               <ButtonShare recipes={ drinkRecipe } />
               <FavoriteButton recipe={ drinkRecipe } />
             </div>
