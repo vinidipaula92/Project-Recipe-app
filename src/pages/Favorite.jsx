@@ -13,6 +13,11 @@ export default function Favorite() {
     setFavoriteItems(savedItemsArray);
   };
 
+  const handleFavorite = (identification) => {
+    const newFavs = favoriteItems.filter((element) => element.id !== identification);
+    setFavoriteItems(newFavs);
+  };
+
   useEffect(() => {
     askFavorite();
   }, []);
@@ -41,7 +46,11 @@ export default function Favorite() {
                 data-testid={ `${index}-horizontal-image` }
               />
               <ButtonShare index={ index } recipes={ element } />
-              <FavoriteButton index={ index } />
+              <FavoriteButton
+                index={ index }
+                handleFunction={ handleFavorite }
+                identification={ element.id }
+              />
             </div>
           ))
         }
