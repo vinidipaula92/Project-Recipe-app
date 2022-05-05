@@ -62,15 +62,17 @@ export default function DetailsDrink() {
             <h1 data-testid="recipe-title">{drinkRecipe.strDrink}</h1>
             <p data-testid="recipe-category">{drinkRecipe.strAlcoholic}</p>
             {
-              ingredients.map((ingredient, index) => (drinkRecipe[ingredient]
-                && (
-                  <p
-                    key={ ingredient }
-                    data-testid={ `${index}-ingredient-name-and-measure` }
-                  >
-                    {`${drinkRecipe[ingredient]} - ${drinkRecipe[measure[index]]}`}
-                  </p>
-                )
+              ingredients.map((ingredient, index) => (drinkRecipe[ingredient] !== ''
+              && drinkRecipe[ingredient] !== null
+              && drinkRecipe[measure[index]] !== null
+              && (
+                <p
+                  key={ ingredient }
+                  data-testid={ `${index}-ingredient-name-and-measure` }
+                >
+                  {`${drinkRecipe[ingredient]} - ${drinkRecipe[measure[index]]}`}
+                </p>
+              )
               ))
             }
             <p data-testid="instructions">{drinkRecipe.strInstructions}</p>
