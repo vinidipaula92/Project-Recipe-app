@@ -1,21 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import ButtonShare from '../components/ButtonShare';
 import FavoriteButton from '../components/FavoriteButton';
 import '../css/progress.css';
 import { requestFoodRecipeById } from '../services/apiRequest';
+import { recipeDispatch } from '../redux/actions';
 
 export default function ProgressFood() {
   const { id } = useParams();
+  const dispatch = useDispatch();
   const [recipe, setRecipe] = useState({});
   const [loading, setLoading] = useState(true);
-  // const [isChecked, setIsChecked] = useState(false);
 
   const getRecipeById = async () => {
     const { meals } = await requestFoodRecipeById(id);
     setRecipe(meals[0]);
     setLoading(false);
+    dispatch(recipeDispatch(meals[0]));
   };
 
   useEffect(() => {
@@ -27,6 +30,10 @@ export default function ProgressFood() {
 
   const measure = Object.keys(recipe)
     .filter((key) => key.includes('strMeasure'));
+
+  const handleClick = () => {
+    console.log('legal fera');
+  };
 
   return (
     <div>
@@ -42,8 +49,8 @@ export default function ProgressFood() {
               <h1 data-testid="recipe-title">{recipe.strMeal}</h1>
             </div>
             <div>
-              <ButtonShare />
-              <FavoriteButton />
+              <ButtonShare recipes={ recipe } />
+              <FavoriteButton recipe={ recipe } />
             </div>
             <p data-testid="recipe-category">{recipe.strCategory}</p>
             <h3>Ingredients</h3>
@@ -61,9 +68,8 @@ export default function ProgressFood() {
                       <input
                         type="checkbox"
                         id={ `${index}-ingredient-step` }
-                        // value={ `${ingredient} ${measure[index]}` }
-                        // checked={ false }
-                        // onChange={ functio }
+                        value={ `${ingredient} ${measure[index]}` }
+                        checked={ false }
                       />
                       {`${recipe[ingredient]} - ${recipe[measure[index]]}`}
                     </label>
@@ -76,6 +82,7 @@ export default function ProgressFood() {
             <button
               type="button"
               data-testid="finish-recipe-btn"
+              onClick={ handleClick }
             >
               Finish
             </button>
