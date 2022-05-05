@@ -8,8 +8,7 @@ import {
   requestDrinksCategories,
   requestMeal,
   requestMealsByCategory,
-  requestMealsCategories
-} from '../services/apiRequest';
+  requestMealsCategories } from '../services/apiRequest';
 import { NUMBER_FIVE } from '../services/consts';
 /* eslint comma-dangle: ["error", "never"] */
 
