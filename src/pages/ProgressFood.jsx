@@ -10,6 +10,7 @@ export default function ProgressFood() {
   const { id } = useParams();
   const [recipe, setRecipe] = useState({});
   const [loading, setLoading] = useState(true);
+  // const [isChecked, setIsChecked] = useState(false);
 
   const getRecipeById = async () => {
     const { meals } = await requestFoodRecipeById(id);
@@ -52,12 +53,17 @@ export default function ProgressFood() {
                 && recipe[measure[index]] !== null
                 && (
                   <p>
-                    <label htmlFor={ `${index}-ingredient-step` }>
+                    <label
+                      key={ `${index}` }
+                      htmlFor={ `${index}-ingredient-step` }
+                      data-testid={ `${index}-ingredient-step` }
+                    >
                       <input
                         type="checkbox"
-                        key={ ingredient }
-                        data-testid={ `${index}-ingredient-step` }
                         id={ `${index}-ingredient-step` }
+                        // value={ `${ingredient} ${measure[index]}` }
+                        // checked={ false }
+                        // onChange={ functio }
                       />
                       {`${recipe[ingredient]} - ${recipe[measure[index]]}`}
                     </label>
