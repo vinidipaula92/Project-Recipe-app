@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container-page {
+  height: 640px;
+  width: 320px;
+}
+
+.header-title {
+  display: flex;
+  flex-flow: row wrap;
+  font-size: 18px;
+  font-weight: 700;
+  justify-content: space-around;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.card-recipe {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.card-img {
+  height: 100%;
+  width: 100%;
+}
+
+.card-name {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}

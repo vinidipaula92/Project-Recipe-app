@@ -54,6 +54,7 @@ export default function Login() {
             type="button"
             disabled={ emailTest || passwordTest }
             onClick={ handleClick }
+            className="login-submit-btn"
           >
             Entrar
           </button>
