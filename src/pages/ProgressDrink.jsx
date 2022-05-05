@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import ButtonShare from '../components/ButtonShare';
 import FavoriteButton from '../components/FavoriteButton';
 import '../css/progress.css';
-import { requestDrinkRecipeById } from '../services/apiRequest';
 import { drinkRecipeDispatch } from '../redux/actions';
+import { requestDrinkRecipeById } from '../services/apiRequest';
 
 export default function ProgressDrink() {
   const { id } = useParams();
@@ -73,12 +74,14 @@ export default function ProgressDrink() {
             }
             <h3>Instructions</h3>
             <p data-testid="instructions">{drinkRecipe.strInstructions}</p>
-            <button
-              type="button"
-              data-testid="finish-recipe-btn"
-            >
-              Finish
-            </button>
+            <Link to="/done-recipes">
+              <button
+                type="button"
+                data-testid="finish-recipe-btn"
+              >
+                Finish
+              </button>
+            </Link>
           </div>
         )
       }
