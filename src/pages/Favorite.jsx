@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import ButtonShare from '../components/ButtonShare';
 import FavoriteButton from '../components/FavoriteButton';
 import Header from '../components/Header';
@@ -65,22 +66,27 @@ export default function Favorite() {
         {
           favoriteItems && filteredFavorites.map((element, index) => (
             <div key={ element.id }>
-              <p data-testid={ `${index}-horizontal-name` }>{ element.name }</p>
-              <p
-                data-testid={ `${index}-horizontal-top-text` }
-              >
-                { element.type === 'food'
-                  ? element.nationality : element.alcoholicOrNot }
-                {' '}
-                -
-                {' '}
-                { element.category }
-              </p>
-              <img
-                src={ element.image }
-                alt={ `foto do alimento com o id ${element.id}` }
-                data-testid={ `${index}-horizontal-image` }
-              />
+              <Link to={ `/${element.type}s/${element.id}` }>
+                <div>
+                  <p data-testid={ `${index}-horizontal-name` }>{ element.name }</p>
+                  <p
+                    data-testid={ `${index}-horizontal-top-text` }
+                  >
+                    { element.type === 'food'
+                      ? element.nationality : element.alcoholicOrNot }
+                    {' '}
+                    -
+                    {' '}
+                    { element.category }
+                  </p>
+                  <img
+                    src={ element.image }
+                    alt={ `foto do alimento com o id ${element.id}` }
+                    data-testid={ `${index}-horizontal-image` }
+                    width="300px"
+                  />
+                </div>
+              </Link>
               <ButtonShare index={ index } recipes={ element } />
               <FavoriteButton
                 index={ index }
