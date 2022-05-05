@@ -77,7 +77,6 @@ export const handleChangeFavoriteMeals = (recipe, favorite) => {
   } else {
     const removingItem = savedItemsArray
       .filter((element) => element.id === recipe.idMeals);
-    console.log(removingItem);
     const savingRemovedItem = JSON.stringify(removingItem);
     localStorage.setItem('favoriteRecipes', savingRemovedItem);
   }

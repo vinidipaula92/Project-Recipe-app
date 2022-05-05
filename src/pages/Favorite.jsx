@@ -1,27 +1,26 @@
-// import React, { useEffect } from 'react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 
 export default function Favorite() {
-  // const [favoriteItems, setFavoriteItems] = useState([]);
+  const [favoriteItems, setFavoriteItems] = useState([]);
 
-  // const askFavorite = () => {
-  //   const savedItems = localStorage.getItem('favoriteRecipes');
-  //   const savedItemsArray = JSON.parse(savedItems);
-  //   setFavoriteItems(savedItemsArray);
-  // };
+  const askFavorite = () => {
+    const savedItems = localStorage.getItem('favoriteRecipes');
+    const savedItemsArray = JSON.parse(savedItems);
+    setFavoriteItems(savedItemsArray);
+  };
 
-  // useEffect(() => {
-  //   askFavorite();
-  // }, []);
+  useEffect(() => {
+    askFavorite();
+  }, []);
 
   return (
     <div>
       <Header />
       <span data-testid="page-title">Favorite Recipes</span>
-      {/* <div>
+      <div>
         {
-          favoriteItems.map((element) => (
+          favoriteItems && favoriteItems.map((element) => (
             <div key={ element.id }>
               <p>{ element.name }</p>
               <p>{ element.nationality }</p>
@@ -33,7 +32,7 @@ export default function Favorite() {
             </div>
           ))
         }
-      </div> */}
+      </div>
     </div>
   );
 }
