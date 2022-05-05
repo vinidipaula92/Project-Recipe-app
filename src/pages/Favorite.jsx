@@ -1,4 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
+import ButtonShare from '../components/ButtonShare';
+import FavoriteButton from '../components/FavoriteButton';
 import Header from '../components/Header';
 
 export default function Favorite() {
@@ -37,6 +40,8 @@ export default function Favorite() {
                 alt={ `foto do alimento com o id ${element.id}` }
                 data-testid={ `${index}-horizontal-image` }
               />
+              <ButtonShare index={ index } />
+              <FavoriteButton index={ index } />
             </div>
           ))
         }
