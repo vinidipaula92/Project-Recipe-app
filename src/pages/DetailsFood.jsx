@@ -72,14 +72,16 @@ export default function DetailsFood() {
             <p data-testid="recipe-category">{recipe.strCategory}</p>
             {
               ingredients.map((ingredient, index) => (recipe[ingredient] !== ''
-                && (
-                  <p
-                    key={ ingredient }
-                    data-testid={ `${index}-ingredient-name-and-measure` }
-                  >
-                    {`${recipe[ingredient]} - ${recipe[measure[index]]}`}
-                  </p>
-                )
+              && recipe[ingredient] !== null
+              && recipe[measure[index]] !== null
+              && (
+                <p
+                  key={ ingredient }
+                  data-testid={ `${index}-ingredient-name-and-measure` }
+                >
+                  {`${recipe[ingredient]} - ${recipe[measure[index]]}`}
+                </p>
+              )
               ))
             }
             <p data-testid="instructions">{recipe.strInstructions}</p>
