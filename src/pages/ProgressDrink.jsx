@@ -1,13 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import ButtonShare from '../components/ButtonShare';
 import FavoriteButton from '../components/FavoriteButton';
 import '../css/progress.css';
 import { requestDrinkRecipeById } from '../services/apiRequest';
+import { drinkRecipeDispatch } from '../redux/actions';
 
 export default function ProgressDrink() {
   const { id } = useParams();
+  const dispatch = useDispatch();
   const [drinkRecipe, setDrinkRecipe] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -15,6 +18,7 @@ export default function ProgressDrink() {
     const { drinks } = await requestDrinkRecipeById(id);
     setDrinkRecipe(drinks[0]);
     setLoading(false);
+    dispatch(drinkRecipeDispatch(drinks[0]));
   };
 
   useEffect(() => {
@@ -41,8 +45,8 @@ export default function ProgressDrink() {
               <h1 data-testid="recipe-title">{drinkRecipe.strDrink}</h1>
             </div>
             <div>
-              <ButtonShare />
-              <FavoriteButton />
+              <ButtonShare recipes={ drinkRecipe } />
+              <FavoriteButton recipe={ drinkRecipe } />
             </div>
             <p data-testid="recipe-category">{drinkRecipe.strAlcoholic}</p>
             <h3>Ingredients</h3>
