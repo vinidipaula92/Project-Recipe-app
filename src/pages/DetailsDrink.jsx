@@ -16,7 +16,7 @@ export default function DetailsDrink() {
   const dispatch = useDispatch();
   const [drinkRecipe, setDrinkRecipe] = useState({});
   const [loading, setLoading] = useState(true);
-  const [continue, setContinue] = useState(false);
+  const [continueRecipe, setContinueRecipe] = useState(false);
 
   const getRecipeById = async () => {
     const { drinks } = await requestDrinkRecipeById(id);
@@ -31,10 +31,9 @@ export default function DetailsDrink() {
   }
 
   /*  const verifyRecipeStatus = () => {
-     const inProgressRecipes = localStorage.getItem('inProgressRecipes');
-     if (inProgressRecipes) {
-       
-     }
+    const inProgressRecipes = localStorage.getItem('inProgressRecipes');
+    if (inProgressRecipes) {
+    }
    } */
 
   useEffect(() => {
@@ -64,8 +63,8 @@ export default function DetailsDrink() {
           <div>
             <img
               data-testid="recipe-photo"
-              src={drinkRecipe.strDrinkThumb}
-              alt={drinkRecipe.strDrink}
+              src={ drinkRecipe.strDrinkThumb }
+              alt={ drinkRecipe.strDrink }
             />
             <h1 data-testid="recipe-title">{drinkRecipe.strDrink}</h1>
             <p data-testid="recipe-category">{drinkRecipe.strAlcoholic}</p>
@@ -73,8 +72,8 @@ export default function DetailsDrink() {
               ingredients.map((ingredient, index) => (drinkRecipe[ingredient]
                 && (
                   <p
-                    key={ingredient}
-                    data-testid={`${index}-ingredient-name-and-measure`}
+                    key={ ingredient }
+                    data-testid={ `${index}-ingredient-name-and-measure` }
                   >
                     {`${drinkRecipe[ingredient]} - ${drinkRecipe[measure[index]]}`}
                   </p>
@@ -83,7 +82,7 @@ export default function DetailsDrink() {
             }
             <p data-testid="instructions">{drinkRecipe.strInstructions}</p>
             <video width="320" height="240" controls data-testid="video">
-              <source src={drinkRecipe.strVideo} type="video/mp4" />
+              <source src={ drinkRecipe.strVideo } type="video/mp4" />
               <track
                 src="captions_en.vtt"
                 kind="captions"
@@ -92,22 +91,22 @@ export default function DetailsDrink() {
               />
               Your browser does not support the video tag.
             </video>
-            <Slider {...settings}>
+            <Slider { ...settings }>
               {
                 meals && meals.map((meal, index) => (
                   index < NUMBER_SIX && (
                     <div
-                      data-testid={`${index}-recomendation-card`}
-                      key={meal.idMeal}
+                      data-testid={ `${index}-recomendation-card` }
+                      key={ meal.idMeal }
                     >
-                      <Link to={`/foods/${meal.idMeal}`}>
+                      <Link to={ `/foods/${meal.idMeal}` }>
                         <img
-                          data-testid={`${index}-card-img`}
-                          src={meal.strMealThumb}
+                          data-testid={ `${index}-card-img` }
+                          src={ meal.strMealThumb }
                           alt="recipes cards"
                         />
                         <p
-                          data-testid={`${index}-recomendation-title`}
+                          data-testid={ `${index}-recomendation-title` }
                         >
                           {meal.strMeal}
                         </p>
@@ -117,8 +116,8 @@ export default function DetailsDrink() {
               }
             </Slider>
             <div>
-              <ButtonShare recipes={drinkRecipe} />
-              <FavoriteButton recipe={drinkRecipe} />
+              <ButtonShare recipes={ drinkRecipe } />
+              <FavoriteButton recipe={ drinkRecipe } />
             </div>
             <p>
               a
@@ -126,31 +125,30 @@ export default function DetailsDrink() {
               a
             </p>
             {
-              continue ? (
-            <Link to={`/drinks/${drinkRecipe.idDrink}/in-progress`}>
-              <button
-                className="footer-fixed"
-                type="button"
-                data-testid="start-recipe-btn"
-              >
-                Continue Recipe
-              </button>
-            </Link>
-            )
-            :
-            (
-            <Link to={`/drinks/${drinkRecipe.idDrink}/in-progress`}>
-              <button
-                className="footer-fixed"
-                type="button"
-                data-testid="start-recipe-btn"
-              >
-                Start
-              </button>
-            </Link>
-            )
-          }
-
+              continueRecipe
+                ? (
+                  <Link to={ `/drinks/${drinkRecipe.idDrink}/in-progress` }>
+                    <button
+                      className="footer-fixed"
+                      type="button"
+                      data-testid="start-recipe-btn"
+                    >
+                      Continue Recipe
+                    </button>
+                  </Link>
+                )
+                : (
+                  <Link to={ `/drinks/${drinkRecipe.idDrink}/in-progress` }>
+                    <button
+                      className="footer-fixed"
+                      type="button"
+                      data-testid="start-recipe-btn"
+                    >
+                      Start
+                    </button>
+                  </Link>
+                )
+            }
           </div>
         )
       }

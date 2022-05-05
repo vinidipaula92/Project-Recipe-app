@@ -30,7 +30,6 @@ export default function ExploreDrinks() {
                 data-testid="explore-by-ingredient"
               >
                 By Ingredient
-
               </button>
             </Link>
             {
@@ -44,7 +43,6 @@ export default function ExploreDrinks() {
                     data-testid="explore-surprise"
                   >
                     Surprise me!
-
                   </button>
                 </Link>
               ))
