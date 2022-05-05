@@ -16,6 +16,8 @@ export default function Favorite() {
   const handleFavorite = (identification) => {
     const newFavs = favoriteItems.filter((element) => element.id !== identification);
     setFavoriteItems(newFavs);
+    const saveNewFavs = JSON.stringify(newFavs);
+    localStorage.setItem('favoriteRecipes', saveNewFavs);
   };
 
   useEffect(() => {
