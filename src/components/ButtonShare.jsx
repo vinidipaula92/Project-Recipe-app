@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-// import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import { useClipboard } from 'use-clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
@@ -25,7 +24,6 @@ export default function ButtonShare(props) {
   }, []);
 
   const handleCopy = () => {
-    console.log('aqui');
     if (pathname.includes('drinks')) {
       clipboard.copy(`http://localhost:3000/drinks/${drinkRecipe.idDrink}`);
     }
