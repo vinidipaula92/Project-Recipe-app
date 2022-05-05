@@ -40,7 +40,7 @@ export default function Favorite() {
                 alt={ `foto do alimento com o id ${element.id}` }
                 data-testid={ `${index}-horizontal-image` }
               />
-              <ButtonShare index={ index } />
+              <ButtonShare index={ index } recipes={ element } />
               <FavoriteButton index={ index } />
             </div>
           ))
