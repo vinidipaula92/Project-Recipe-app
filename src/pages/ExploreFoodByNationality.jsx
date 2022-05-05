@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import {
   requestFoodNationality, requestMeal,
-  requestNationality
+  requestNationality,
 } from '../services/apiRequest';
 import { NUMBER_ELEVEN } from '../services/consts';
 
