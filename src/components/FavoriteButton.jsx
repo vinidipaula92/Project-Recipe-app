@@ -10,7 +10,7 @@ import { handleCHangeFavoriteDrink,
   checkFavoriteMeals } from '../services/Helpers';
 
 export default function FavoriteButton(props) {
-  const { recipe, index } = props;
+  const { recipe, index, handleFunction, identification } = props;
   const location = useLocation();
   const { pathname } = location;
   const [favorite, setFavorite] = useState(true);
@@ -46,7 +46,8 @@ export default function FavoriteButton(props) {
   return (
     <button
       type="button"
-      onClick={ handleChangeFavorite }
+      onClick={ handleFunction !== undefined ? (
+        () => handleFunction(identification)) : handleChangeFavorite }
     >
       {favorite
         ? (
