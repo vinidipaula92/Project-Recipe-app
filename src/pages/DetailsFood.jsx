@@ -6,10 +6,10 @@ import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import ButtonShare from '../components/ButtonShare';
 import FavoriteButton from '../components/FavoriteButton';
+import '../css/Details.css';
 import { recipeDispatch, saveDataDrink } from '../redux/actions';
 import { requestDrinks, requestFoodRecipeById } from '../services/apiRequest';
 import { NUMBER_SIX } from '../services/consts';
-import '../css/Details.css';
 
 export default function DetailsFood() {
   const { id } = useParams();
@@ -58,8 +58,13 @@ export default function DetailsFood() {
     slidesToScroll: 2,
   };
 
+  const handleClick = ({ target }) => {
+    const { value } = target;
+    console.log(value);
+  };
+
   return (
-    <div>
+    <div className="container">
       {
         loading ? <p>Loading...</p> : (
           <div className="recipe-details">
@@ -144,6 +149,7 @@ export default function DetailsFood() {
                       className="footer-fixed"
                       type="button"
                       data-testid="start-recipe-btn"
+                      onClick={ handleClick }
                     >
                       Start
                     </button>

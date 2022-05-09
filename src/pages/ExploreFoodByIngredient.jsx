@@ -35,7 +35,7 @@ export default function ExploreFoodByIngredient() {
   };
 
   return (
-    <div>
+    <div className="container">
       <Header />
       <span data-testid="page-title">Explore Ingredients</span>
       <div data-testid="ingredient-container">

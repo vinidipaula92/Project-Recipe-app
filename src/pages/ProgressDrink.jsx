@@ -33,7 +33,7 @@ export default function ProgressDrink() {
     .filter((key) => key.includes('strMeasure'));
 
   return (
-    <div>
+    <div className="container">
       {
         loading ? <p>Loading...</p> : (
           <div>

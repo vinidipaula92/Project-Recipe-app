@@ -32,7 +32,7 @@ export default function RecipeDone() {
   };
 
   return (
-    <div>
+    <div className="container">
       <Header />
       <span data-testid="page-title">Done Recipes</span>
       <button
