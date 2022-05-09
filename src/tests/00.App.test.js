@@ -1,62 +1,43 @@
-// import React from 'react';
-// import { render, screen } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
-// import { Router } from 'react-router-dom';
-// import { createMemoryHistory } from 'history';
+import { screen } from '@testing-library/react';
+import React from 'react';
+import Food from '../pages/Food';
 
-// import App from '../App';
-// import Login from '../pages/Login';
-// import Food from '../pages/Food';
-// import Drinks from '../pages/Drinks';
-// import DetailsFood from '../pages/DetailsFood';
-// import DetailsDrink from '../pages/DetailsDrink';
-// import ProgressFood from '../pages/ProgressFood';
-// import ProgressDrink from '../pages/ProgressDrink';
-// import Explore from '../pages/Explore';
-// import ExploreFood from '../pages/ExploreFood';
-// import ExploreDrinks from '../pages/ExploreDrinks';
-// import ExploreFoodByIngredient from '../pages/ExploreFoodByIngredient';
-// import ExploreDrinkByIngredient from '../pages/ExploreDrinkByIngredient';
-// import ExploreFoodByNationality from '../pages/ExploreFoodByNationality';
-// import Profile from '../pages/Profile';
-// import RecipeDone from '../pages/RecipeDone';
-// import Favorite from '../pages/Favorite';
 
-// describe('Testa a Tela de login: /;', () => {
-//   it('', () => {
+describe('Testa a Tela de login: /;', () => {
+  it('', () => {
 
-//   });
-// });
+  });
+});
 
-// describe('Testa a Tela principal de receitas de comidas: /foods;', () => {
-//   it('Testes do Header', () => {
-//     renderWithRouter(<Food />);
-//     // Testes do Header
-//     const profilePage = screen.getByRole('img', { name: /login/i });
-//     const searchIcon = screen.getByRole('img', { name: /search/i });
-//     const inputTextHeader = screen.getByRole('textbox');
-//     const searchBtn = screen.getByTestId('exec-search-btn');
+describe('Testa a Tela principal de receitas de comidas: /foods;', () => {
+  it('Testes do Header', () => {
+    renderWithRouter(<Food />);
+    // Testes do Header
+    const profilePage = screen.getByRole('img', { name: /login/i });
+    const searchIcon = screen.getByRole('img', { name: /search/i });
+    const inputTextHeader = screen.getByRole('textbox');
+    const searchBtn = screen.getByTestId('exec-search-btn');
 
-//     expect(profilePage).toBeInTheDocument();
-//     expect(searchIcon).toBeInTheDocument();
-//     expect(inputTextHeader).toBeInTheDocument();
-//     expect(searchBtn).toBeInTheDocument();
-//   });
+    expect(profilePage).toBeInTheDocument();
+    expect(searchIcon).toBeInTheDocument();
+    expect(inputTextHeader).toBeInTheDocument();
+    expect(searchBtn).toBeInTheDocument();
+  });
 
-//   it('Testes do Footer', () => {
-//     renderWithRouter(<Food />);
-//     // Testes do Header
-//     const mealFooterBtn = screen.getByRole('img', { name: /meal/i });
-//     const drinkFooterBtn = screen.getByRole('img', { name: /drink/i });
-//     const exploreFooterBtn = screen.getByRole('img', { name: /explore/i });
+  it('Testes do Footer', () => {
+    renderWithRouter(<Food />);
+    // Testes do Header
+    const mealFooterBtn = screen.getByRole('img', { name: /meal/i });
+    const drinkFooterBtn = screen.getByRole('img', { name: /drink/i });
+    const exploreFooterBtn = screen.getByRole('img', { name: /explore/i });
 
-//     expect(mealFooterBtn).toBeInTheDocument();
-//     expect(drinkFooterBtn).toBeInTheDocument();
-//     expect(exploreFooterBtn).toBeInTheDocument();
+    expect(mealFooterBtn).toBeInTheDocument();
+    expect(drinkFooterBtn).toBeInTheDocument();
+    expect(exploreFooterBtn).toBeInTheDocument();
 
-//     // Testes do Footer
-//   });
-// });
+    // Testes do Footer
+  });
+});
 
 // describe('Testa a Tela principal de receitas de bebidas: /drinks;', () => {
 //   it('', () => {
