@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 
 export default function ProgressCheckbox(props) {
@@ -49,3 +50,10 @@ export default function ProgressCheckbox(props) {
     </p>
   );
 }
+
+ProgressCheckbox.propTypes = {
+  ingredient: PropTypes.string.isRequired,
+  measure: PropTypes.objectOf(PropTypes.string).isRequired,
+  index: PropTypes.number.isRequired,
+  recipe: PropTypes.objectOf.isRequired,
+};

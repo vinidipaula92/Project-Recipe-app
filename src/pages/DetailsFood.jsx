@@ -76,7 +76,6 @@ export default function DetailsFood() {
       inProgressRecipes.meals[recipe.idMeal] = ingredientMap;
       localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
     }
-
   };
 
   return (
