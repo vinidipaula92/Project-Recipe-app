@@ -58,6 +58,26 @@ export default function DetailsFood() {
     slidesToScroll: 2,
   };
 
+  const ingredientMap = ingredients.map((ingredient) => recipe[ingredient]);
+
+  const handleClick = () => {
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const arrayChecks = [...ingredientMap];
+    if (inProgressRecipes === null) {
+      const recipeSave = {
+        cocktails: {},
+        meals: {
+          [recipe.idMeal]: ingredientMap,
+          [`${recipe.idMeal}checks`]: arrayChecks.fill(false, 0, ingredientMap.length),
+        },
+      };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(recipeSave));
+    } else {
+      inProgressRecipes.meals[recipe.idMeal] = ingredientMap;
+      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+    }
+  };
+
   return (
     <div>
       {
@@ -144,6 +164,7 @@ export default function DetailsFood() {
                       className="footer-fixed"
                       type="button"
                       data-testid="start-recipe-btn"
+                      onClick={ handleClick }
                     >
                       Start
                     </button>
