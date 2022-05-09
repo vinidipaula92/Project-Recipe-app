@@ -5,32 +5,17 @@ import Header from '../components/Header';
 import '../css/profile.css';
 
 export default function Profile() {
-  const userEmail = localStorage.getItem('user');
+  const userEmail = localStorage.getItem('user')
+    ? JSON.parse(localStorage.getItem('user')) : { email: '' };
 
   const handleClick = () => {
     localStorage.clear();
   };
   return (
-    <div className="container-page">
-      <div className="header-title">
-        <Header />
-        <span
-          data-testid="page-title"
-          className="page-title"
-        >
-          Profile
-
-        </span>
-      </div>
-      <div className="container-profile">
-        <h3
-          data-testid="profile-email"
-          className="profile-email"
-        >
-          {userEmail}
-
-        </h3>
-        <div className="container-btn">
+    <div className="container">
+      <Header />
+      <span data-testid="page-title">Profile</span>
+        <h3 data-testid="profile-email">{userEmail.email}</h3>
           <Link to="/done-recipes">
             <button
               type="button"
@@ -62,8 +47,6 @@ export default function Profile() {
 
             </button>
           </Link>
-        </div>
-      </div>
       <Footer />
     </div>
   );

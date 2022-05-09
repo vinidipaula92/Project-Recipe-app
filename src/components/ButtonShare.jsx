@@ -1,9 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
-import { useClipboard } from 'use-clipboard-copy';
-// import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import { useClipboard } from 'use-clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
 
 export default function ButtonShare(props) {
@@ -21,10 +20,10 @@ export default function ButtonShare(props) {
     setIndexEx(index);
     setDrinkRecipe(recipes);
     setRecipe(recipes);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleCopy = () => {
-    console.log('aqui');
     if (pathname.includes('drinks')) {
       clipboard.copy(`http://localhost:3000/drinks/${drinkRecipe.idDrink}`);
     }

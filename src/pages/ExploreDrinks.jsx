@@ -18,7 +18,7 @@ export default function ExploreDrinks() {
     handleRequestFood();
   }, []);
   return (
-    <div>
+    <div className="container">
       <Header />
       {
         loading ? (<div>Loading...</div>) : (
@@ -30,7 +30,6 @@ export default function ExploreDrinks() {
                 data-testid="explore-by-ingredient"
               >
                 By Ingredient
-
               </button>
             </Link>
             {
@@ -44,7 +43,6 @@ export default function ExploreDrinks() {
                     data-testid="explore-surprise"
                   >
                     Surprise me!
-
                   </button>
                 </Link>
               ))

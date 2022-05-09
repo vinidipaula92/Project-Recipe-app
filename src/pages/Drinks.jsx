@@ -18,12 +18,14 @@ export default function Drinks() {
   }
 
   useEffect(() => {
-    askApi();
+    if (drinks === undefined) {
+      askApi();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <Header />
       <span data-testid="page-title">Drinks</span>
       <Searchheader />

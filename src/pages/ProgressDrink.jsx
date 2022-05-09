@@ -1,55 +1,90 @@
-import React, { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import ButtonShare from '../components/ButtonShare';
+import FavoriteButton from '../components/FavoriteButton';
+import '../css/progress.css';
+import { drinkRecipeDispatch } from '../redux/actions';
+import { requestDrinkRecipeById } from '../services/apiRequest';
 
 export default function ProgressDrink() {
-  const [add, setAdd] = useState(false);
-  const [count, setCount] = useState(0);
-  const handleClick = () => {
-    if (count === 0) {
-      setAdd(true);
-      setCount(1);
-    } else {
-      setAdd(false);
-      setCount(0);
-    }
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const [drinkRecipe, setDrinkRecipe] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  const getRecipeById = async () => {
+    const { drinks } = await requestDrinkRecipeById(id);
+    setDrinkRecipe(drinks[0]);
+    setLoading(false);
+    dispatch(drinkRecipeDispatch(drinks[0]));
   };
+
+  useEffect(() => {
+    getRecipeById();
+  }, []);
+
+  const ingredients = Object.keys(drinkRecipe)
+    .filter((key) => key.includes('strIngredient'));
+
+  const measure = Object.keys(drinkRecipe)
+    .filter((key) => key.includes('strMeasure'));
+
   return (
-    <div>
-      <h1>Progress Drink</h1>
-      <h3 data-testid="recipe-title">Titulo</h3>
-      <img
-        src="https://www.seriouseats.com/recipes/images/2015/07/20150702-sous-vide-hamburger-anova-primary-1500x1125.jpg"
-        alt="hamburger"
-      />
-      <ButtonShare />
-      <button
-        type="button"
-        data-testid="favorite-btn"
-      >
-        Favorite
-
-      </button>
-      <p data-testid="recipe-category">Category</p>
-      <label
-        htmlFor="ingredients"
-      >
-        Ingredients:
-        <input
-          type="checkbox"
-          id="ingredients"
-          data-testid="ingredient-step"
-          className={ add ? 'ingredient-step' : null }
-          onClick={ handleClick }
-        />
-      </label>
-      <p data-testid="instructions">Intructions</p>
-      <button
-        type="button"
-        data-testid="finish-recipe-btn"
-      >
-        Finish
-
-      </button>
+    <div className="container">
+      {
+        loading ? <p>Loading...</p> : (
+          <div>
+            <div>
+              <img
+                data-testid="recipe-photo"
+                src={ drinkRecipe.strDrinkThumb }
+                alt={ drinkRecipe.strDrink }
+              />
+              <h1 data-testid="recipe-title">{drinkRecipe.strDrink}</h1>
+            </div>
+            <div>
+              <ButtonShare recipes={ drinkRecipe } />
+              <FavoriteButton recipe={ drinkRecipe } />
+            </div>
+            <p data-testid="recipe-category">{drinkRecipe.strAlcoholic}</p>
+            <h3>Ingredients</h3>
+            {
+              ingredients.map((ingredient, index) => (drinkRecipe[ingredient] !== ''
+              && drinkRecipe[ingredient] !== null
+              && drinkRecipe[measure[index]] !== null
+                && (
+                  <p>
+                    <label
+                      key={ `${index}` }
+                      htmlFor={ `${index}-ingredient-step` }
+                      data-testid={ `${index}-ingredient-step` }
+                    >
+                      <input
+                        type="checkbox"
+                        id={ `${index}-ingredient-step` }
+                      />
+                      {`${drinkRecipe[ingredient]} - ${drinkRecipe[measure[index]]}`}
+                    </label>
+                  </p>
+                )
+              ))
+            }
+            <h3>Instructions</h3>
+            <p data-testid="instructions">{drinkRecipe.strInstructions}</p>
+            <Link to="/done-recipes">
+              <button
+                type="button"
+                data-testid="finish-recipe-btn"
+              >
+                Finish
+              </button>
+            </Link>
+          </div>
+        )
+      }
     </div>
   );
 }

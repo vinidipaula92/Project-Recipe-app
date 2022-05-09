@@ -2,20 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import Slider from 'react-slick';
-import { saveDataFood, drinkRecipeDispatch } from '../redux/actions';
-import { requestDrinkRecipeById, requestMeal } from '../services/apiRequest';
-import { NUMBER_SIX } from '../services/consts';
-import '../css/footer.css';
-import FavoriteButton from '../components/FavoriteButton';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import ButtonShare from '../components/ButtonShare';
+import FavoriteButton from '../components/FavoriteButton';
+import '../css/Details.css';
+import '../css/footer.css';
+import { drinkRecipeDispatch, saveDataFood } from '../redux/actions';
+import { requestDrinkRecipeById, requestMeal } from '../services/apiRequest';
+import { NUMBER_SIX } from '../services/consts';
 
 export default function DetailsDrink() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [drinkRecipe, setDrinkRecipe] = useState({});
   const [loading, setLoading] = useState(true);
+  const [continueRecipe, setContinueRecipe] = useState(false);
 
   const getRecipeById = async () => {
     const { drinks } = await requestDrinkRecipeById(id);
@@ -29,10 +31,19 @@ export default function DetailsDrink() {
     dispatch(saveDataFood(mealsList));
   }
 
+  const verifyRecipeStatus = () => {
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (inProgressRecipes && inProgressRecipes.cocktails) {
+      console.log(Object.keys(inProgressRecipes.cocktails).includes(id));
+      setContinueRecipe(Object.keys(inProgressRecipes.cocktails).includes(id));
+    }
+  };
+
   useEffect(() => {
     getRecipeById();
     askApi();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    verifyRecipeStatus();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const { meals } = useSelector((state) => state.dataReducer.dataFood);
@@ -50,7 +61,7 @@ export default function DetailsDrink() {
   };
 
   return (
-    <div>
+    <div className="container">
       {
         loading ? <p>Loading...</p> : (
           <div>
@@ -62,15 +73,17 @@ export default function DetailsDrink() {
             <h1 data-testid="recipe-title">{drinkRecipe.strDrink}</h1>
             <p data-testid="recipe-category">{drinkRecipe.strAlcoholic}</p>
             {
-              ingredients.map((ingredient, index) => (drinkRecipe[ingredient]
-                && (
-                  <p
-                    key={ ingredient }
-                    data-testid={ `${index}-ingredient-name-and-measure` }
-                  >
-                    {`${drinkRecipe[ingredient]} - ${drinkRecipe[measure[index]]}`}
-                  </p>
-                )
+              ingredients.map((ingredient, index) => (drinkRecipe[ingredient] !== ''
+              && drinkRecipe[ingredient] !== null
+              && drinkRecipe[measure[index]] !== null
+              && (
+                <p
+                  key={ ingredient }
+                  data-testid={ `${index}-ingredient-name-and-measure` }
+                >
+                  {`${drinkRecipe[ingredient]} - ${drinkRecipe[measure[index]]}`}
+                </p>
+              )
               ))
             }
             <p data-testid="instructions">{drinkRecipe.strInstructions}</p>
@@ -108,7 +121,7 @@ export default function DetailsDrink() {
                   )))
               }
             </Slider>
-            <div>
+            <div className="buttons">
               <ButtonShare recipes={ drinkRecipe } />
               <FavoriteButton recipe={ drinkRecipe } />
             </div>
@@ -117,15 +130,31 @@ export default function DetailsDrink() {
               a
               a
             </p>
-            <Link to={ `/drinks/${drinkRecipe.idDrink}/in-progress` }>
-              <button
-                className="footer-fixed"
-                type="button"
-                data-testid="start-recipe-btn"
-              >
-                Start
-              </button>
-            </Link>
+            {
+              continueRecipe
+                ? (
+                  <Link to={ `/drinks/${drinkRecipe.idDrink}/in-progress` }>
+                    <button
+                      className="footer-fixed"
+                      type="button"
+                      data-testid="start-recipe-btn"
+                    >
+                      Continue Recipe
+                    </button>
+                  </Link>
+                )
+                : (
+                  <Link to={ `/drinks/${drinkRecipe.idDrink}/in-progress` }>
+                    <button
+                      className="footer-fixed"
+                      type="button"
+                      data-testid="start-recipe-btn"
+                    >
+                      Start
+                    </button>
+                  </Link>
+                )
+            }
           </div>
         )
       }

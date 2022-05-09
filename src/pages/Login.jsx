@@ -28,10 +28,8 @@ export default function Login() {
   const passwordTest = user.password.length <= numberSix;
 
   return (
-    <div className="login-page">
-      <div className="login-page-body">
+    <div className="container">
         <p className="login-page-title">Login</p>
-        {/* <div className="login-page-form"> */}
         <form>
           <input
             className="email-input"
@@ -59,8 +57,6 @@ export default function Login() {
             Entrar
           </button>
         </form>
-        {/* </div> */}
-      </div>
     </div>
   );
 }

@@ -2,19 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import Slider from 'react-slick';
-import { saveDataDrink, recipeDispatch } from '../redux/actions';
-import { requestDrinks, requestFoodRecipeById } from '../services/apiRequest';
-import { NUMBER_SIX } from '../services/consts';
-import FavoriteButton from '../components/FavoriteButton';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import ButtonShare from '../components/ButtonShare';
+import FavoriteButton from '../components/FavoriteButton';
+import '../css/Details.css';
+import { recipeDispatch, saveDataDrink } from '../redux/actions';
+import { requestDrinks, requestFoodRecipeById } from '../services/apiRequest';
+import { NUMBER_SIX } from '../services/consts';
 
 export default function DetailsFood() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [recipe, setRecipe] = useState({});
   const [loading, setLoading] = useState(true);
+  const [continueRecipe, setContinueRecipe] = useState(false);
 
   const getRecipeById = async () => {
     const { meals } = await requestFoodRecipeById(id);
@@ -28,9 +30,17 @@ export default function DetailsFood() {
     dispatch(saveDataDrink(drinksList));
   }
 
+  const verifyRecipeStatus = () => {
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (inProgressRecipes && inProgressRecipes.meals) {
+      setContinueRecipe(Object.keys(inProgressRecipes.meals).includes(id));
+    }
+  };
+
   useEffect(() => {
     getRecipeById();
     askApi();
+    verifyRecipeStatus();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -48,8 +58,29 @@ export default function DetailsFood() {
     slidesToScroll: 2,
   };
 
+  const ingredientMap = ingredients.map((ingredient) => recipe[ingredient]);
+
+  const handleClick = () => {
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const arrayChecks = [...ingredientMap];
+    if (inProgressRecipes === null) {
+      const recipeSave = {
+        cocktails: {},
+        meals: {
+          [recipe.idMeal]: ingredientMap,
+          [`${recipe.idMeal}checks`]: arrayChecks.fill(false, 0, ingredientMap.length),
+        },
+      };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(recipeSave));
+    } else {
+      inProgressRecipes.meals[recipe.idMeal] = ingredientMap;
+      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+    }
+
+  };
+
   return (
-    <div>
+    <div className="container">
       {
         loading ? <p>Loading...</p> : (
           <div className="recipe-details">
@@ -62,14 +93,16 @@ export default function DetailsFood() {
             <p data-testid="recipe-category">{recipe.strCategory}</p>
             {
               ingredients.map((ingredient, index) => (recipe[ingredient] !== ''
-                && (
-                  <p
-                    key={ ingredient }
-                    data-testid={ `${index}-ingredient-name-and-measure` }
-                  >
-                    {`${recipe[ingredient]} - ${recipe[measure[index]]}`}
-                  </p>
-                )
+              && recipe[ingredient] !== null
+              && recipe[measure[index]] !== null
+              && (
+                <p
+                  key={ ingredient }
+                  data-testid={ `${index}-ingredient-name-and-measure` }
+                >
+                  {`${recipe[ingredient]} - ${recipe[measure[index]]}`}
+                </p>
+              )
               ))
             }
             <p data-testid="instructions">{recipe.strInstructions}</p>
@@ -109,19 +142,36 @@ export default function DetailsFood() {
                 }
               </Slider>
             </div>
-            <div>
+            <div className="buttons">
               <ButtonShare recipes={ recipe } />
               <FavoriteButton recipe={ recipe } />
             </div>
-            <Link to={ `/foods/${recipe.idMeal}/in-progress` }>
-              <button
-                className="footer-fixed"
-                type="button"
-                data-testid="start-recipe-btn"
-              >
-                Start
-              </button>
-            </Link>
+            {
+              continueRecipe
+                ? (
+                  <Link to={ `/foods/${recipe.idMeal}/in-progress` }>
+                    <button
+                      className="footer-fixed"
+                      type="button"
+                      data-testid="start-recipe-btn"
+                    >
+                      Continue Recipe
+                    </button>
+                  </Link>
+                )
+                : (
+                  <Link to={ `/foods/${recipe.idMeal}/in-progress` }>
+                    <button
+                      className="footer-fixed"
+                      type="button"
+                      data-testid="start-recipe-btn"
+                      onClick={ handleClick }
+                    >
+                      Start
+                    </button>
+                  </Link>
+                )
+            }
           </div>
         )
       }

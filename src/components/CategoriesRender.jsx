@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { requestDrinksCategories,
-  requestMealsCategories,
-  requestMealsByCategory,
+import { addCategorieFilter, saveDataDrink, saveDataFood } from '../redux/actions';
+import {
+  requestDrinks,
   requestDrinksByCategories,
+  requestDrinksCategories,
   requestMeal,
-  requestDrinks } from '../services/apiRequest';
+  requestMealsByCategory,
+  requestMealsCategories } from '../services/apiRequest';
 import { NUMBER_FIVE } from '../services/consts';
-import { saveDataDrink, saveDataFood, addCategorieFilter } from '../redux/actions';
 /* eslint comma-dangle: ["error", "never"] */
 
 export default function CategoriesRender() {
@@ -16,6 +17,7 @@ export default function CategoriesRender() {
   const [categoriesList, setCategoriesList] = useState([]);
   const dispatch = useDispatch();
   const { categorieFilter } = useSelector((state) => state.dataReducer);
+  const [isNationatily] = useState(pathname.includes('nationalities'));
 
   async function provideCategories() {
     if (pathname === '/drinks') {
@@ -72,18 +74,19 @@ export default function CategoriesRender() {
   }, []);
 
   return (
-    <div>
-      <button
-        type="button"
-        data-testid="All-category-filter"
-        onClick={ filterAllCategories }
-      >
-        All
+    !isNationatily && (
+      <div>
+        <button
+          type="button"
+          data-testid="All-category-filter"
+          onClick={ filterAllCategories }
+        >
+          All
 
-      </button>
-      {
-        categoriesList.map((element, index) => (
-          index < NUMBER_FIVE
+        </button>
+        {
+          categoriesList.map((element, index) => (
+            index < NUMBER_FIVE
           && (
             <button
               type="button"
@@ -94,8 +97,10 @@ export default function CategoriesRender() {
             >
               {element.strCategory}
             </button>)
-        ))
-      }
-    </div>
+          ))
+        }
+      </div>
+    )
+
   );
 }

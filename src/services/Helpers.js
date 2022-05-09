@@ -6,7 +6,7 @@ export function handleCHangeFavoriteDrink(recipe, favorite) {
       const favRecipe = {
         id: recipe.idDrink,
         type: 'drink',
-        nationality: recipe.strArea,
+        nationality: '',
         category: recipe.strCategory,
         alcoholicOrNot: recipe.strAlcoholic,
         name: recipe.strDrink,
@@ -21,7 +21,7 @@ export function handleCHangeFavoriteDrink(recipe, favorite) {
       const favRecipeItems = {
         id: recipe.idDrink,
         type: 'drink',
-        nationality: recipe.strArea,
+        nationality: '',
         category: recipe.strCategory,
         alcoholicOrNot: recipe.strAlcoholic,
         name: recipe.strDrink,
@@ -51,7 +51,7 @@ export const handleChangeFavoriteMeals = (recipe, favorite) => {
         type: 'food',
         nationality: recipe.strArea,
         category: recipe.strCategory,
-        alcoholicOrNot: recipe.alcoholicOrNot,
+        alcoholicOrNot: '',
         name: recipe.strMeal,
         image: recipe.strMealThumb,
       };
@@ -66,7 +66,7 @@ export const handleChangeFavoriteMeals = (recipe, favorite) => {
         type: 'food',
         nationality: recipe.strArea,
         category: recipe.strCategory,
-        alcoholicOrNot: recipe.alcoholicOrNot,
+        alcoholicOrNot: '',
         name: recipe.strMeal,
         image: recipe.strMealThumb,
       };
@@ -77,7 +77,6 @@ export const handleChangeFavoriteMeals = (recipe, favorite) => {
   } else {
     const removingItem = savedItemsArray
       .filter((element) => element.id === recipe.idMeals);
-    console.log(removingItem);
     const savingRemovedItem = JSON.stringify(removingItem);
     localStorage.setItem('favoriteRecipes', savingRemovedItem);
   }

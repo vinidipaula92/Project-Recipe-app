@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import { saveDataFood } from '../redux/actions';
-import { requestExploreIngredientFood } from '../services/apiRequest';
+import { addCategorieFilter, saveDataFood } from '../redux/actions';
+import { requestExploreIngredientFood, resquestByMeal } from '../services/apiRequest';
 import { NUMBER_ELEVEN } from '../services/consts';
 
 export default function ExploreFoodByIngredient() {
   const [loading, setLoading] = useState(true);
-  const { meals } = useSelector((state) => state.dataReducer.dataFood);
   const dispatch = useDispatch();
+  const history = useHistory();
+  const { pathname } = useLocation();
+  const { meals } = useSelector((state) => state.dataReducer.dataFood);
 
-  async function askApi(props) {
-    console.log(props);
+  async function askApi() {
     const mealsList = await requestExploreIngredientFood();
     dispatch(saveDataFood(mealsList));
     setLoading(false);
@@ -23,8 +24,18 @@ export default function ExploreFoodByIngredient() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleCick = async ({ target }) => {
+    const { value } = target;
+    if (pathname === '/explore/foods/ingredients') {
+      const mealsByCategorie = await resquestByMeal('ingredient', value);
+      dispatch(saveDataFood(mealsByCategorie));
+      dispatch(addCategorieFilter(value));
+    }
+    history.push('/foods');
+  };
+
   return (
-    <div>
+    <div className="container">
       <Header />
       <span data-testid="page-title">Explore Ingredients</span>
       <div data-testid="ingredient-container">
@@ -35,27 +46,32 @@ export default function ExploreFoodByIngredient() {
                 meals && meals.map((ingredient, index) => (
                   index <= NUMBER_ELEVEN && (
                     <div>
-                      <Link to="/foods">
+                      <div
+                        key={ ingredient.idMeal }
+                        value={ ingredient.strIngredient }
 
-                        <div
-                          data-testid={ `${index}-ingredient-card` }
-                          key={ ingredient.idMeal }
-
-                        >
-                          <img
-                            data-testid={ `${index}-card-img` }
-                            src={ `https://www.themealdb.com/images/ingredients/${ingredient
-                              .strIngredient}-Small.png` }
-                            alt="recipes cards"
-                          />
-                          <p
-                            data-testid={ `${index}-card-name` }
-                          >
-                            {ingredient.strIngredient}
-
-                          </p>
-                        </div>
-                      </Link>
+                      >
+                        <img
+                          data-testid={ `${index}-card-img` }
+                          src={ `https://www.themealdb.com/images/ingredients/${ingredient
+                            .strIngredient}-Small.png` }
+                          alt="recipes cards"
+                        />
+                      </div>
+                      <p
+                        data-testid={ `${index}-card-name` }
+                      >
+                        {ingredient.strIngredient}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={ handleCick }
+                        value={ ingredient.strIngredient }
+                        data-testid={ `${index}-ingredient-card` }
+                      >
+                        {' '}
+                        { ingredient.strIngredient }
+                      </button>
                     </div>
                   )))
               }
