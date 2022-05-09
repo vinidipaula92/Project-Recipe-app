@@ -28,10 +28,12 @@ export default function Food() {
 
   return (
 
-    <div className="container">
+    <div className="container main-content">
       <div className="header-title">
-        <Header />
-        <span data-testid="page-title">Foods</span>
+        <div className="header-top-foods">
+          <Header />
+          <span data-testid="page-title">Foods</span>
+        </div>
         <Searchheader />
       </div>
       {
@@ -42,7 +44,10 @@ export default function Food() {
               key={ meal.idMeal }
               className="card-recipe"
             >
-              <Link to={ `/foods/${meal.idMeal}` }>
+              <Link
+                to={ `/foods/${meal.idMeal}` }
+                className="card-link"
+              >
                 <img
                   data-testid={ `${index}-card-img` }
                   src={ meal.strMealThumb }

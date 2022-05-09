@@ -70,3 +70,26 @@
 footer {
   position: fixed;
 }
+
+:root {
+
+  --l1: #ffea00;
+
+  --l2: #fd0;
+
+  --l3: #ffd000;
+
+  --l4: #ffc300;
+
+  --l5: #ffb700;
+
+  --l6: #fa0;
+
+  --l7: #ffa200;
+
+  --l8: #ff9500;
+
+  --l9: #f80;
+
+  --l10: #ff7b00;
+}

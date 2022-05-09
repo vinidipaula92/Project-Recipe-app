@@ -69,11 +69,11 @@ export default function Searchheader() {
     }
   };
   return (
-    <div>
+    <div className="container">
       <button
         type="button"
         onClick={ handleInput }
-        className="search-button"
+        className="search-button btn btn-secondary"
       >
         <img
           src={ searchIcon }
@@ -151,7 +151,8 @@ export default function Searchheader() {
             </button>
 
           </>
-        ) : <CategoriesRender />
+        )
+          : <CategoriesRender />
       }
     </div>
   );

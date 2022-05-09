@@ -4,11 +4,6 @@
   padding: 0;
 }
 
-.container-page {
-  height: 640px;
-  width: 320px;
-}
-
 .container-profile {
   display: flex;
   flex-direction: column;
@@ -17,8 +12,9 @@
 }
 
 .page-title {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 2em;
+  font-weight: 900;
+  margin: 0 auto;
   margin-bottom: 20px;
 }
 
@@ -67,21 +63,21 @@
   font-size: 16px;
   font-weight: 700;
   margin-top: 20px;
-  padding: 22px 20px;
+  padding: 10px 20px;
   text-decoration: none;
   text-transform: uppercase;
   transition: all 0.3s;
 }
 
 .profile-email {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   margin-bottom: 20px;
 }
 
-.container-btn {
+.profile-container {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
 }
