@@ -9,10 +9,9 @@ import {
   requestDrinksCategories,
   requestMeal,
   requestMealsByCategory,
-  requestMealsCategories
+  requestMealsCategories,
 } from '../services/apiRequest';
 import { NUMBER_FIVE } from '../services/consts';
-/* eslint comma-dangle: ["error", "never"] */
 
 export default function CategoriesRender() {
   const { pathname } = useLocation();
