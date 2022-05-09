@@ -26,7 +26,7 @@ export default function Food() {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <Header />
       <span data-testid="page-title">Foods</span>
       <Searchheader />

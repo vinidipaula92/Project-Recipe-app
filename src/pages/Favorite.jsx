@@ -35,7 +35,7 @@ export default function Favorite() {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <Header />
       <span data-testid="page-title">Favorite Recipes</span>
       <button

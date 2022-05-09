@@ -25,7 +25,7 @@ export default function Drinks() {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <Header />
       <span data-testid="page-title">Drinks</span>
       <Searchheader />

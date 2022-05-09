@@ -38,7 +38,7 @@ export default function ExploreFoodByNationality() {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <Header />
       <Searchheader />
       <span data-testid="page-title">Explore Nationalities</span>

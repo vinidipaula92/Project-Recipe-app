@@ -18,7 +18,7 @@ export default function ExploreDrinks() {
     handleRequestFood();
   }, []);
   return (
-    <div>
+    <div className="container">
       <Header />
       {
         loading ? (<div>Loading...</div>) : (
