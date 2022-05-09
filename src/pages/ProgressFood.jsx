@@ -5,10 +5,11 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import ButtonShare from '../components/ButtonShare';
 import FavoriteButton from '../components/FavoriteButton';
+import ProgressCheckbox from '../components/ProgressCheckbox';
 import '../css/progress.css';
 import { recipeDispatch } from '../redux/actions';
-import ProgressCheckbox from '../components/ProgressCheckbox';
 import { requestFoodRecipeById } from '../services/apiRequest';
+
 export default function ProgressFood() {
   const { id } = useParams();
   const dispatch = useDispatch();
