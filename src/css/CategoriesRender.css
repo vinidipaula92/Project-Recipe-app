@@ -1,0 +1,11 @@
+.category-btn {
+  border: 2px solid gray;
+  box-shadow: 0 0 1em gray;
+  margin: 2px;
+  width: 100px;
+}
+
+.categories {
+  display: flex;
+  flex-flow: row wrap;
+}
