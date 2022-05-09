@@ -7,8 +7,8 @@ import ButtonShare from '../components/ButtonShare';
 import FavoriteButton from '../components/FavoriteButton';
 import '../css/progress.css';
 import { recipeDispatch } from '../redux/actions';
+import ProgressCheckbox from '../components/ProgressCheckbox';
 import { requestFoodRecipeById } from '../services/apiRequest';
-
 export default function ProgressFood() {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -20,17 +20,37 @@ export default function ProgressFood() {
     setRecipe(meals[0]);
     setLoading(false);
     dispatch(recipeDispatch(meals[0]));
+    // const ingredientes = Object.keys(recipe)
+    //   .filter((key) => key.includes('strIngredient'));
+    // console.log(ingredientes);
   };
-
-  useEffect(() => {
-    getRecipeById();
-  }, []);
 
   const ingredients = Object.keys(recipe)
     .filter((key) => key.includes('strIngredient'));
 
   const measure = Object.keys(recipe)
     .filter((key) => key.includes('strMeasure'));
+
+  useEffect(() => {
+    getRecipeById();
+  }, []);
+
+  // const handleChange = ({ target: { checked, name } }) => {
+  //   console.log(isChecked);
+  //   console.log(checked);
+  //   console.log(name);
+  //   if (checked) {
+  //     setIsChecked(
+  //       ...isChecked,
+  //       { [name]: true },
+  //     );
+  //   } else {
+  //     setIsChecked({
+  //       ...isChecked,
+  //       [name]: false,
+  //     });
+  //   }
+  // };
 
   const handleClick = () => {
     console.log('legal fera');
@@ -60,21 +80,12 @@ export default function ProgressFood() {
                 && recipe[ingredient] !== null
                 && recipe[measure[index]] !== null
                 && (
-                  <p>
-                    <label
-                      key={ `${index}` }
-                      htmlFor={ `${index}-ingredient-step` }
-                      data-testid={ `${index}-ingredient-step` }
-                    >
-                      <input
-                        type="checkbox"
-                        id={ `${index}-ingredient-step` }
-                        value={ `${ingredient} ${measure[index]}` }
-                        checked={ false }
-                      />
-                      {`${recipe[ingredient]} - ${recipe[measure[index]]}`}
-                    </label>
-                  </p>
+                  <ProgressCheckbox
+                    recipe={ recipe }
+                    ingredient={ ingredient }
+                    measure={ measure }
+                    index={ index }
+                  />
                 )
               ))
             }
