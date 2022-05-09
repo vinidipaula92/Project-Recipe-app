@@ -6,11 +6,11 @@ import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import ButtonShare from '../components/ButtonShare';
 import FavoriteButton from '../components/FavoriteButton';
+import '../css/Details.css';
 import '../css/footer.css';
 import { drinkRecipeDispatch, saveDataFood } from '../redux/actions';
 import { requestDrinkRecipeById, requestMeal } from '../services/apiRequest';
 import { NUMBER_SIX } from '../services/consts';
-import '../css/Details.css';
 
 export default function DetailsDrink() {
   const { id } = useParams();
@@ -61,7 +61,7 @@ export default function DetailsDrink() {
   };
 
   return (
-    <div>
+    <div className="container">
       {
         loading ? <p>Loading...</p> : (
           <div>

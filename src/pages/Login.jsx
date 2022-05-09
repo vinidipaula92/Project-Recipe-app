@@ -27,11 +27,11 @@ export default function Login() {
   const passwordTest = user.password.length <= numberSix;
 
   return (
-    <div>
+    <div className="container">
       <p>Login</p>
       <form>
         <input
-          className="emailInput"
+          className="input"
           type="text"
           name="email"
           value={ user.email }
@@ -48,6 +48,7 @@ export default function Login() {
         />
         <button
           data-testid="login-submit-btn"
+          className="btn-success"
           type="button"
           disabled={ emailTest || passwordTest }
           onClick={ handleClick }

@@ -4,17 +4,18 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 export default function Profile() {
-  const userEmail = localStorage.getItem('user');
+  const userEmail = localStorage.getItem('user')
+    ? JSON.parse(localStorage.getItem('user')) : { email: '' };
 
   const handleClick = () => {
     localStorage.clear();
   };
   return (
-    <div>
+    <div className="container">
       <Header />
       <span data-testid="page-title">Profile</span>
       <div>
-        <h3 data-testid="profile-email">{userEmail}</h3>
+        <h3 data-testid="profile-email">{userEmail.email}</h3>
         <Link to="/done-recipes">
           <button
             type="button"

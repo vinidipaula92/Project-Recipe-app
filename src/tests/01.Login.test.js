@@ -1,13 +1,13 @@
-import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import React from 'react';
+import Login from '../pages/Login';
+import { buttonId, emailForTests, emailId, passwordId } from '../services/consts';
 import renderWithRouter from './__RenderWithRouter';
-import App from '../App';
-import { emailId, passwordId, buttonId, emailForTests } from '../services/consts';
 
 describe('Test in login screen if', () => {
   it('there is an email and password field and a button', () => {
-    renderWithRouter(<App />);
+    renderWithRouter(<Login />);
 
     const emailField = screen.getByTestId(emailId);
     const passwordField = screen.getByTestId(passwordId);
@@ -19,7 +19,7 @@ describe('Test in login screen if', () => {
   });
 
   it('is Possible to type on email field', () => {
-    renderWithRouter(<App />);
+    renderWithRouter(<Login />);
 
     const emailField = screen.getByTestId(emailId);
 
@@ -29,7 +29,7 @@ describe('Test in login screen if', () => {
   });
 
   it('is possible to type os password field', () => {
-    renderWithRouter(<App />);
+    renderWithRouter(<Login />);
 
     const passwordField = screen.getByTestId(passwordId);
 
@@ -39,7 +39,7 @@ describe('Test in login screen if', () => {
   });
 
   it('have the button disabled if email or password is not valid', () => {
-    renderWithRouter(<App />);
+    renderWithRouter(<Login />);
 
     const emailField = screen.getByTestId(emailId);
     const passwordField = screen.getByTestId(passwordId);
@@ -70,7 +70,7 @@ describe('Test in login screen if', () => {
   // Não está funcionando a troca de rota clicando no botão por que faz a requisição e precisa das variaveis para fazer que não existem aqui, provavelmente vai precisar fazer um mock
 
   // it('redirect to /foods', () => {
-  //   const { history } = renderWithRouter(<App />);
+  //   const { history } = renderWithRouter(<Login />);
 
   //   const emailField = screen.getByTestId(emailId);
   //   const passwordField = screen.getByTestId(passwordId);

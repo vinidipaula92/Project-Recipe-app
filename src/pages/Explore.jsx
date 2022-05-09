@@ -5,7 +5,7 @@ import Header from '../components/Header';
 
 export default function Explore() {
   return (
-    <div>
+    <div className="container">
       <Header />
       <span data-testid="page-title">Explore</span>
       <Link to="/explore/foods">
