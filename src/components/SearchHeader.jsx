@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
+import '../css/searchHeader.css';
 import searchIcon from '../images/searchIcon.svg';
 import { saveDataDrink, saveDataFood } from '../redux/actions';
 import { resquestByDrink, resquestByMeal } from '../services/apiRequest';
@@ -25,7 +26,7 @@ export default function Searchheader() {
     const newData = await resquestByMeal(searchMethod, searchValue);
     console.log(newData);
     dispatch(saveDataFood(newData));
-    if (!newData.meals) {
+    if (!newData?.meals) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
       return;
     }
@@ -37,7 +38,7 @@ export default function Searchheader() {
   const ifRouteDrink = async (searchMethod, searchValue) => {
     const newData = await resquestByDrink(searchMethod, searchValue);
     dispatch(saveDataDrink(newData));
-    if (!newData.drinks) {
+    if (!newData?.drinks) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
       return;
     }
@@ -72,6 +73,7 @@ export default function Searchheader() {
       <button
         type="button"
         onClick={ handleInput }
+        className="search-button"
       >
         <img
           src={ searchIcon }
@@ -89,9 +91,13 @@ export default function Searchheader() {
                 name="searchValue"
                 value={ search.searchValue }
                 onChange={ handleChange }
+                className="search-input"
               />
-              <div>
-                <label htmlFor="ingredient">
+              <div className="container-search">
+                <label
+                  htmlFor="ingredient"
+                  className="search-label"
+                >
                   <input
                     data-testid="ingredient-search-radio"
                     type="radio"
@@ -99,10 +105,14 @@ export default function Searchheader() {
                     name="searchMethod"
                     value="ingredient"
                     onChange={ handleChange }
+                    className="search-radio"
                   />
                   ingredient
                 </label>
-                <label htmlFor="name">
+                <label
+                  htmlFor="name"
+                  className="search-label"
+                >
                   <input
                     data-testid="name-search-radio"
                     type="radio"
@@ -110,10 +120,14 @@ export default function Searchheader() {
                     name="searchMethod"
                     value="name"
                     onClick={ handleChange }
+                    className="search-radio"
                   />
                   name
                 </label>
-                <label htmlFor="firstLetter">
+                <label
+                  htmlFor="firstLetter"
+                  className="search-label"
+                >
                   <input
                     data-testid="first-letter-search-radio"
                     type="radio"
@@ -121,6 +135,7 @@ export default function Searchheader() {
                     name="searchMethod"
                     value="firstLetter"
                     onClick={ handleChange }
+                    className="search-radio"
                   />
                   first letter
                 </label>
@@ -130,6 +145,7 @@ export default function Searchheader() {
               data-testid="exec-search-btn"
               type="submit"
               onClick={ handleClick }
+              className="search-button"
             >
               Search
             </button>
