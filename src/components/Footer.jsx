@@ -8,7 +8,10 @@ import mealIcon from '../images/mealIcon.svg';
 function Footer() {
   return (
     <div className="footer-fixed">
-      <footer data-testid="footer">
+      <footer
+        data-testid="footer"
+        className="footer-img"
+      >
         <Link to="/foods">
           <img
             data-testid="food-bottom-btn"
