@@ -34,7 +34,6 @@ export default function DetailsDrink() {
   const verifyRecipeStatus = () => {
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (inProgressRecipes && inProgressRecipes.cocktails) {
-      console.log(Object.keys(inProgressRecipes.cocktails).includes(id));
       setContinueRecipe(Object.keys(inProgressRecipes.cocktails).includes(id));
     }
   };
@@ -97,39 +96,36 @@ export default function DetailsDrink() {
               />
               Your browser does not support the video tag.
             </video>
-            <Slider { ...settings }>
-              {
-                meals && meals.map((meal, index) => (
-                  index < NUMBER_SIX && (
-                    <div
-                      data-testid={ `${index}-recomendation-card` }
-                      key={ meal.idMeal }
-                    >
-                      <Link to={ `/foods/${meal.idMeal}` }>
-                        <img
-                          data-testid={ `${index}-card-img` }
-                          src={ meal.strMealThumb }
-                          alt="recipes cards"
-                        />
-                        <p
-                          data-testid={ `${index}-recomendation-title` }
-                        >
-                          {meal.strMeal}
-                        </p>
-                      </Link>
-                    </div>
-                  )))
-              }
-            </Slider>
+            <div>
+              <Slider { ...settings }>
+                {
+                  meals && meals.map((meal, index) => (
+                    index < NUMBER_SIX && (
+                      <div
+                        data-testid={ `${index}-recomendation-card` }
+                        key={ meal.idMeal }
+                      >
+                        <Link to={ `/foods/${meal.idMeal}` }>
+                          <img
+                            data-testid={ `${index}-card-img` }
+                            src={ meal.strMealThumb }
+                            alt="recipes cards"
+                          />
+                          <p
+                            data-testid={ `${index}-recomendation-title` }
+                          >
+                            {meal.strMeal}
+                          </p>
+                        </Link>
+                      </div>
+                    )))
+                }
+              </Slider>
+            </div>
             <div className="buttons">
               <ButtonShare recipes={ drinkRecipe } />
               <FavoriteButton recipe={ drinkRecipe } />
             </div>
-            <p>
-              a
-              a
-              a
-            </p>
             {
               continueRecipe
                 ? (

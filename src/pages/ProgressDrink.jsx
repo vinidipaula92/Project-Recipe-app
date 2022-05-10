@@ -14,6 +14,8 @@ export default function ProgressDrink() {
   const dispatch = useDispatch();
   const [drinkRecipe, setDrinkRecipe] = useState({});
   const [loading, setLoading] = useState(true);
+  const [isChecked, setIsChecked] = useState([]);
+  const [done, setDone] = useState(true);
 
   const getRecipeById = async () => {
     const { drinks } = await requestDrinkRecipeById(id);
@@ -22,15 +24,64 @@ export default function ProgressDrink() {
     dispatch(drinkRecipeDispatch(drinks[0]));
   };
 
+  const ingredients = Object.keys(drinkRecipe)
+    .filter((key) => key.includes('strIngredient'));
+  const measure = Object.keys(drinkRecipe)
+    .filter((key) => key.includes('strMeasure'));
+
   useEffect(() => {
     getRecipeById();
   }, []);
 
-  const ingredients = Object.keys(drinkRecipe)
-    .filter((key) => key.includes('strIngredient'));
+  useEffect(() => {
+    setDone(!done);
+  }, [isChecked]);
 
-  const measure = Object.keys(drinkRecipe)
-    .filter((key) => key.includes('strMeasure'));
+  const localStoragePrepare = () => {
+    const ingredientMap = ingredients
+      .filter((ingredient) => drinkRecipe[ingredient] !== '');
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const arrayChecks = [...ingredientMap];
+    setIsChecked(arrayChecks);
+    if (inProgressRecipes === null) {
+      const recipeSave = {
+        cocktails: {
+          [drinkRecipe.idDrink]: ingredientMap,
+          [`${drinkRecipe.idDrink}checks`]: arrayChecks
+            .fill(false, 0, ingredientMap.length),
+        },
+        meals: {},
+      };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(recipeSave));
+    } else if (!inProgressRecipes.cocktails[drinkRecipe.idDrink]) {
+      inProgressRecipes.cocktails[drinkRecipe.idDrink] = ingredientMap;
+      inProgressRecipes.cocktails[`${drinkRecipe.idDrink}checks`] = arrayChecks
+        .fill(false, 0, ingredientMap.length);
+      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+    } else {
+      setIsChecked(inProgressRecipes.cocktails[`${drinkRecipe.idDrink}checks`]);
+    }
+  };
+
+  useEffect(() => {
+    localStoragePrepare();
+  }, [drinkRecipe]);
+
+  const handleClick = () => {
+    console.log('legal fera');
+  };
+
+  const handleChange = ({ target: { checked, name } }) => {
+    const temp = [...isChecked];
+    temp[name] = checked;
+
+    setIsChecked([
+      ...temp,
+    ]);
+    const localRecipe = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    localRecipe.cocktails[`${drinkRecipe.idDrink}checks`] = [...temp];
+    localStorage.setItem('inProgressRecipes', JSON.stringify(localRecipe));
+  };
 
   return (
     <div className="container">
@@ -52,25 +103,29 @@ export default function ProgressDrink() {
             <p data-testid="recipe-category">{drinkRecipe.strAlcoholic}</p>
             <h3>Ingredients</h3>
             {
-              ingredients.map((ingredient, index) => (drinkRecipe[ingredient] !== ''
-              && drinkRecipe[ingredient] !== null
-              && drinkRecipe[measure[index]] !== null
+              isChecked && ingredients
+                .map((ingredient, index) => (drinkRecipe[ingredient] !== ''
+                && drinkRecipe[ingredient] !== null
+                && drinkRecipe[measure[index]] !== null
                 && (
-                  <p>
+                  <p key={ `${index}-ingredient-step` }>
                     <label
-                      key={ `${index}` }
                       htmlFor={ `${index}-ingredient-step` }
                       data-testid={ `${index}-ingredient-step` }
                     >
                       <input
                         type="checkbox"
                         id={ `${index}-ingredient-step` }
+                        value={ `${ingredient} ${measure[index]}` }
+                        checked={ isChecked[index] }
+                        onChange={ (event) => handleChange(event) }
+                        name={ index }
                       />
                       {`${drinkRecipe[ingredient]} - ${drinkRecipe[measure[index]]}`}
                     </label>
                   </p>
                 )
-              ))
+                ))
             }
             <h3>Instructions</h3>
             <p data-testid="instructions">{drinkRecipe.strInstructions}</p>
@@ -78,6 +133,8 @@ export default function ProgressDrink() {
               <button
                 type="button"
                 data-testid="finish-recipe-btn"
+                disabled={ !isChecked.every((check) => check) }
+                onClick={ handleClick }
               >
                 Finish
               </button>

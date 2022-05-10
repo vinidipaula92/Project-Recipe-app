@@ -12,22 +12,8 @@ export default function ProgressCheckbox(props) {
     setIsChecked(
       checks,
     );
+    console.log('aqui');
   }, []);
-
-  const handleChange = ({ target: { checked, name } }) => {
-    const sla = [...isChecked];
-    sla[name] = checked;
-    setIsChecked([
-      ...sla,
-    ]);
-    console.log(isChecked);
-    // const localRecipe = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    // localRecipe.meals[`${recipe.idMeal}checks`] = [
-    //   ...isChecked,
-    //   isChecked[name] = !checked,
-    // ];
-    // localStorage.setItem('inProgressRecipes', JSON.stringify(localRecipe));
-  };
 
   return (
     <p>
