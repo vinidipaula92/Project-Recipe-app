@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Searchheader from '../components/SearchHeader';
+import '../css/Explore.css';
+import Pedrin from '../images/Pedrin.png';
 import { nationality, requestFoodNationality, requestMeal } from '../services/apiRequest';
 import { NUMBER_ELEVEN } from '../services/consts';
 
@@ -39,15 +41,21 @@ export default function ExploreFoodByNationality() {
 
   return (
     <div className="container">
-      <Header />
+      <div className="explore-header">
+        <Header />
+        <Link to="/">
+          <img src={ Pedrin } alt="logo" width="50px" />
+        </Link>
+        <span data-testid="page-title">Explore Nationalities</span>
+      </div>
       <Searchheader />
-      <span data-testid="page-title">Explore Nationalities</span>
       {loading ? (
         <p>Loading...</p>
       ) : (
         <select
           data-testid="explore-by-nationality-dropdown"
           onChange={ handleChange }
+          className="select-nationality"
         >
           <option
             data-testid="All-option"
@@ -71,14 +79,28 @@ export default function ExploreFoodByNationality() {
       {native
         && native.map(
           (meal, index) => index <= NUMBER_ELEVEN && (
-            <div key={ index } data-testid={ `${index}-recipe-card` }>
-              <Link to={ `/foods/${meal.idMeal}` }>
+            <div
+              key={ index }
+              data-testid={ `${index}-recipe-card` }
+              className="recipe-card"
+            >
+              <Link
+                to={ `/foods/${meal.idMeal}` }
+                className="recipe-card-link"
+              >
                 <img
                   data-testid={ `${index}-card-img` }
                   src={ meal.strMealThumb }
                   alt="recipes cards"
+                  className="card-img"
                 />
-                <p data-testid={ `${index}-card-name` }>{meal.strMeal}</p>
+                <p
+                  data-testid={ `${index}-card-name` }
+                  className="card-name"
+                >
+                  {meal.strMeal}
+
+                </p>
               </Link>
             </div>
           ),

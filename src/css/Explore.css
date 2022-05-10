@@ -1,0 +1,126 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.explore-header {
+  display: flex;
+  flex-flow: row wrap;
+  font-size: 18px;
+  font-weight: 700;
+  justify-content: space-around;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.btn-explore-foods, .btn-explore-drinks, .btn-explore-by-ingredient {
+  background-color: var(--l3);
+  border: 2px solid var(--l3);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding: 20px;
+  width: 100%;
+}
+
+.btn-explore-by-nationality, .btn-explore-surprise {
+  background-color: var(--l3);
+  border: 2px solid var(--l3);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding: 20px;
+  width: 100%;
+}
+
+.explore-img {
+  height: 100%;
+  width: 100%;
+}
+
+.btn-ingredient {
+  background-color: var(--l3);
+  border: 2px solid var(--l3);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.ingredient-container {
+  background-color: var(--l3);
+  border: 2px solid var(--l3);
+  border-radius: 8px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  width: 150px;
+}
+
+.ingredient {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  margin-left: -10px;
+  width: 100%;
+}
+
+.select-nationality {
+  background-color: var(--l3);
+  border: 2px solid var(--l3);
+  border-radius: 8px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 10px;
+  width: 100%;
+}
+
+.recipe-card {
+  background-color: var(--l3);
+  border: 2px solid var(--l3);
+  border-radius: 8px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.card-img {
+  height: 100%;
+  width: 100%;
+}
+
+.card-name {
+  display: flex;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  margin-left: -10px;
+  width: 100%;
+}
+
+.recipe-card-link {
+  color: black;
+  text-align: center;
+  text-decoration: none;
+}

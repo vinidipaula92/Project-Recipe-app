@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import '../css/Explore.css';
+import foodImg from '../images/foodImg.png';
+import Pedrin from '../images/Pedrin.png';
 import { requestRandomByFood } from '../services/apiRequest';
 
 export default function ExploreFood() {
@@ -20,15 +23,21 @@ export default function ExploreFood() {
 
   return (
     <div className="container">
-      <Header />
       {
         loading ? (<div>Loading...</div>) : (
           <div>
-            <span data-testid="page-title">Explore Foods</span>
+            <div className="explore-header">
+              <Header />
+              <Link to="/">
+                <img src={ Pedrin } alt="logo" width="50px" />
+              </Link>
+              <span data-testid="page-title">Explore Foods</span>
+            </div>
             <Link to="/explore/foods/ingredients">
               <button
                 type="button"
                 data-testid="explore-by-ingredient"
+                className="btn-explore-by-ingredient"
               >
                 By Ingredient
 
@@ -38,6 +47,7 @@ export default function ExploreFood() {
               <button
                 type="button"
                 data-testid="explore-by-nationality"
+                className="btn-explore-by-nationality"
               >
                 By Nationality
               </button>
@@ -51,6 +61,7 @@ export default function ExploreFood() {
                   <button
                     type="button"
                     data-testid="explore-surprise"
+                    className="btn-explore-surprise"
                   >
                     Surprise me!
 
@@ -61,6 +72,11 @@ export default function ExploreFood() {
           </div>
         )
       }
+      <img
+        src={ foodImg }
+        alt="logo"
+        className="explore-img"
+      />
       <Footer />
     </div>
   );
