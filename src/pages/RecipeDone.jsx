@@ -10,7 +10,6 @@ export default function RecipeDone() {
   useEffect(() => {
     const getDoneRecipes = () => {
       const doneRecipes = localStorage.getItem('doneRecipes');
-      console.log(JSON.parse(doneRecipes));
       if (doneRecipes) {
         setRecipes(JSON.parse(doneRecipes));
         setLocalRecipes(JSON.parse(doneRecipes));
@@ -85,15 +84,12 @@ export default function RecipeDone() {
               index={ index }
               recipes={ recipe }
             />
-            {recipe.tags.map((tag) => (
-              <p
-                key={ `${index}-${tag}horizontal-tag` }
-                data-testid={ `${index}-${tag}-horizontal-tag` }
-              >
-                {recipe.tags}
-              </p>
-            ))}
-
+            <p
+              key={ `${index}-${recipe.tags}horizontal-tag` }
+              data-testid={ `${index}-${recipe.tags}-horizontal-tag` }
+            >
+              {recipe.tags}
+            </p>
           </div>
         ))
       }
