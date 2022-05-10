@@ -5,7 +5,7 @@
 }
 
 footer {
-  background-color: moccasin;
+  background-color: var(--l3);
   bottom: 0;
   position: fixed;
   width: 100%;

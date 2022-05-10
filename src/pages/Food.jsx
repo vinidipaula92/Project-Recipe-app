@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Searchheader from '../components/SearchHeader';
 import '../css/food.css';
+import Pedrin from '../images/Pedrin.png';
 import { saveDataFood } from '../redux/actions';
 import { requestMeal } from '../services/apiRequest';
 import { NUMBER_ELEVEN } from '../services/consts';
@@ -32,6 +33,9 @@ export default function Food() {
       <div className="header-title">
         <div className="header-top-foods">
           <Header />
+          <Link to="/">
+            <img src={ Pedrin } alt="logo" width="50px" />
+          </Link>
           <span data-testid="page-title">Foods</span>
         </div>
         <Searchheader />

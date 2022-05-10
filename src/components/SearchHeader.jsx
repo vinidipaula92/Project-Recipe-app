@@ -73,7 +73,7 @@ export default function Searchheader() {
       <button
         type="button"
         onClick={ handleInput }
-        className="search-button btn btn-secondary"
+        className="search-button btn"
       >
         <img
           src={ searchIcon }
