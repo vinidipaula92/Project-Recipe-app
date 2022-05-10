@@ -39,7 +39,7 @@ export default function ProgressDrink() {
 
   const localStoragePrepare = () => {
     const ingredientMap = ingredients
-      .filter((ingredient) => drinkRecipe[ingredient] !== '');
+      .filter((ingredient) => drinkRecipe[ingredient] !== null);
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
     const arrayChecks = [...ingredientMap];
     setIsChecked(arrayChecks);
@@ -68,7 +68,30 @@ export default function ProgressDrink() {
   }, [drinkRecipe]);
 
   const handleClick = () => {
-    console.log('legal fera');
+    const localRecipe = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    delete localRecipe.cocktails[drinkRecipe.idDrink];
+    delete localRecipe.cocktails[`${drinkRecipe.idDrink}checks`];
+    localStorage.setItem('inProgressRecipes', JSON.stringify(localRecipe));
+
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    const storeRecipe = {
+      id,
+      type: 'Drink',
+      nationality: '',
+      category: drinkRecipe.strCategory,
+      alcoholicOrNot: drinkRecipe.alcoholicOrNot,
+      name: drinkRecipe.strDrink,
+      image: drinkRecipe.strDrinkThumb,
+      doneDate: '',
+      tags: '',
+    };
+    if (doneRecipes) {
+      doneRecipes.push(storeRecipe);
+      localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
+    } else {
+      const finishedRecipe = [storeRecipe];
+      localStorage.setItem('doneRecipes', JSON.stringify(finishedRecipe));
+    }
   };
 
   const handleChange = ({ target: { checked, name } }) => {

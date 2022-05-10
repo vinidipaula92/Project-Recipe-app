@@ -68,7 +68,30 @@ export default function ProgressFood() {
   }, [recipe]);
 
   const handleClick = () => {
-    console.log('legal fera');
+    const localRecipe = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    delete localRecipe.meals[recipe.idMeal];
+    delete localRecipe.meals[`${recipe.idMeal}checks`];
+    localStorage.setItem('inProgressRecipes', JSON.stringify(localRecipe));
+
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    const storeRecipe = {
+      id,
+      type: 'Food',
+      nationality: recipe.strArea,
+      category: recipe.strCategory,
+      alcoholicOrNot: '',
+      name: recipe.strMeal,
+      image: recipe.strMealThumb,
+      doneDate: '',
+      tags: recipe.strTags,
+    };
+    if (doneRecipes) {
+      doneRecipes.push(storeRecipe);
+      localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
+    } else {
+      const finishedRecipe = [storeRecipe];
+      localStorage.setItem('doneRecipes', JSON.stringify(finishedRecipe));
+    }
   };
 
   const handleChange = ({ target: { checked, name } }) => {
