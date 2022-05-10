@@ -10,6 +10,7 @@ export default function RecipeDone() {
   useEffect(() => {
     const getDoneRecipes = () => {
       const doneRecipes = localStorage.getItem('doneRecipes');
+      console.log(JSON.parse(doneRecipes));
       if (doneRecipes) {
         setRecipes(JSON.parse(doneRecipes));
         setLocalRecipes(JSON.parse(doneRecipes));
@@ -30,6 +31,7 @@ export default function RecipeDone() {
     setRecipes(localRecipes);
   };
 
+  console.log('dentro do map total', recipes);
   return (
     <div className="container">
       <Header />
@@ -57,41 +59,47 @@ export default function RecipeDone() {
       </button>
 
       {
-        recipes && recipes.map((recipe, index) => (
-          <div key={ recipe.id }>
-            <Link to={ `/${recipe.type}s/${recipe.id}` }>
-              <div>
-                <h1 data-testid={ `${index}-horizontal-name` }>{recipe.name}</h1>
-                <img
-                  width="300px"
-                  data-testid={ `${index}-horizontal-image` }
-                  src={ recipe.image }
-                  alt={ recipe.name }
-                />
-              </div>
-            </Link>
-            { recipe.type === 'food' ? (
-              <p data-testid={ `${index}-horizontal-top-text` }>
-                {`${recipe?.nationality} - ${recipe?.category}`}
-              </p>
-            ) : (
-              <p data-testid={ `${index}-horizontal-top-text` }>
-                {recipe?.alcoholicOrNot}
-              </p>
-            ) }
-            <p data-testid={ `${index}-horizontal-done-date` }>{recipe.doneDate}</p>
-            <ButtonShare
-              index={ index }
-              recipes={ recipe }
-            />
-            <p
-              key={ `${index}-${recipe.tags}horizontal-tag` }
-              data-testid={ `${index}-${recipe.tags}-horizontal-tag` }
-            >
-              {recipe.tags}
-            </p>
-          </div>
-        ))
+        recipes.length && recipes.map((recipe, index) => {
+          console.log('dentro do map', recipe);
+          return (
+            <div key={ recipe.id }>
+              <Link to={ `/${recipe.type}s/${recipe.id}` }>
+                <div>
+                  <h1 data-testid={ `${index}-horizontal-name` }>{recipe.name}</h1>
+                  <img
+                    width="300px"
+                    data-testid={ `${index}-horizontal-image` }
+                    src={ recipe.image }
+                    alt={ recipe.name }
+                  />
+                </div>
+              </Link>
+              { recipe.type === 'food' ? (
+                <p data-testid={ `${index}-horizontal-top-text` }>
+                  {`${recipe?.nationality} - ${recipe?.category}`}
+                </p>
+              ) : (
+                <p data-testid={ `${index}-horizontal-top-text` }>
+                  {recipe?.alcoholicOrNot}
+                </p>
+              ) }
+              <p data-testid={ `${index}-horizontal-done-date` }>{recipe.doneDate}</p>
+              <ButtonShare
+                index={ index }
+                recipes={ recipe }
+              />
+              {recipe.tags && recipe.tags.map((tag) => (
+                <p
+                  key={ `${index}-${tag}-horizontal-tag` }
+                  data-testid={ `${index}-${tag}-horizontal-tag` }
+                >
+                  {tag}
+                </p>
+              ))}
+
+            </div>
+          );
+        })
       }
     </div>
   );

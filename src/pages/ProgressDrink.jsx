@@ -39,9 +39,11 @@ export default function ProgressDrink() {
 
   const localStoragePrepare = () => {
     const ingredientMap = ingredients
-      .filter((ingredient) => drinkRecipe[ingredient] !== null);
+      .filter((ingredient) => drinkRecipe[ingredient] !== null
+      && drinkRecipe[ingredient] !== '');
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
     const arrayChecks = [...ingredientMap];
+    console.log('ingredient map', ingredientMap);
     setIsChecked(arrayChecks);
     if (inProgressRecipes === null) {
       const recipeSave = {
@@ -129,7 +131,6 @@ export default function ProgressDrink() {
               isChecked && ingredients
                 .map((ingredient, index) => (drinkRecipe[ingredient] !== ''
                 && drinkRecipe[ingredient] !== null
-                && drinkRecipe[measure[index]] !== null
                 && (
                   <p key={ `${index}-ingredient-step` }>
                     <label
@@ -144,7 +145,12 @@ export default function ProgressDrink() {
                         onChange={ (event) => handleChange(event) }
                         name={ index }
                       />
-                      {`${drinkRecipe[ingredient]} - ${drinkRecipe[measure[index]]}`}
+                      {
+                        drinkRecipe[measure[index]] === null
+                          ? `${drinkRecipe[ingredient]}`
+                          : `${drinkRecipe[ingredient]} - ${drinkRecipe[measure[index]]}`
+                      }
+
                     </label>
                   </p>
                 )

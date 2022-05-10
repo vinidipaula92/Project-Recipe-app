@@ -39,7 +39,8 @@ export default function ProgressFood() {
 
   const localStoragePrepare = () => {
     const ingredientMap = ingredients
-      .filter((ingredient) => recipe[ingredient] !== '');
+      .filter((ingredient) => recipe[ingredient] !== null
+      && recipe[ingredient] !== '');
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
     const arrayChecks = [...ingredientMap];
     setIsChecked(arrayChecks);
@@ -83,7 +84,7 @@ export default function ProgressFood() {
       name: recipe.strMeal,
       image: recipe.strMealThumb,
       doneDate: '',
-      tags: recipe.strTags,
+      tags: recipe.strTags.split(','),
     };
     if (doneRecipes) {
       doneRecipes.push(storeRecipe);
@@ -133,7 +134,7 @@ export default function ProgressFood() {
                 && (
                   <p key={ `${index}-ingredient-step` }>
                     <label
-                      htmlFor={ index }
+                      htmlFor={ `${index}-ingredient-step` }
                       data-testid={ `${index}-ingredient-step` }
                     >
                       <input
