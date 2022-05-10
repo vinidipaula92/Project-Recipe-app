@@ -63,7 +63,7 @@ export default function DetailsDrink() {
     <div className="container">
       {
         loading ? <p>Loading...</p> : (
-          <div>
+          <div className="recipe-details">
             <img
               data-testid="recipe-photo"
               src={ drinkRecipe.strDrinkThumb }
