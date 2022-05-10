@@ -8,7 +8,8 @@ import {
   requestDrinksCategories,
   requestMeal,
   requestMealsByCategory,
-  requestMealsCategories } from '../services/apiRequest';
+  requestMealsCategories
+} from '../services/apiRequest';
 import { NUMBER_FIVE } from '../services/consts';
 /* eslint comma-dangle: ["error", "never"] */
 
@@ -20,6 +21,7 @@ export default function CategoriesRender() {
   const [isNationatily] = useState(pathname.includes('nationalities'));
 
   async function provideCategories() {
+    console.log('pathname', pathname);
     if (pathname === '/drinks') {
       const drinksCategories = await requestDrinksCategories();
       const { drinks } = drinksCategories;
@@ -27,6 +29,7 @@ export default function CategoriesRender() {
     } else if (pathname === '/foods') {
       const mealsCategories = await requestMealsCategories();
       const { meals } = mealsCategories;
+      console.log(meals);
       setCategoriesList(meals);
     }
   }
@@ -72,7 +75,7 @@ export default function CategoriesRender() {
     provideCategories();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  console.log('categories', categoriesList);
   return (
     !isNationatily && (
       <div>
