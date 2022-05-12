@@ -42,6 +42,20 @@
   width: 100%;
 }
 
+.btn-filter-by-all, .btn-filter-by-food, .btn-filter-by-drink {
+  background-color: var(--l3);
+  border: 2px solid var(--l3);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding: 20px;
+  width: 100%;
+}
+
 .explore-img {
   height: 100%;
   width: 100%;

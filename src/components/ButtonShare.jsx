@@ -43,6 +43,7 @@ export default function ButtonShare(props) {
     <button
       type="button"
       onClick={ handleCopy }
+      className="btn-share"
     >
       { share ? (
         <img
