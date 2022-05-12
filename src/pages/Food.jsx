@@ -28,7 +28,6 @@ export default function Food() {
   }, []);
 
   return (
-
     <div className="container main-content">
       <div className="header-title">
         <div className="header-top-foods">

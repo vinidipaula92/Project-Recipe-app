@@ -65,14 +65,24 @@ export default function DetailsDrink() {
         loading ? <p>Loading...</p> : (
           <div className="recipe-details">
             <img
+              className="card-img"
               data-testid="recipe-photo"
               src={ drinkRecipe.strDrinkThumb }
               alt={ drinkRecipe.strDrink }
             />
-            <h1 data-testid="recipe-title">{drinkRecipe.strDrink}</h1>
+            <h1
+              data-testid="recipe-title"
+              className="card-name"
+            >
+              {drinkRecipe.strDrink}
+            </h1>
             <p data-testid="recipe-category">{drinkRecipe.strAlcoholic}</p>
-            {
-              ingredients.map((ingredient, index) => (drinkRecipe[ingredient] !== ''
+            <div
+              className="ingred-container"
+            >
+              <h3>Ingredients</h3>
+              {
+                ingredients.map((ingredient, index) => (drinkRecipe[ingredient] !== ''
               && drinkRecipe[ingredient] !== null
               && drinkRecipe[measure[index]] !== null
               && (
@@ -83,9 +93,15 @@ export default function DetailsDrink() {
                   {`${drinkRecipe[ingredient]} - ${drinkRecipe[measure[index]]}`}
                 </p>
               )
-              ))
-            }
-            <p data-testid="instructions">{drinkRecipe.strInstructions}</p>
+                ))
+              }
+            </div>
+            <div
+              className="instruc-container"
+            >
+              <h3>Instructions</h3>
+              <p data-testid="instructions">{drinkRecipe.strInstructions}</p>
+            </div>
             <video width="320" height="240" controls data-testid="video">
               <source src={ drinkRecipe.strVideo } type="video/mp4" />
               <track
@@ -104,12 +120,14 @@ export default function DetailsDrink() {
                       <div
                         data-testid={ `${index}-recomendation-card` }
                         key={ meal.idMeal }
+                        className="slider-container"
                       >
                         <Link to={ `/foods/${meal.idMeal}` }>
                           <img
                             data-testid={ `${index}-card-img` }
                             src={ meal.strMealThumb }
                             alt="recipes cards"
+                            className="slider-img"
                           />
                           <p
                             data-testid={ `${index}-recomendation-title` }
@@ -131,7 +149,7 @@ export default function DetailsDrink() {
                 ? (
                   <Link to={ `/drinks/${drinkRecipe.idDrink}/in-progress` }>
                     <button
-                      className="footer-fixed"
+                      className="footer-fixed button"
                       type="button"
                       data-testid="start-recipe-btn"
                     >
@@ -142,7 +160,7 @@ export default function DetailsDrink() {
                 : (
                   <Link to={ `/drinks/${drinkRecipe.idDrink}/in-progress` }>
                     <button
-                      className="footer-fixed"
+                      className="footer-fixed button"
                       type="button"
                       data-testid="start-recipe-btn"
                     >

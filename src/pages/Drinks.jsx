@@ -7,6 +7,8 @@ import Searchheader from '../components/SearchHeader';
 import { saveDataDrink } from '../redux/actions';
 import { requestDrinks } from '../services/apiRequest';
 import { NUMBER_ELEVEN } from '../services/consts';
+import '../css/food.css';
+import Pedrin from '../images/Pedrin.png';
 
 export default function Drinks() {
   const { drinks } = useSelector((state) => state.dataReducer.dataDrink);
@@ -26,20 +28,41 @@ export default function Drinks() {
 
   return (
     <div className="container">
-      <Header />
-      <span data-testid="page-title">Drinks</span>
+      <div className="header-title">
+        <div className="header-top-foods">
+          <Header />
+          <Link to="/">
+            <img src={ Pedrin } alt="logo" width="50px" />
+          </Link>
+          <span data-testid="page-title">Drinks</span>
+        </div>
+      </div>
       <Searchheader />
       {
         drinks && drinks.map((drink, index) => (
           index <= NUMBER_ELEVEN && (
-            <div data-testid={ `${index}-recipe-card` } key={ drink.idDrink }>
-              <Link to={ `/drinks/${drink.idDrink}` }>
+            <div
+              data-testid={ `${index}-recipe-card` }
+              key={ drink.idDrink }
+              className="card-recipe"
+            >
+              <Link
+                to={ `/drinks/${drink.idDrink}` }
+                className="card-link"
+              >
                 <img
                   data-testid={ `${index}-card-img` }
                   src={ drink.strDrinkThumb }
                   alt="recipes cards"
+                  className="card-img"
                 />
-                <p data-testid={ `${index}-card-name` }>{drink.strDrink}</p>
+                <p
+                  data-testid={ `${index}-card-name` }
+                  className="card-name"
+                >
+                  {drink.strDrink}
+
+                </p>
               </Link>
             </div>
           )))
