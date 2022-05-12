@@ -28,45 +28,45 @@
 }
 
 .done-btn {
-  background-color: #00a8ff;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  font-size: 16px;
+  background-color: var(--l3);
+  border: 2px solid var(--l3);
+  border-radius: 8px;
+  color: black;
+  font-size: 18px;
   font-weight: 700;
+  margin: 0 auto;
+  margin-bottom: 20px;
   margin-top: 20px;
-  padding: 10px 20px;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: all 0.3s;
+  padding: 20px;
+  width: 100%;
 }
 
 .favorite-btn {
-  background-color: #00a8ff;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  font-size: 16px;
+  background-color: var(--l3);
+  border: 2px solid var(--l3);
+  border-radius: 8px;
+  color: black;
+  font-size: 18px;
   font-weight: 700;
+  margin: 0 auto;
+  margin-bottom: 20px;
   margin-top: 20px;
-  padding: 10px 20px;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: all 0.3s;
+  padding: 20px;
+  width: 100%;
 }
 
 .logout-btn {
-  background-color: #00a8ff;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  font-size: 16px;
+  background-color: var(--l3);
+  border: 2px solid var(--l3);
+  border-radius: 8px;
+  color: black;
+  font-size: 18px;
   font-weight: 700;
+  margin: 0 auto;
+  margin-bottom: 20px;
   margin-top: 20px;
-  padding: 10px 20px;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: all 0.3s;
+  padding: 20px;
+  width: 100%;
 }
 
 .profile-email {

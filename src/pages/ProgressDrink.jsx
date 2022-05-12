@@ -113,20 +113,34 @@ export default function ProgressDrink() {
       {
         loading ? <p>Loading...</p> : (
           <div>
-            <div>
+            <div className="container-favorite">
               <img
                 data-testid="recipe-photo"
                 src={ drinkRecipe.strDrinkThumb }
                 alt={ drinkRecipe.strDrink }
+                className="recipe-photo"
               />
-              <h1 data-testid="recipe-title">{drinkRecipe.strDrink}</h1>
+              <h1
+                data-testid="recipe-title"
+                className="recipe-title"
+
+              >
+                {drinkRecipe.strDrink}
+
+              </h1>
             </div>
             <div>
               <ButtonShare recipes={ drinkRecipe } />
               <FavoriteButton recipe={ drinkRecipe } />
             </div>
-            <p data-testid="recipe-category">{drinkRecipe.strAlcoholic}</p>
-            <h3>Ingredients</h3>
+            <p
+              data-testid="recipe-category"
+              className="recipe-category"
+            >
+              {drinkRecipe.strAlcoholic}
+
+            </p>
+            <h3 className="ingredients-text">Ingredients</h3>
             {
               isChecked && ingredients
                 .map((ingredient, index) => (drinkRecipe[ingredient] !== ''
@@ -136,6 +150,7 @@ export default function ProgressDrink() {
                     <label
                       htmlFor={ `${index}-ingredient-step` }
                       data-testid={ `${index}-ingredient-step` }
+                      // className={ `${isChecked[index] ? 'checked' : ''} ingredient-step` }
                     >
                       <input
                         type="checkbox"
@@ -144,6 +159,8 @@ export default function ProgressDrink() {
                         checked={ isChecked[index] }
                         onChange={ (event) => handleChange(event) }
                         name={ index }
+                        className="ingredient-step-checkbox"
+
                       />
                       {
                         drinkRecipe[measure[index]] === null
@@ -156,14 +173,21 @@ export default function ProgressDrink() {
                 )
                 ))
             }
-            <h3>Instructions</h3>
-            <p data-testid="instructions">{drinkRecipe.strInstructions}</p>
+            <h3 className="instructions-text">Instructions</h3>
+            <p
+              data-testid="instructions"
+              className="instructions-recipe"
+            >
+              {drinkRecipe.strInstructions}
+
+            </p>
             <Link to="/done-recipes">
               <button
                 type="button"
                 data-testid="finish-recipe-btn"
                 disabled={ !isChecked.every((check) => check) }
                 onClick={ handleClick }
+                className="finish-recipe-btn"
               >
                 Finish
               </button>

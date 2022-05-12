@@ -1,0 +1,23 @@
+.horizontal-done-date {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.horizontal-tag {
+  align-items: center;
+  border: 2px solid var(--l3);
+  border-radius: 8px;
+  display: flex;
+  font-size: 18px;
+  font-weight: 700;
+  justify-content: center;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+}

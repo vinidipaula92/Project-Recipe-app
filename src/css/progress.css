@@ -4,6 +4,79 @@
   padding: 0;
 }
 
+.recipe-photo {
+  width: 100%;
+}
+
+.recipe-title {
+  align-items: center;
+  display: flex;
+  font-size: 24px;
+  font-weight: 700;
+  justify-content: center;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.recipe-category {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.ingredients-text {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
 .ingredient-step {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.checked {
   text-decoration: line-through;
+}
+
+.ingredient-step-checkbox {
+  margin-right: 10px;
+}
+
+.instructions-text {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.finish-recipe-btn {
+  background-color: var(--l3);
+  border: 2px solid var(--l3);
+  border-radius: 8px;
+  color: black;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding: 20px;
+  width: 100%;
+}
+
+.finish-recipe-btn:disabled {
+  background-color: #ddd;
+}
+
+.instructions-recipe {
+  display: flex;
+  flex-direction: column;
+  font-family: sans-serif;
+  justify-content: center;
+  width: 100%;
 }
