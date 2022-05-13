@@ -68,10 +68,6 @@ export default function ExploreDrinkByIngredient() {
                         alt="recipes cards"
                       />
 
-                      <p data-testid={ `${index}-card-name` }>
-                        {drink.strIngredient1}
-
-                      </p>
                       <button
                         type="button"
                         onClick={ handleCick }
@@ -79,7 +75,10 @@ export default function ExploreDrinkByIngredient() {
                         data-testid={ `${index}-ingredient-card` }
                         className="btn-ingredient"
                       >
-                        {drink.strIngredient1}
+                        <p data-testid={ `${index}-card-name` }>
+                          {drink.strIngredient1}
+
+                        </p>
                       </button>
                     </div>
                   )))
