@@ -63,7 +63,7 @@ describe('Test in login screen if', () => {
 
     userEvent.type(emailField, emailForTests);
     userEvent.type(passwordField, '1234567');
-
+    userEvent.click(enterButton);
     expect(enterButton.disabled).toBe(false);
   });
 

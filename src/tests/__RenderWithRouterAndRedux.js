@@ -24,26 +24,14 @@ import reducer from '../redux/reducers';
 } */
 
 const customRender = (
-  component, // componente a ser renderizado
-  {
-    // estado inicial para o nosso reducer
-    initialState = {},
-
-    // caso você passe uma store por parâmetro ela será utilizada
-    // caso contrário vai chamar a função createStore e criar uma nova
-    store = createStore(reducer, initialState),
-
-    // rota inicial da nossa aplicação
-    initialEntries = ['/foods'],
-
-    // caso você passe um history por parâmetro ele será utilizado
-    // caso contrário vai chamar a função createMemotryHistory e criar um novo
-    history = createMemoryHistory({ initialEntries }),
-  } = {},
-) => ({ // arrow function que retorna um objeto
+  component,
+  route,
+) => {
+  const history = createMemoryHistory({ initialEntries: [route] });
+  const store = createStore(reducer);
 
   // spread do retorno do render { getByTestId, getByRole, etc }
-  ...render(
+  return ({ ...render(
     <Router history={ history }>
       <Provider store={ store }>
         {component}
@@ -56,6 +44,7 @@ const customRender = (
 
   // store usada acima
   store,
-});
+  });
+};
 
 export default customRender;

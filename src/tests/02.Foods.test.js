@@ -1,8 +1,8 @@
-// import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import fetchMock from '../../cypress/mocks/fetch';
-import Food from '../pages/Food';
+import App from '../App';
 import customRender from './__RenderWithRouterAndRedux';
 
 describe('Testa a Tela principal de receitas de comidas: /foods;', () => {
@@ -15,10 +15,10 @@ describe('Testa a Tela principal de receitas de comidas: /foods;', () => {
   });
 
   it('Testes do Header', async () => {
-    customRender(<Food />, { initialEntries: ['/foods'] });
+    customRender(<App />, '/foods');
     // Testes do Header
     const profilePage = screen.getByRole('img', { name: /login/i });
-    const searchIcon = screen.getByRole('img', { name: /search/i });
+    const searchIcon = screen.getByRole('button', { name: /search/i });
     const allBtn = await screen.findByTestId('All-category-filter');
     const beefBTN = await screen.findByTestId('Beef-category-filter');
     const breakfastBtn = await screen.findByTestId('Breakfast-category-filter');
@@ -35,20 +35,46 @@ describe('Testa a Tela principal de receitas de comidas: /foods;', () => {
     expect(dessertBtn).toBeInTheDocument();
     expect(goatBtn).toBeInTheDocument();
 
-    /*     userEvent.click(searchIcon);
+    userEvent.click(allBtn);
+    userEvent.click(beefBTN);
+    userEvent.click(breakfastBtn);
+    userEvent.click(chickenBtn);
+    userEvent.click(dessertBtn);
+    userEvent.click(goatBtn);
+    userEvent.click(searchIcon);
+  });
 
-    const inputTextHeader = screen.getByRole('textbox');
-    const ingredientRadio = screen.getByText(/ingredient/i);
-    const nameRadio = screen.getByText(/name/i);
-    const firstLetterRadio = screen.getByText(/first letter/i);
+  it('Testes do Header', async () => {
+    customRender(<App />, '/foods');
+    // Testes do Header
+
+    const searchIcon = screen.getByRole('button', { name: /search/i });
+    userEvent.click(searchIcon);
+    const inputTextHeader = await screen.findByTestId(/search-input/i);
+    const ingredientRadio = await screen.findByText(/ingredient/i);
+    const nameRadio = await screen.findByText(/name/i);
+    const firstLetterRadio = await screen.findByText(/first letter/i);
     expect(inputTextHeader).toBeInTheDocument();
     expect(ingredientRadio).toBeInTheDocument();
     expect(nameRadio).toBeInTheDocument();
-    expect(firstLetterRadio).toBeInTheDocument(); */
+    expect(firstLetterRadio).toBeInTheDocument();
+
+    const searchBtn = await screen.findByTestId('exec-search-btn');
+    userEvent.type(inputTextHeader, 'chicken');
+    userEvent.click(ingredientRadio);
+    userEvent.click(searchBtn);
+
+    /* userEvent.type(inputTextHeader, 'soup');
+    userEvent.click(nameRadio);
+    userEvent.click(searchBtn);
+
+    userEvent.type(inputTextHeader, 'a');
+    userEvent.click(firstLetterRadio);
+    userEvent.click(searchBtn); */
   });
 
   it('Testes do Footer', () => {
-    customRender(<Food />);
+    customRender(<App />, '/foods');
     // Testes do Header
     const mealFooterBtn = screen.getByRole('img', { name: /meal/i });
     const drinkFooterBtn = screen.getByRole('img', { name: /drink/i });
@@ -60,7 +86,7 @@ describe('Testa a Tela principal de receitas de comidas: /foods;', () => {
   });
   // Testes do Footer
   it('Testes do Cards', async () => {
-    customRender(<Food />);
+    customRender(<App />, '/foods');
     const img = await screen.findByText(/corba/i);
 
     expect(img).toBeInTheDocument();
