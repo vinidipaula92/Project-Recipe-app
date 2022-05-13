@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import '../css/Explore.css';
+import Pedrin from '../images/Pedrin.png';
 import { addCategorieFilter, saveDataDrink } from '../redux/actions';
 import { requestExploreIngredientDrink, resquestByDrink } from '../services/apiRequest';
 import { NUMBER_ELEVEN } from '../services/consts';
@@ -38,17 +41,26 @@ export default function ExploreDrinkByIngredient() {
 
   return (
     <div className="container">
-      <Header />
-      <span data-testid="page-title">Explore Ingredients</span>
-      <div data-testid="ingredient-container">
+      <div className="explore-header">
+        <Header />
+        <Link to="/">
+          <img src={ Pedrin } alt="logo" width="50px" />
+        </Link>
+        <span data-testid="page-title">Explore Ingredients</span>
+      </div>
+      <div
+        data-testid="ingredient-container"
+      >
         {
           loading ? <p>Loading...</p> : (
-            <div>
+            <div className="ingredient">
               {
                 drinks.map((drink, index) => (
                   index <= NUMBER_ELEVEN && (
                     <div
                       key={ index }
+                      className="ingredient-container"
+
                     >
                       <img
                         data-testid={ `${index}-card-img` }
@@ -65,6 +77,7 @@ export default function ExploreDrinkByIngredient() {
                         onClick={ handleCick }
                         value={ drink.strIngredient1 }
                         data-testid={ `${index}-ingredient-card` }
+                        className="btn-ingredient"
                       >
                         {drink.strIngredient1}
                       </button>
