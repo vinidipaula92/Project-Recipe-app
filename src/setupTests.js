@@ -4,7 +4,7 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom/extend-expect';
 
-window.matchMedia = window.matchMedia || function () {
+window.matchMedia = window.matchMedia || function a() {
   return {
     matches: false,
     addListener() {},

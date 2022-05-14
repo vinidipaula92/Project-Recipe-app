@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import '../css/CategoriesRender.css';
 import { addCategorieFilter, saveDataDrink, saveDataFood } from '../redux/actions';
 import {
   requestDrinks,
@@ -8,10 +9,9 @@ import {
   requestDrinksCategories,
   requestMeal,
   requestMealsByCategory,
-  requestMealsCategories
+  requestMealsCategories,
 } from '../services/apiRequest';
 import { NUMBER_FIVE } from '../services/consts';
-/* eslint comma-dangle: ["error", "never"] */
 
 export default function CategoriesRender() {
   const { pathname } = useLocation();
@@ -75,11 +75,12 @@ export default function CategoriesRender() {
   }, []);
   return (
     !isNationatily && (
-      <div>
+      <div className="categories">
         <button
           type="button"
           data-testid="All-category-filter"
           onClick={ filterAllCategories }
+          className="btn btn-light category-btn"
         >
           All
 
@@ -94,6 +95,7 @@ export default function CategoriesRender() {
               key={ element.strCategory }
               value={ element.strCategory }
               onClick={ filterCategories }
+              className="btn btn-light category-btn"
             >
               {element.strCategory}
             </button>)

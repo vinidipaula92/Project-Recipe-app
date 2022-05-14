@@ -12,7 +12,7 @@ export default function Profile() {
     localStorage.clear();
   };
   return (
-    <div className="container">
+    <div className="container profile-container">
       <Header />
       <span data-testid="page-title">Profile</span>
       <h3 data-testid="profile-email">{userEmail.email}</h3>
