@@ -73,7 +73,6 @@ export default function CategoriesRender() {
     provideCategories();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
     !isNationatily && (
       <div className="categories">

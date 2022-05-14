@@ -6,7 +6,7 @@ import { Router } from 'react-router-dom';
 import { createStore } from 'redux';
 import reducer from '../redux/reducers';
 
-function customRender(
+/* function customRender(
   ui,
   route = '/',
 ) {
@@ -21,6 +21,30 @@ function customRender(
     store,
     history,
   };
-}
+} */
+
+const customRender = (
+  component,
+  route,
+) => {
+  const history = createMemoryHistory({ initialEntries: [route] });
+  const store = createStore(reducer);
+
+  // spread do retorno do render { getByTestId, getByRole, etc }
+  return ({ ...render(
+    <Router history={ history }>
+      <Provider store={ store }>
+        {component}
+      </Provider>
+    </Router>,
+  ),
+
+  // history usado acima
+  history,
+
+  // store usada acima
+  store,
+  });
+};
 
 export default customRender;

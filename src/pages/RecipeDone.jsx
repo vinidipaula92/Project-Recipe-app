@@ -10,7 +10,6 @@ export default function RecipeDone() {
   useEffect(() => {
     const getDoneRecipes = () => {
       const doneRecipes = localStorage.getItem('doneRecipes');
-      console.log(JSON.parse(doneRecipes));
       if (doneRecipes) {
         setRecipes(JSON.parse(doneRecipes));
         setLocalRecipes(JSON.parse(doneRecipes));
@@ -31,7 +30,6 @@ export default function RecipeDone() {
     setRecipes(localRecipes);
   };
 
-  console.log('dentro do map total', recipes);
   return (
     <div className="container">
       <Header />
