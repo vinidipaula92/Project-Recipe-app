@@ -42,6 +42,11 @@ describe('Testa a Tela principal de receitas de comidas: /drinks;', () => {
     userEvent.click(otherBtn);
     userEvent.click(cocoaBtn);
     userEvent.click(searchIcon);
+  });
+
+  it('Testes do seachHeader', async () => {
+    customRender(<App />, '/drinks');
+    // Testes do Header
 
     const inputTextHeader = screen.getByRole('textbox');
     const ingredientRadio = screen.getByText(/ingredient/i);
@@ -51,6 +56,27 @@ describe('Testa a Tela principal de receitas de comidas: /drinks;', () => {
     expect(ingredientRadio).toBeInTheDocument();
     expect(nameRadio).toBeInTheDocument();
     expect(firstLetterRadio).toBeInTheDocument();
+
+    const searchBtn = await screen.findByTestId('exec-search-btn');
+    userEvent.type(inputTextHeader, 'Light rum');
+    userEvent.click(ingredientRadio);
+    userEvent.click(searchBtn);
+
+    userEvent.type(inputTextHeader, 'gin');
+    userEvent.click(nameRadio);
+    userEvent.click(searchBtn);
+
+    userEvent.type(inputTextHeader, 'a');
+    userEvent.click(firstLetterRadio);
+    userEvent.click(searchBtn);
+
+    userEvent.type(inputTextHeader, 'Aquamarine');
+    userEvent.click(nameRadio);
+    userEvent.click(searchBtn);
+
+    userEvent.type(inputTextHeader, 'xablau');
+    userEvent.click(nameRadio);
+    userEvent.click(searchBtn);
   });
 
   it('Testes do Footer', () => {

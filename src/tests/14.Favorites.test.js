@@ -26,6 +26,9 @@ describe(
       const share = await screen.findByRole('img', { name: /compartilhar/i });
       const favorite = await screen.getByRole('img', { name: /favoritar/i });
 
+      const favoritesBtn1 = await screen.findByTestId('0-horizontal-favorite-btn');
+      const favoritesBtn2 = await screen.findByTestId('1-horizontal-favorite-btn');
+
       expect(image).toBeInTheDocument();
       expect(food).toBeInTheDocument();
       expect(drink).toBeInTheDocument();
@@ -36,6 +39,8 @@ describe(
       userEvent.click(drink);
       userEvent.click(share);
       userEvent.click(favorite);
+      userEvent.click(favoritesBtn1);
+      userEvent.click(favoritesBtn2);
     });
   },
 );

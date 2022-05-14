@@ -44,7 +44,7 @@ describe('Testa a Tela principal de receitas de comidas: /foods;', () => {
     userEvent.click(searchIcon);
   });
 
-  it('Testes do Header', async () => {
+  it('Testes do seachHeader', async () => {
     customRender(<App />, '/foods');
     // Testes do Header
 
@@ -64,13 +64,21 @@ describe('Testa a Tela principal de receitas de comidas: /foods;', () => {
     userEvent.click(ingredientRadio);
     userEvent.click(searchBtn);
 
-    /* userEvent.type(inputTextHeader, 'soup');
+    userEvent.type(inputTextHeader, 'soup');
     userEvent.click(nameRadio);
     userEvent.click(searchBtn);
 
     userEvent.type(inputTextHeader, 'a');
     userEvent.click(firstLetterRadio);
-    userEvent.click(searchBtn); */
+    userEvent.click(searchBtn);
+
+    userEvent.type(inputTextHeader, 'Arrabiata');
+    userEvent.click(nameRadio);
+    userEvent.click(searchBtn);
+
+    userEvent.type(inputTextHeader, 'xablau');
+    userEvent.click(nameRadio);
+    userEvent.click(searchBtn);
   });
 
   it('Testes do Footer', () => {

@@ -29,6 +29,7 @@ describe(
       expect(corba).toBeInTheDocument();
 
       const combobox = await screen.findByTestId('explore-by-nationality-dropdown');
+      userEvent.selectOptions(combobox, 'Japanese');
       userEvent.type(combobox, 'Japanese');
       userEvent.type(combobox, 'All');
       userEvent.type(combobox, 'Indian');
