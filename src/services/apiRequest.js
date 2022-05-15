@@ -20,16 +20,13 @@ export async function requestDrinks() {
 }
 
 export async function resquestByMeal(searchMethod, searchValue) {
-  console.log('requestByMeal', searchMethod, searchValue);
   if (searchMethod === 'name') {
     const URL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchValue}`;
-    console.log(URL);
     const data = await request(URL);
     return data;
   }
   if (searchMethod === 'ingredient') {
     const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchValue}`;
-    console.log(URL);
     const data = await request(URL);
     return data;
   }
@@ -41,7 +38,6 @@ export async function resquestByMeal(searchMethod, searchValue) {
       return data;
     }
     const URL = `https://www.themealdb.com/api/json/v1/1/search.php?f=${searchValue}`;
-    console.log(URL);
     const data = await request(URL);
     return data;
   }
@@ -65,7 +61,7 @@ export async function resquestByDrink(searchMethod, searchValue) {
       const data = await requestDrinks();
       return data;
     }
-    const URL = `https://www. thecocktaildb.com/api/json/v1/1/search.php?f=${searchValue}`;
+    const URL = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${searchValue}`;
     const data = await request(URL);
     return data;
   }
