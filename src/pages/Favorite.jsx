@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import ButtonShare from '../components/ButtonShare';
 import FavoriteButton from '../components/FavoriteButton';
 import Header from '../components/Header';
+import '../css/Explore.css';
+import '../css/Favorite.css';
+import Pedrin from '../images/Pedrin.png';
 
 export default function Favorite() {
   const [favoriteItems, setFavoriteItems] = useState([]);
@@ -36,13 +39,19 @@ export default function Favorite() {
 
   return (
     <div className="container">
-      <Header />
-      <span data-testid="page-title">Favorite Recipes</span>
+      <div className="explore-header">
+        <Header />
+        <Link to="/">
+          <img src={ Pedrin } alt="logo" width="50px" />
+        </Link>
+        <span data-testid="page-title">Favorite Recipes</span>
+      </div>
       <button
         type="button"
         data-testid="filter-by-all-btn"
         onClick={ handleFilter }
         value=""
+        className="btn-filter-by-all"
       >
         All
       </button>
@@ -51,6 +60,7 @@ export default function Favorite() {
         data-testid="filter-by-food-btn"
         onClick={ handleFilter }
         value="food"
+        className="btn-filter-by-food"
       >
         Food
       </button>
@@ -59,6 +69,7 @@ export default function Favorite() {
         data-testid="filter-by-drink-btn"
         onClick={ handleFilter }
         value="drink"
+        className="btn-filter-by-drink"
       >
         Drinks
       </button>
@@ -66,11 +77,21 @@ export default function Favorite() {
         {
           favoriteItems && filteredFavorites.map((element, index) => (
             <div key={ element.id }>
-              <Link to={ `/${element.type}s/${element.id}` }>
-                <div>
-                  <p data-testid={ `${index}-horizontal-name` }>{ element.name }</p>
+              <Link
+                to={ `/${element.type}s/${element.id}` }
+                className="link-favorite"
+              >
+                <div className="container-favorite">
+                  <p
+                    data-testid={ `${index}-horizontal-name` }
+                    className="horizontal-name"
+                  >
+                    { element.name }
+
+                  </p>
                   <p
                     data-testid={ `${index}-horizontal-top-text` }
+                    className="horizontal-top-text"
                   >
                     { element.type === 'food'
                       ? element.nationality : element.alcoholicOrNot }

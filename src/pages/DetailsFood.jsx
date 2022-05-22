@@ -65,14 +65,24 @@ export default function DetailsFood() {
         loading ? <p>Loading...</p> : (
           <div className="recipe-details">
             <img
+              className="card-img"
               data-testid="recipe-photo"
               src={ recipe.strMealThumb }
               alt={ recipe.strMeal }
             />
-            <h1 data-testid="recipe-title">{recipe.strMeal}</h1>
+            <h1
+              data-testid="recipe-title"
+              className="card-name"
+            >
+              {recipe.strMeal}
+            </h1>
             <p data-testid="recipe-category">{recipe.strCategory}</p>
-            {
-              ingredients.map((ingredient, index) => (recipe[ingredient] !== ''
+            <div
+              className="ingred-container"
+            >
+              <h3>Ingredients</h3>
+              {
+                ingredients.map((ingredient, index) => (recipe[ingredient] !== ''
               && recipe[ingredient] !== null
               && recipe[measure[index]] !== null
               && (
@@ -83,9 +93,15 @@ export default function DetailsFood() {
                   {`${recipe[ingredient]} - ${recipe[measure[index]]}`}
                 </p>
               )
-              ))
-            }
-            <p data-testid="instructions">{recipe.strInstructions}</p>
+                ))
+              }
+            </div>
+            <div
+              className="instruc-container"
+            >
+              <h3>Instructions</h3>
+              <p data-testid="instructions">{recipe.strInstructions}</p>
+            </div>
             <video width="320" height="240" controls data-testid="video">
               <source src={ recipe.strYoutube } type="video/mp4" />
               <track
@@ -104,12 +120,14 @@ export default function DetailsFood() {
                       <div
                         data-testid={ `${index}-recomendation-card` }
                         key={ drink.idDrink }
+                        className="slider-container"
                       >
                         <Link to={ `/drinks/${drink.idDrink}` }>
                           <img
                             data-testid={ `${index}-card-img` }
                             src={ drink.strDrinkThumb }
                             alt="recipes cards"
+                            className="slider-img"
                           />
                           <p
                             data-testid={ `${index}-recomendation-title` }
@@ -121,17 +139,17 @@ export default function DetailsFood() {
                     )))
                 }
               </Slider>
-            </div>
-            <div className="buttons">
-              <ButtonShare recipes={ recipe } />
-              <FavoriteButton recipe={ recipe } />
+              <div className="buttons">
+                <ButtonShare recipes={ recipe } />
+                <FavoriteButton recipe={ recipe } />
+              </div>
             </div>
             {
               continueRecipe
                 ? (
                   <Link to={ `/foods/${recipe.idMeal}/in-progress` }>
                     <button
-                      className="footer-fixed"
+                      className="footer-fixed button"
                       type="button"
                       data-testid="start-recipe-btn"
                     >
@@ -142,7 +160,7 @@ export default function DetailsFood() {
                 : (
                   <Link to={ `/foods/${recipe.idMeal}/in-progress` }>
                     <button
-                      className="footer-fixed"
+                      className="footer-fixed button"
                       type="button"
                       data-testid="start-recipe-btn"
                     >

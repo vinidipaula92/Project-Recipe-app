@@ -5,9 +5,10 @@
 }
 
 .search-button {
+  background-color: var(--l3);
   border-radius: 0.25rem;
-  box-shadow: 0 0 1em gray;
-  color: white;
+  box-shadow: 0 0 1em var(--l2);
+  color: var(--l1);
   cursor: pointer;
   font-size: 1rem;
   font-weight: 700;

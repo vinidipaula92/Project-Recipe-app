@@ -1,0 +1,68 @@
+.container-favorite {
+  background-color: var(--l3);
+  border: 2px solid var(--l3);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding: 20px;
+  width: 100%;
+}
+
+.horizontal-name {
+  align-items: center;
+  color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+  width: 100%;
+}
+
+.horizontal-top-text {
+  align-items: center;
+  color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+}
+
+.link-favorite {
+  color: black;
+  text-align: center;
+  text-decoration: none;
+}
+
+.btn-share {
+  background-color: var(--l3);
+  border: 2px solid var(--l3);
+  border-radius: 8px;
+  color: black;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding: 20px;
+  width: 100%;
+}
+
+.favorite-btn {
+  background-color: var(--l3);
+  border: 2px solid var(--l3);
+  border-radius: 8px;
+  color: black;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding: 20px;
+  width: 100%;
+}

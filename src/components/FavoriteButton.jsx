@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import { handleCHangeFavoriteDrink,
-  handleChangeFavoriteMeals,
+import {
   checkFavoriteDrinks,
-  checkFavoriteMeals } from '../services/Helpers';
+  checkFavoriteMeals, handleCHangeFavoriteDrink,
+  handleChangeFavoriteMeals,
+} from '../services/Helpers';
 
 export default function FavoriteButton(props) {
   const { recipe, index, handleFunction, identification } = props;
@@ -46,6 +47,7 @@ export default function FavoriteButton(props) {
   return (
     <button
       type="button"
+      className="favorite-btn"
       onClick={ handleFunction !== undefined ? (
         () => handleFunction(identification)) : handleChangeFavorite }
     >

@@ -112,20 +112,33 @@ export default function ProgressFood() {
       {
         loading ? <p>Loading...</p> : (
           <div>
-            <div>
+            <div className="container-favorite">
               <img
                 data-testid="recipe-photo"
                 src={ recipe.strMealThumb }
                 alt={ recipe.strMeal }
+                className="recipe-photo"
               />
-              <h1 data-testid="recipe-title">{recipe.strMeal}</h1>
+              <h1
+                data-testid="recipe-title"
+                className="recipe-title"
+              >
+                {recipe.strMeal}
+
+              </h1>
             </div>
             <div>
               <ButtonShare recipes={ recipe } />
               <FavoriteButton recipe={ recipe } />
             </div>
-            <p data-testid="recipe-category">{recipe.strCategory}</p>
-            <h3>Ingredients</h3>
+            <p
+              data-testid="recipe-category"
+              className="recipe-category"
+            >
+              {recipe.strCategory}
+
+            </p>
+            <h3 className="ingredients-text">Ingredients</h3>
             {
               isChecked && ingredients
                 .map((ingredient, index) => (recipe[ingredient] !== ''
@@ -136,6 +149,7 @@ export default function ProgressFood() {
                     <label
                       htmlFor={ `${index}-ingredient-step` }
                       data-testid={ `${index}-ingredient-step` }
+                      className={ `${isChecked[index] ? 'checked' : ''} ingredient-step` }
                     >
                       <input
                         type="checkbox"
@@ -144,6 +158,7 @@ export default function ProgressFood() {
                         checked={ isChecked[index] }
                         onChange={ (event) => handleChange(event) }
                         name={ index }
+                        className="ingredient-step-checkbox"
                       />
                       {`${recipe[ingredient]} - ${recipe[measure[index]]}`}
                     </label>
@@ -151,14 +166,21 @@ export default function ProgressFood() {
                 )
                 ))
             }
-            <h3>Instructions</h3>
-            <p data-testid="instructions">{recipe.strInstructions}</p>
+            <h3 className="instructions-text">Instructions</h3>
+            <p
+              data-testid="instructions"
+              className="instructions-recipe"
+            >
+              {recipe.strInstructions}
+
+            </p>
             <Link to="/done-recipes">
               <button
                 type="button"
                 data-testid="finish-recipe-btn"
                 disabled={ !isChecked.every((check) => check) }
                 onClick={ handleClick }
+                className="finish-recipe-btn"
               >
                 Finish
               </button>

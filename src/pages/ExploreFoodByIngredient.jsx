@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link, useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import '../css/Explore.css';
+import Pedrin from '../images/Pedrin.png';
 import { addCategorieFilter, saveDataFood } from '../redux/actions';
 import { requestExploreIngredientFood, resquestByMeal } from '../services/apiRequest';
 import { NUMBER_ELEVEN } from '../services/consts';
@@ -36,41 +38,44 @@ export default function ExploreFoodByIngredient() {
 
   return (
     <div className="container">
-      <Header />
-      <span data-testid="page-title">Explore Ingredients</span>
-      <div data-testid="ingredient-container">
+      <div className="explore-header">
+        <Header />
+        <Link to="/">
+          <img src={ Pedrin } alt="logo" width="50px" />
+        </Link>
+        <span data-testid="page-title">Explore Ingredients</span>
+      </div>
+      <div
+        data-testid="ingredient-container"
+      >
         {
           loading ? <p>Loading...</p> : (
-            <div>
+            <div className="ingredient">
               {
                 meals && meals.map((ingredient, index) => (
                   index <= NUMBER_ELEVEN && (
-                    <div>
-                      <div
-                        key={ ingredient.idMeal }
-                        value={ ingredient.strIngredient }
-
-                      >
-                        <img
-                          data-testid={ `${index}-card-img` }
-                          src={ `https://www.themealdb.com/images/ingredients/${ingredient
-                            .strIngredient}-Small.png` }
-                          alt="recipes cards"
-                        />
-                      </div>
-                      <p
-                        data-testid={ `${index}-card-name` }
-                      >
-                        {ingredient.strIngredient}
-                      </p>
+                    <div
+                      key={ index }
+                      value={ ingredient.strIngredient }
+                      className="ingredient-container"
+                    >
+                      <img
+                        data-testid={ `${index}-card-img` }
+                        src={ `https://www.themealdb.com/images/ingredients/${ingredient
+                          .strIngredient}-Small.png` }
+                        alt="recipes cards"
+                      />
                       <button
                         type="button"
                         onClick={ handleCick }
                         value={ ingredient.strIngredient }
                         data-testid={ `${index}-ingredient-card` }
+                        className="btn-ingredient"
                       >
-                        {' '}
-                        { ingredient.strIngredient }
+                        <p>
+                          {' '}
+                          { ingredient.strIngredient }
+                        </p>
                       </button>
                     </div>
                   )))

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import '../css/Login.css';
+import Pedrin2 from '../images/Pedrin.png';
 
 export default function Login() {
   const history = useHistory();
@@ -28,35 +29,43 @@ export default function Login() {
   const passwordTest = user.password.length <= numberSix;
 
   return (
-    <div className="container">
-      <p className="login-page-title">Login</p>
-      <form>
-        <input
-          className="email-input"
-          type="text"
-          name="email"
-          value={ user.email }
-          data-testid="email-input"
-          onChange={ handleChange }
-        />
-        <input
-          className="password-input"
-          type="password"
-          name="password"
-          value={ user.password }
-          data-testid="password-input"
-          onChange={ handleChange }
-        />
-        <button
-          data-testid="login-submit-btn"
-          type="button"
-          disabled={ emailTest || passwordTest }
-          onClick={ handleClick }
-          className="login-submit-btn"
-        >
-          Entrar
-        </button>
-      </form>
+    <div className="container page-body-login">
+      <div>
+        <p className="login-page-title">Login</p>
+        <form>
+          <input
+            className="email-input"
+            type="text"
+            name="email"
+            value={ user.email }
+            data-testid="email-input"
+            onChange={ handleChange }
+          />
+          <input
+            className="password-input"
+            type="password"
+            name="password"
+            value={ user.password }
+            data-testid="password-input"
+            onChange={ handleChange }
+          />
+          <button
+            data-testid="login-submit-btn"
+            type="button"
+            disabled={ emailTest || passwordTest }
+            onClick={ handleClick }
+            className="login-submit-btn"
+          >
+            Entrar
+          </button>
+        </form>
+      </div>
+
+      <img
+        src={ Pedrin2 }
+        alt="logo"
+        className="App-logo"
+      />
     </div>
   );
 }

@@ -1,0 +1,28 @@
+.notfound-text {
+  color: var(--l1);
+  font-size: 50px;
+  font-weight: 700;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding: 20px;
+  width: 100%;
+}
+
+.error-text {
+  color: var(--l1);
+  font-size: 30px;
+  font-weight: 700;
+  margin: 0 auto;
+  padding: 20px;
+  width: 100%;
+}
+
+.construction {
+  color: var(--l1);
+  font-size: 50px;
+  font-weight: 700;
+  margin: 0 auto;
+  padding: 20px;
+  width: 100%;
+}
