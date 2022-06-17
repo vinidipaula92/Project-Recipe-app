@@ -60,12 +60,13 @@ export default function Login() {
           </button>
         </form>
       </div>
-
-      <img
-        src={ Pedrin2 }
-        alt="logo"
-        className="App-logo"
-      />
+      <div className="login-page-image">
+        <img
+          src={ Pedrin2 }
+          alt="logo"
+          className="App-logo"
+        />
+      </div>
     </div>
   );
 }

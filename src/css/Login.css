@@ -3,12 +3,11 @@ body {
 }
 
 .login-page-title {
-  align-items: center;
   color: var(--l1);
-  display: flex;
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .login-page-body {
@@ -80,4 +79,12 @@ form {
   40%, 60% {
     transform: translate3d(4px, 0, 0);
   }
+}
+
+.login-page-image {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  width: 100%;
 }
