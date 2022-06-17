@@ -56,11 +56,6 @@
   width: 100%;
 }
 
-.explore-img {
-  height: 100%;
-  width: 100%;
-}
-
 .btn-ingredient {
   background-color: var(--l3);
   border: 2px solid var(--l3);
@@ -124,7 +119,6 @@
 }
 
 .card-name {
-  display: flex;
   font-size: 18px;
   font-weight: 700;
   margin: 0 auto;
@@ -137,4 +131,9 @@
   color: black;
   text-align: center;
   text-decoration: none;
+}
+
+.explore-img {
+  height: 100%;
+  width: 100%;
 }

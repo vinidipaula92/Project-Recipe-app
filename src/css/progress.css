@@ -80,3 +80,11 @@
   justify-content: center;
   width: 100%;
 }
+
+.card-name {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+}
+

@@ -11,6 +11,8 @@ import '../css/footer.css';
 import { drinkRecipeDispatch, saveDataFood } from '../redux/actions';
 import { requestDrinkRecipeById, requestMeal } from '../services/apiRequest';
 import { NUMBER_SIX } from '../services/consts';
+import Header from '../components/Header';
+import Pedrin from '../images/Pedrin.png';
 
 export default function DetailsDrink() {
   const { id } = useParams();
@@ -64,6 +66,13 @@ export default function DetailsDrink() {
       {
         loading ? <p>Loading...</p> : (
           <div className="recipe-details">
+            <div className="explore-header">
+              <Header />
+              <Link to="/">
+                <img src={ Pedrin } alt="logo" width="50px" />
+              </Link>
+              <span data-testid="page-title">Explore Foods</span>
+            </div>
             <img
               className="card-img"
               data-testid="recipe-photo"

@@ -72,11 +72,13 @@ export default function ExploreFood() {
           </div>
         )
       }
-      <img
-        src={ foodImg }
-        alt="logo"
-        className="explore-img"
-      />
+      <div className="col-12">
+        <img
+          src={ foodImg }
+          alt="logo"
+          className="explore-img"
+        />
+      </div>
       <Footer />
     </div>
   );

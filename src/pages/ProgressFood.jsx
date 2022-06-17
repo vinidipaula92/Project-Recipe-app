@@ -8,6 +8,8 @@ import FavoriteButton from '../components/FavoriteButton';
 import '../css/progress.css';
 import { recipeDispatch } from '../redux/actions';
 import { requestFoodRecipeById } from '../services/apiRequest';
+import Header from '../components/Header';
+import Pedrin from '../images/Pedrin.png';
 
 export default function ProgressFood() {
   const { id } = useParams();
@@ -112,6 +114,13 @@ export default function ProgressFood() {
       {
         loading ? <p>Loading...</p> : (
           <div>
+            <div className="explore-header">
+              <Header />
+              <Link to="/">
+                <img src={ Pedrin } alt="logo" width="50px" />
+              </Link>
+              <span data-testid="page-title">Explore Foods</span>
+            </div>
             <div className="container-favorite">
               <img
                 data-testid="recipe-photo"

@@ -16,7 +16,7 @@ export default function Explore() {
         </Link>
         <span data-testid="page-title">Explore</span>
       </div>
-      <div className="btn">
+      <div className="btn col-12">
         <Link to="/explore/foods">
           <button
             type="button"
@@ -38,11 +38,13 @@ export default function Explore() {
           </button>
         </Link>
       </div>
-      <img
-        src={ Explorar }
-        alt="logo"
-        className="explore-img"
-      />
+      <div className="col-12">
+        <img
+          src={ Explorar }
+          alt="logo"
+          className="explore-img"
+        />
+      </div>
       <Footer />
     </div>
   );

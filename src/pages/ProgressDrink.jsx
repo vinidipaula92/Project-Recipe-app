@@ -8,6 +8,7 @@ import FavoriteButton from '../components/FavoriteButton';
 import '../css/progress.css';
 import { drinkRecipeDispatch } from '../redux/actions';
 import { requestDrinkRecipeById } from '../services/apiRequest';
+import Header from '../components/Header';
 
 export default function ProgressDrink() {
   const { id } = useParams();
@@ -112,7 +113,14 @@ export default function ProgressDrink() {
     <div className="container">
       {
         loading ? <p>Loading...</p> : (
-          <div>
+          <div className="col-12">
+            <div className="explore-header">
+              <Header />
+              <Link to="/">
+                <img src={ Pedrin } alt="logo" width="50px" />
+              </Link>
+              <span data-testid="page-title">Explore Foods</span>
+            </div>
             <div className="container-favorite">
               <img
                 data-testid="recipe-photo"
@@ -122,7 +130,7 @@ export default function ProgressDrink() {
               />
               <h1
                 data-testid="recipe-title"
-                className="recipe-title"
+                className="card-name"
 
               >
                 {drinkRecipe.strDrink}
@@ -135,7 +143,7 @@ export default function ProgressDrink() {
             </div>
             <p
               data-testid="recipe-category"
-              className="recipe-category"
+              className="card-name"
             >
               {drinkRecipe.strAlcoholic}
 
