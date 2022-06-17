@@ -90,6 +90,7 @@ export default function Searchheader() {
                 value={ search.searchValue }
                 onChange={ handleChange }
                 className="search-input"
+                placeholder="pesquisar por..."
               />
               <div className="container-search">
                 <label
@@ -105,7 +106,7 @@ export default function Searchheader() {
                     onChange={ handleChange }
                     className="search-radio"
                   />
-                  ingredient
+                  INGREDIENT
                 </label>
                 <label
                   htmlFor="name"
@@ -120,7 +121,7 @@ export default function Searchheader() {
                     onClick={ handleChange }
                     className="search-radio"
                   />
-                  name
+                  NAME
                 </label>
                 <label
                   htmlFor="firstLetter"
@@ -135,7 +136,7 @@ export default function Searchheader() {
                     onClick={ handleChange }
                     className="search-radio"
                   />
-                  first letter
+                  FIRST LETTER
                 </label>
               </div>
             </form>

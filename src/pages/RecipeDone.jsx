@@ -22,11 +22,11 @@ export default function RecipeDone() {
   }, []);
 
   const handleFood = () => {
-    setRecipes(localRecipes.filter((recipe) => recipe.type === 'food'));
+    setRecipes(localRecipes.filter((recipe) => recipe.type === 'Food'));
   };
 
   const handleDrink = () => {
-    setRecipes(localRecipes.filter((recipe) => recipe.type === 'drink'));
+    setRecipes(localRecipes.filter((recipe) => recipe.type === 'Drink'));
   };
 
   const handleAll = () => {
@@ -68,65 +68,62 @@ export default function RecipeDone() {
       </button>
 
       {
-        recipes.length && recipes.map((recipe, index) => {
-          console.log('dentro do map', recipe);
-          return (
-            <div
-              key={ recipe.id }
+        recipes.length && recipes.map((recipe, index) => (
+          <div
+            key={ recipe.id }
+          >
+            <Link
+              to={ `/${recipe.type}s/${recipe.id}` }
+              className="link-favorite"
             >
-              <Link
-                to={ `/${recipe.type}s/${recipe.id}` }
-                className="link-favorite"
-              >
-                <div className="container-favorite">
-                  <h1 data-testid={ `${index}-horizontal-name` }>{recipe.name}</h1>
-                  <img
-                    width="300px"
-                    data-testid={ `${index}-horizontal-image` }
-                    src={ recipe.image }
-                    alt={ recipe.name }
-                  />
-                </div>
-              </Link>
-              { recipe.type === 'food' ? (
-                <p
-                  data-testid={ `${index}-horizontal-top-text` }
-                  className="horizontal-top-text"
-                >
-                  {`${recipe?.nationality} - ${recipe?.category}`}
-                </p>
-              ) : (
-                <p
-                  data-testid={ `${index}-horizontal-top-text` }
-                  className="horizontal-top-text"
-                >
-                  {recipe?.alcoholicOrNot}
-                </p>
-              ) }
+              <div className="container-favorite">
+                <h1 data-testid={ `${index}-horizontal-name` }>{recipe.name}</h1>
+                <img
+                  width="300px"
+                  data-testid={ `${index}-horizontal-image` }
+                  src={ recipe.image }
+                  alt={ recipe.name }
+                />
+              </div>
+            </Link>
+            { recipe.type === 'food' ? (
               <p
-                data-testid={ `${index}-horizontal-done-date` }
-                className="horizontal-done-date"
+                data-testid={ `${index}-horizontal-top-text` }
+                className="horizontal-top-text"
               >
-                {recipe.doneDate}
-
+                {`${recipe?.nationality} - ${recipe?.category}`}
               </p>
-              <ButtonShare
-                index={ index }
-                recipes={ recipe }
-              />
-              {recipe.tags && recipe.tags.map((tag) => (
-                <p
-                  key={ `${index}-${tag}-horizontal-tag` }
-                  data-testid={ `${index}-${tag}-horizontal-tag` }
-                  className="horizontal-tag"
-                >
-                  {tag}
-                </p>
-              ))}
+            ) : (
+              <p
+                data-testid={ `${index}-horizontal-top-text` }
+                className="horizontal-top-text"
+              >
+                {recipe?.alcoholicOrNot}
+              </p>
+            ) }
+            <p
+              data-testid={ `${index}-horizontal-done-date` }
+              className="horizontal-done-date"
+            >
+              {recipe.doneDate}
 
-            </div>
-          );
-        })
+            </p>
+            <ButtonShare
+              index={ index }
+              recipes={ recipe }
+            />
+            {recipe.tags && recipe.tags.map((tag) => (
+              <p
+                key={ `${index}-${tag}-horizontal-tag` }
+                data-testid={ `${index}-${tag}-horizontal-tag` }
+                className="horizontal-tag"
+              >
+                {tag}
+              </p>
+            ))}
+
+          </div>
+        ))
       }
     </div>
   );

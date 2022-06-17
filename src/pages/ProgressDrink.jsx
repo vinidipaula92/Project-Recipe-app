@@ -9,6 +9,7 @@ import '../css/progress.css';
 import { drinkRecipeDispatch } from '../redux/actions';
 import { requestDrinkRecipeById } from '../services/apiRequest';
 import Header from '../components/Header';
+import Pedrin from '../images/Pedrin.png';
 
 export default function ProgressDrink() {
   const { id } = useParams();
@@ -44,7 +45,6 @@ export default function ProgressDrink() {
       && drinkRecipe[ingredient] !== '');
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
     const arrayChecks = [...ingredientMap];
-    console.log('ingredient map', ingredientMap);
     setIsChecked(arrayChecks);
     if (inProgressRecipes === null) {
       const recipeSave = {
