@@ -15,4 +15,4 @@
   - Bootstrap
 
 ## Link para o App
-  - https://recipe-app-navy-sigma.vercel.app/ 
+  - https://recipe-app-vinidipaula.vercel.app/
